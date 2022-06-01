@@ -10,5 +10,38 @@
     margin-right: auto;
     padding-top: 50px;
     padding-bottom: 50px;
+    padding-left: 15px;
+    padding-right: 15px;
+
+    .header_menus {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+
+      .header_menu_item {
+        cursor: pointer;
+
+        h3 {
+          font-size: 23px;
+          display: flex;
+          align-items: center;
+          gap: 10px;
+        }
+      }
+
+      .header_menu_item_active {
+        border: 1px solid white;
+        border-radius: 40%;
+        cursor: pointer;
+        padding: 0px 10px;
+
+        h3 {
+          font-size: 23px;
+          display: flex;
+          align-items: center;
+          gap: 10px;
+        }
+      }
+    }
   }
 }
