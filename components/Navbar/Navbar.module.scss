@@ -1,0 +1,58 @@
+.navbar {
+  height: 70px;
+  background-color: #2155cd;
+
+  .navbar_main {
+    width: 100%;
+    max-width: 1224px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+
+    .nav_brand {
+      cursor: pointer;
+      padding: 0px 10px;
+
+      color: white;
+      h2 {
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+      }
+    }
+
+    .registration {
+      margin-right: 10px;
+      .reg_btn {
+        padding: 10px 20px;
+        cursor: pointer;
+        border-radius: 5px;
+        background: none;
+        border: none;
+        text-transform: capitalize;
+        letter-spacing: 1px;
+        font-weight: bold;
+        background-color: white;
+        transition: all 0.3s ease;
+      }
+
+      .reg_btn:hover {
+        background-color: #92b4ec;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .navbar {
+    .navbar_main {
+      .registration {
+        .reg_btn {
+          padding: 9px 15px;
+        }
+      }
+    }
+  }
+}
