@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import Features from '../components/Features/Features';
 import Header from '../components/Header/Header';
 import Navbar from '../components/Navbar/Navbar';
 import styles from '../styles/index.module.scss';
@@ -15,6 +16,7 @@ export default function Home() {
             <main className={styles.main}>
                 <Navbar />
                 <Header />
+                <Features />
             </main>
         </div>
     );

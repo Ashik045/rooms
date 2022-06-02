@@ -1,8 +1,11 @@
 import React from 'react';
+import Header from '../../components/Header/Header';
+import Navbar from '../../components/Navbar/Navbar';
 
 const index = () => (
     <div>
-        <h1>hotels</h1>
+        <Navbar />
+        <Header type="hList" />
     </div>
 );
 

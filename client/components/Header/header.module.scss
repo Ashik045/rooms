@@ -1,6 +1,9 @@
 .header {
   background-color: #2155cd;
-  margin-top: -25px;
+  // margin-top: 0px;
+  position: relative;
+  z-index: 2;
+  margin-bottom: 150px;
 
   .header_main {
     width: 100%;
@@ -16,30 +19,280 @@
     .header_menus {
       display: flex;
       align-items: center;
-      gap: 40px;
+      gap: 35px;
+      flex-wrap: wrap;
+      padding-left: 10px;
+      padding-top: 20px;
+      padding-bottom: 100px;
 
       .header_menu_item {
         cursor: pointer;
+        height: 70px;
+        width: 170px;
+        display: flex;
+        align-items: center;
 
         h3 {
           font-size: 23px;
+          gap: 10px;
           display: flex;
           align-items: center;
-          gap: 10px;
         }
       }
 
       .header_menu_item_active {
         border: 1px solid white;
-        border-radius: 40%;
+        border-radius: 100px;
         cursor: pointer;
+        height: 70px;
+        width: 170px;
         padding: 0px 10px;
+        display: flex;
+        align-items: center;
 
         h3 {
           font-size: 23px;
+          gap: 10px;
           display: flex;
           align-items: center;
-          gap: 10px;
+        }
+      }
+    }
+
+    h1 {
+      font-size: 50px;
+      font-weight: bold;
+    }
+
+    p {
+      font-size: 25px;
+    }
+
+    .reg_btn {
+      padding: 15px 12px;
+      cursor: pointer;
+      border-radius: 5px;
+      background: none;
+      border: none;
+      text-transform: capitalize;
+      letter-spacing: 1px;
+      font-weight: bold;
+      background-color: white;
+      transition: all 0.3s ease;
+      margin-top: 80px;
+      margin-bottom: 30px;
+    }
+
+    .reg_btn:hover {
+      background-color: #92b4ec;
+    }
+
+    .header_search {
+      width: 97%;
+      max-width: 1224px;
+      margin-left: auto;
+      margin-right: auto;
+      // height: 80px;
+      padding: 20px 10px;
+      border-radius: 8px;
+      position: absolute;
+      bottom: -40px;
+      display: grid;
+      grid-template-columns: 27% 27% 27% 10%;
+      align-items: center;
+      justify-content: space-around;
+      grid-gap: 15px;
+      background-color: white;
+      box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px,
+        rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+
+      .header_search_item {
+        color: rgb(165, 163, 163);
+        display: flex;
+        align-items: center;
+        .header_search_icon {
+          color: rgb(165, 163, 163);
+          margin-right: 8px;
+          font-size: 20px;
+        }
+
+        .header_search_icon_first {
+          color: rgb(165, 163, 163);
+          margin-right: 5px;
+          font-size: 25px;
+        }
+
+        .header_search_date {
+          cursor: pointer;
+        }
+
+        .header_search_calender {
+          position: absolute;
+          top: 80px;
+          box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 12px;
+        }
+
+        .searc_inp {
+          padding: 5px;
+          font-size: 16px;
+          border: none;
+          outline: none;
+        }
+
+        .header_search_btn {
+          padding: 15px 20px;
+          cursor: pointer;
+          border-radius: 5px;
+          background: none;
+          border: none;
+          text-transform: capitalize;
+          letter-spacing: 1px;
+          font-weight: bold;
+          background-color: #2155cd;
+          color: white;
+          transition: all 0.3s ease;
+        }
+
+        .search_options {
+          background-color: white;
+          box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 12px;
+          position: absolute;
+          top: 80px;
+          padding: 5px 15px;
+          color: rgb(165, 163, 163);
+          transition: all 0.4s ease;
+          border-radius: 4px;
+
+          .search_option_item {
+            width: 200px;
+            display: flex;
+            justify-content: space-between;
+            margin: 10px 0px;
+            font-size: 18px;
+
+            .search_option_btnss {
+              display: flex;
+              align-items: center;
+              gap: 10px;
+              color: rgb(31, 30, 30);
+
+              .option_btn {
+                background-color: white;
+                border: 1px solid lightgray;
+                border-radius: 3px;
+                padding: 4px 8px;
+                cursor: pointer;
+                font-size: 17px;
+              }
+
+              .option_btn:disabled {
+                cursor: not-allowed;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .header {
+    .header_main {
+      .header_search {
+        display: grid;
+        grid-template-columns: 30% 30% 30%;
+        align-items: center;
+        justify-content: space-around;
+        grid-gap: 15px;
+        position: absolute;
+        bottom: -80px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .header {
+    .header_main {
+      .header_search {
+        display: grid;
+        grid-template-columns: 40% 40%;
+        align-items: center;
+        justify-content: space-around;
+        grid-gap: 25px;
+        .header_search_item {
+          .search_options {
+            position: absolute;
+            top: 120px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .header {
+    .header_main {
+      .header_menus {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        padding-bottom: 10px;
+
+        .header_menu_item {
+          height: 60px;
+          width: 170px;
+
+          h3 {
+            font-size: 20px;
+            gap: 10px;
+          }
+        }
+
+        .header_menu_item_active {
+          border-radius: 80px;
+          height: 60px;
+          width: 170px;
+
+          h3 {
+            font-size: 20px;
+            gap: 10px;
+          }
+        }
+      }
+
+      h1 {
+        font-size: 45px;
+      }
+
+      p {
+        font-size: 22px;
+      }
+
+      .reg_btn {
+        padding: 11px 10px;
+        margin-top: 40px;
+      }
+
+      .header_search {
+        width: 93%;
+        margin-left: auto;
+        margin-right: auto;
+        display: grid;
+        grid-template-columns: 95%;
+        align-items: center;
+        justify-content: center;
+        grid-gap: 35px;
+        position: absolute;
+        bottom: -200px;
+
+        .header_search_item {
+          .search_options {
+            position: absolute;
+            top: 170px;
+          }
         }
       }
     }
