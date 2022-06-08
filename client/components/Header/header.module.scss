@@ -23,17 +23,18 @@
       flex-wrap: wrap;
       padding-left: 10px;
       padding-top: 20px;
-      padding-bottom: 100px;
+      padding-bottom: 90px;
 
       .header_menu_item {
         cursor: pointer;
-        height: 70px;
+        height: 60px;
         width: 170px;
         display: flex;
         align-items: center;
+        justify-content: center;
 
         h3 {
-          font-size: 23px;
+          font-size: 22px;
           gap: 10px;
           display: flex;
           align-items: center;
@@ -44,14 +45,15 @@
         border: 1px solid white;
         border-radius: 100px;
         cursor: pointer;
-        height: 70px;
+        height: 60px;
         width: 170px;
         padding: 0px 10px;
         display: flex;
         align-items: center;
+        justify-content: center;
 
         h3 {
-          font-size: 23px;
+          font-size: 22px;
           gap: 10px;
           display: flex;
           align-items: center;
@@ -238,11 +240,12 @@
       .header_menus {
         display: flex;
         align-items: center;
-        gap: 20px;
+        gap: 10px;
+        padding-top: 0px;
         padding-bottom: 10px;
 
         .header_menu_item {
-          height: 60px;
+          height: 50px;
           width: 170px;
 
           h3 {
@@ -253,7 +256,7 @@
 
         .header_menu_item_active {
           border-radius: 80px;
-          height: 60px;
+          height: 50px;
           width: 170px;
 
           h3 {
@@ -289,9 +292,19 @@
         bottom: -200px;
 
         .header_search_item {
+          .header_search_calender {
+            position: absolute;
+            top: 120px;
+          }
+
           .search_options {
             position: absolute;
             top: 170px;
+          }
+
+          .header_search_btn {
+            padding: 13px 20px;
+            margin-left: auto;
           }
         }
       }

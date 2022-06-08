@@ -86,7 +86,7 @@ function Header({type}) {
     return (
         <div className={style.header}>
             <div className={style.header_main}>
-                <div className={style.header_menus} style={{ paddingBottom: type === "hList" ? '0px' : "100px"}}>
+                <div className={style.header_menus} style={{ paddingBottom: type === "hList" && '0px'}}>
                     {menus.map((menu) => (
                         <div
                             className={`${
