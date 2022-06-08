@@ -1,8 +1,10 @@
 import Head from 'next/head';
 import Features from '../components/Features/Features';
+import Footer from '../components/Footer/Footer';
 import Header from '../components/Header/Header';
 import LovelyHomeDetail from '../components/lovelyHomeDetail/LovelyHomeDetail';
 import Navbar from '../components/Navbar/Navbar';
+import Newsletter from '../components/Newsletter/Newsletter';
 import Propertys from '../components/Propertys/Propertys';
 import item1 from '../images/item1.jpg';
 import item2 from '../images/item2.jpg';
@@ -99,6 +101,8 @@ export default function Home() {
                 <Features />
                 <Propertys propertyDetails={propertyDetails} />
                 <LovelyHomeDetail homeDetails={HomesDetails} />
+                <Newsletter />
+                <Footer />
             </main>
         </div>
     );
