@@ -16,3 +16,15 @@
     text-decoration: underline;
   }
 }
+
+@media screen and (max-width: 567px) {
+  .footer_item {
+    h2 {
+      margin-bottom: 25px;
+    }
+
+    p {
+      margin-bottom: 15px;
+    }
+  }
+}

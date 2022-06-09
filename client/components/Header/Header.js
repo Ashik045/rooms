@@ -2,6 +2,7 @@
 /* eslint-disable prettier/prettier */
 import { format } from 'date-fns';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import { DateRange } from 'react-date-range';
 import 'react-date-range/dist/styles.css'; // main css file
@@ -20,6 +21,7 @@ import style from './header.module.scss';
 function Header({type}) {
     const [openDate, setOpenDate] = useState(false)
     const [openOption, setOpenOption] = useState(false)
+    const [destination, setDestination] = useState('')
     const [options, setOptions] = useState({
         adult: 1,
         children: 0,
@@ -32,6 +34,8 @@ function Header({type}) {
           key: 'selection'
         }
       ]);
+
+      const router = useRouter()
 
     const menus = [
         {
@@ -81,6 +85,23 @@ function Header({type}) {
         setOpenDate(false)
     }
 
+    const states = {
+        destination,
+        date,
+        options
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        // router.push(`/hotels?destination=${destination}&options=${options.adult}`)
+        router.push({
+            pathname: '/hotels',
+            query: states
+        })
+       
+        console.log(states);
+    }
+
     const { user } = useState(false);
 
     return (
@@ -123,67 +144,70 @@ function Header({type}) {
                 )}
 
                 {/* header search */}
-                <div className={style.header_search}>
-                    <div className={style.header_search_item}>
-                        <MdLocalHotel className={style.header_search_icon_first} />
-                        <input
-                            type="text"
-                            placeholder="Where are you going?"
-                            className={style.searc_inp}
-                        />
-                    </div>
+                    <div className={style.header_search}>
+                            <div className={style.header_search_item}>
+                                <MdLocalHotel className={style.header_search_icon_first} />
+                                <input
+                                    type="text"
+                                    placeholder="Where are you going?"
+                                    className={style.searc_inp}
+                                    value={destination}
+                                    onChange={(e) => setDestination(e.target.value)}
+                                />
+                            </div>
 
-                    <div className={style.header_search_item}>
-                        <FaCalendarAlt className={style.header_search_icon} />
-                        <span onClick={handleCalender} className={style.header_search_date}>{`${format(date[0].startDate, "MM/dd/yyyy")} to ${format(date[0].endDate, "MM/dd/yyyy")}`}
-                        </span>
-                            {openDate && <DateRange
-                                editableDateInputs
-                                onChange={item => setDate([item.selection])}
-                                moveRangeOnFirstSelection={false}
-                                ranges={date}
-                                className={style.header_search_calender}
-                            />}
-                    </div>
+                            <div className={style.header_search_item}>
+                                <FaCalendarAlt className={style.header_search_icon} />
+                                <span onClick={handleCalender} className={style.header_search_date}>{`${format(date[0].startDate, "MM/dd/yyyy")} to ${format(date[0].endDate, "MM/dd/yyyy")}`}
+                                </span>
+                                    {openDate && <DateRange
+                                        editableDateInputs
+                                        onChange={item => setDate([item.selection])}
+                                        moveRangeOnFirstSelection={false}
+                                        ranges={date}
+                                        className={style.header_search_calender}
+                                        minDate={new Date()}
+                                    />}
+                            </div>
 
-                    <div className={style.header_search_item}>
-                        <FaUserFriends className={style.header_search_icon_first} />
-                        <span className={style.header_search_date} onClick={handleRoomss}>{`${options.adult} adult ${options.children} children ${options.room} room `}</span>
-                    {openOption && <div className={style.search_options}>
-                        <div className={style.search_option_item}>
-                            <span className={style.option_txt}>Adult</span>
-                            <div className={style.search_option_btnss}>
-                                <button className={style.option_btn} type="button" onClick={() => handleBtn("adult", "d")} disabled={options.adult <= 1}>-</button>
-                                <span className={style.option_txt_num}>{options.adult}</span>
-                                <button className={style.option_btn} type="button" onClick={() => handleBtn("adult", "i")}>+</button>
+                            <div className={style.header_search_item}>
+                                <FaUserFriends className={style.header_search_icon_first} />
+                                <span className={style.header_search_date} onClick={handleRoomss}>{`${options.adult} adult ${options.children} children ${options.room} room `}</span>
+                            {openOption && <div className={style.search_options}>
+                                <div className={style.search_option_item}>
+                                    <span className={style.option_txt}>Adult</span>
+                                    <div className={style.search_option_btnss}>
+                                        <button className={style.option_btn} type="button" onClick={() => handleBtn("adult", "d")} disabled={options.adult <= 1}>-</button>
+                                        <span className={style.option_txt_num}>{options.adult}</span>
+                                        <button className={style.option_btn} type="button" onClick={() => handleBtn("adult", "i")}>+</button>
+                                    </div>
+                                </div>
+
+                                <div className={style.search_option_item}>
+                                    <span className={style.option_txt}>Children</span>
+                                    <div className={style.search_option_btnss}>
+                                        <button className={style.option_btn} type="button" onClick={() => handleBtn("children", "d")} disabled={options.children <= 0}>-</button>
+                                        <span className={style.option_txt_num}>{options.children}</span>
+                                        <button className={style.option_btn} type="button" onClick={() => handleBtn("children", "i")}>+</button>
+                                    </div>
+                                </div>
+
+                                <div className={style.search_option_item}>
+                                    <span className={style.option_txt}>Room</span>
+                                    <div className={style.search_option_btnss}>
+                                        <button className={style.option_btn} type="button" onClick={() => handleBtn("room", "d")} disabled={options.room <= 1}>-</button>
+                                        <span className={style.option_txt_num}>{options.room}</span>
+                                        <button className={style.option_btn} type="button" onClick={() => handleBtn("room", "i")}>+</button>
+                                    </div>
+                                </div>
+                            </div>}
+
+                            </div>
+
+                            <div className={style.header_search_item}>
+                                <button className={style.header_search_btn} type="button" onClick={handleSubmit}>Search</button>
                             </div>
                         </div>
-
-                        <div className={style.search_option_item}>
-                            <span className={style.option_txt}>Children</span>
-                            <div className={style.search_option_btnss}>
-                                <button className={style.option_btn} type="button" onClick={() => handleBtn("children", "d")} disabled={options.children <= 0}>-</button>
-                                <span className={style.option_txt_num}>{options.children}</span>
-                                <button className={style.option_btn} type="button" onClick={() => handleBtn("children", "i")}>+</button>
-                            </div>
-                        </div>
-
-                        <div className={style.search_option_item}>
-                            <span className={style.option_txt}>Room</span>
-                            <div className={style.search_option_btnss}>
-                                <button className={style.option_btn} type="button" onClick={() => handleBtn("room", "d")} disabled={options.room <= 1}>-</button>
-                                <span className={style.option_txt_num}>{options.room}</span>
-                                <button className={style.option_btn} type="button" onClick={() => handleBtn("room", "i")}>+</button>
-                            </div>
-                        </div>
-                    </div>}
-
-                    </div>
-
-                    <div className={style.header_search_item}>
-                        <button className={style.header_search_btn} type="button">Search</button>
-                    </div>
-                </div>
 
                 </>
                 )}

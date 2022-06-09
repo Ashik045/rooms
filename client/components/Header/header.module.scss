@@ -247,6 +247,8 @@
         .header_menu_item {
           height: 50px;
           width: 170px;
+          display: flex;
+          justify-content: start;
 
           h3 {
             font-size: 20px;
@@ -258,6 +260,8 @@
           border-radius: 80px;
           height: 50px;
           width: 170px;
+          display: flex;
+          justify-content: start;
 
           h3 {
             font-size: 20px;

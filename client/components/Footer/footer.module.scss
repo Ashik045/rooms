@@ -41,3 +41,26 @@
     }
   }
 }
+
+@media screen and (max-width: 767px) {
+  .footer {
+    .footer_main {
+      display: grid;
+      grid-template-columns: 95%;
+      justify-content: center;
+    }
+  }
+}
+
+@media screen and (max-width: 567px) {
+  .footer {
+    .footer_main {
+      .footer_left {
+        display: grid;
+        grid-template-columns: 100%;
+        grid-gap: 15px;
+        justify-content: center;
+      }
+    }
+  }
+}
