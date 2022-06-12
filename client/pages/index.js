@@ -22,7 +22,7 @@ const propertyDetails = [
         id: 2,
         img: item2,
         title: 'Apartments',
-        items: '306 Apartments'
+        items: '306 Apartments',
     },
     {
         id: 1,
@@ -34,21 +34,21 @@ const propertyDetails = [
         id: 3,
         img: item3,
         title: 'Resorts',
-        items: '2123 Resorts'
+        items: '2123 Resorts',
     },
     {
         id: 4,
         img: item4,
         title: 'Villas',
-        items: '1350 Villas'
+        items: '1350 Villas',
     },
     {
         id: 5,
         img: item5,
         title: 'Cabins',
-        items: '1780 Cabins'
+        items: '1780 Cabins',
     },
-]
+];
 
 const HomesDetails = [
     {
@@ -57,7 +57,7 @@ const HomesDetails = [
         title: 'The patio Barcelona',
         location: 'Barcelona',
         price: '$135',
-        rating: '9.5'
+        rating: '9.5',
     },
     {
         id: 1,
@@ -65,7 +65,7 @@ const HomesDetails = [
         title: 'Flora Ciado Apartments',
         location: 'Lisbon',
         price: '$105',
-        rating: '8.7'
+        rating: '8.7',
     },
     {
         id: 3,
@@ -73,7 +73,7 @@ const HomesDetails = [
         title: 'Sea front Apartments',
         location: 'London',
         price: '$165',
-        rating: '9.5'
+        rating: '9.5',
     },
     {
         id: 4,
@@ -81,10 +81,9 @@ const HomesDetails = [
         title: 'The tower of Chevel',
         location: 'Chevel',
         price: '$135',
-        rating: '9.6'
+        rating: '9.6',
     },
-]
-
+];
 
 export default function Home() {
     return (

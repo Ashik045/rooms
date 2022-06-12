@@ -67,12 +67,10 @@ function Header({type}) {
     ];
 
     const handleBtn = (name, operation) => {
-        setOptions((prev) => {
-            return {
+        setOptions((prev) => ({
                 ...prev,
                 [name]: operation === "i" ? options[name] + 1 :  options[name] - 1
-            }
-        })
+            }))
     }
 
     const handleCalender = () => {
