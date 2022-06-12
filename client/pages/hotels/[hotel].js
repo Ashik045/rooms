@@ -1,9 +1,10 @@
 /* eslint-disable import/no-unresolved */
 import Image from 'next/image';
 import { FaBath, FaBed, FaCheck } from 'react-icons/fa';
-import { EffectFade, Navigation, Pagination } from 'swiper';
+import { EffectCards, EffectFade, Navigation, Pagination } from 'swiper';
 // Import Swiper styles
 import 'swiper/css';
+import 'swiper/css/effect-cards';
 import 'swiper/css/effect-fade';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
@@ -21,6 +22,7 @@ import item3 from '../../images/medium4.jpg';
 import style from '../../styles/hotelDetail.module.scss';
 
 const hotelDetails = () => {
+    const days = 10;
     const details = {
         id: 1,
         image: [img1, item1, item2, item3, item4],
@@ -68,7 +70,7 @@ const hotelDetails = () => {
                                 <Image
                                     className={style.swiper_slide_img}
                                     src={imgs}
-                                    width={1100}
+                                    height={400}
                                     layout="fill"
                                     objectFit="cover"
                                 />
@@ -104,7 +106,37 @@ const hotelDetails = () => {
                 </div>
 
                 <div className={style.hotel_detail_right}>
-                    <h1>right</h1>
+                    <Swiper
+                        effect="cards"
+                        grabCursor
+                        modules={[EffectCards]}
+                        className={style.mySwiper}
+                    >
+                        {details.image.slice(1).map((imgs) => (
+                            <SwiperSlide
+                                className={style.swiper_slide2}
+                                style={{ position: 'relative' }}
+                            >
+                                <Image
+                                    className={style.swiper_slide_img2}
+                                    src={imgs}
+                                    objectFit="cover"
+                                />
+                            </SwiperSlide>
+                        ))}
+                    </Swiper>
+
+                    <div className={style.hotel_detail_booking}>
+                        <h2>Perfect for 10 days stay!</h2>
+                        <p>
+                            Located in the real heart of Krakow, this hotel has an excellent review
+                            of <b>9.5</b>.
+                        </p>
+                        <p>
+                            <span>${details.price * days} </span> / 10 nights
+                        </p>
+                        <button type="button">Reserve or Book now</button>
+                    </div>
                 </div>
                 <hr />
             </div>
