@@ -6,6 +6,7 @@ import LovelyHomeDetail from '../components/lovelyHomeDetail/LovelyHomeDetail';
 import Navbar from '../components/Navbar/Navbar';
 import Newsletter from '../components/Newsletter/Newsletter';
 import Propertys from '../components/Propertys/Propertys';
+import SpecialServices from '../components/SpecialServices/SpecialServices';
 import item1 from '../images/item1.jpg';
 import item2 from '../images/item2.jpg';
 import item3 from '../images/item3.jpg';
@@ -100,6 +101,7 @@ export default function Home() {
                 <Features />
                 <Propertys propertyDetails={propertyDetails} />
                 <LovelyHomeDetail homeDetails={HomesDetails} />
+                <SpecialServices />
                 <Newsletter />
                 <Footer />
             </main>
