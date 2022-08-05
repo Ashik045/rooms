@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import BlogComponent from '../components/BlogComponent/BlogComponent';
 import Features from '../components/Features/Features';
 import Footer from '../components/Footer/Footer';
 import Header from '../components/Header/Header';
@@ -7,6 +8,10 @@ import Navbar from '../components/Navbar/Navbar';
 import Newsletter from '../components/Newsletter/Newsletter';
 import Propertys from '../components/Propertys/Propertys';
 import SpecialServices from '../components/SpecialServices/SpecialServices';
+import bImg1 from '../images/blog1.jpg';
+import bImg2 from '../images/blog2.jpg';
+import bImg3 from '../images/blog3.jpg';
+import bImg4 from '../images/blog4.jpg';
 import item1 from '../images/item1.jpg';
 import item2 from '../images/item2.jpg';
 import item3 from '../images/item3.jpg';
@@ -86,6 +91,69 @@ const HomesDetails = [
     },
 ];
 
+const Blogs = [
+    {
+        id: 1,
+        img: bImg1,
+        title: 'How to cure wanderlust without leaving your home',
+        tags: ['Travel', 'Communication', 'Tourist Guide'],
+        text: [
+            'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquam rerum ea doloribus quae alias velit porro eligendi laudantium dolor necessitatibus delectus ab esse, corporis labore dignissimos molestiae cupiditate quo. Ipsa adipisci error beatae, deleniti accusantium molestias quae cumque nulla quasi sunt laborum! Possimus, numquam. Obcaecati animi aspernatur distinctio explicabo consequuntur.',
+            'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquam rerum ea doloribus quae alias velit porro eligendi laudantium dolor necessitatibus delectus ab esse, corporis labore dignissimos molestiae cupiditate quo. Ipsa adipisci error beatae, deleniti accusantium molestias quae cumque nulla quasi sunt laborum! Possimus, numquam.',
+        ],
+        createdAt: new Date().toDateString(),
+        views: 122,
+    },
+    {
+        id: 2,
+        img: bImg2,
+        title: '10 of the Most Underrated Cities in Europe',
+        tags: ['City', 'Communication', 'Tourist Guide'],
+        text: [
+            'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquam rerum ea doloribus quae alias velit porro eligendi laudantium dolor necessitatibus delectus ab esse, corporis labore dignissimos molestiae cupiditate quo. Ipsa adipisci error beatae, deleniti accusantium molestias quae cumque nulla quasi sunt laborum! Possimus, numquam. Obcaecati animi aspernatur distinctio explicabo consequuntur.',
+            'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquam rerum ea doloribus quae alias velit porro eligendi laudantium dolor necessitatibus delectus ab esse, corporis labore dignissimos molestiae cupiditate quo. Ipsa adipisci error beatae, deleniti accusantium molestias quae cumque nulla quasi sunt laborum! Possimus, numquam.',
+        ],
+        createdAt: new Date().toDateString(),
+        views: 29,
+    },
+    {
+        id: 3,
+        img: bImg3,
+        title: 'The Seven People You Always Meet Hosteling',
+        tags: ['Communication', 'Tourist Guide', 'City'],
+        text: [
+            'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquam rerum ea doloribus quae alias velit porro eligendi laudantium dolor necessitatibus delectus ab esse, corporis labore dignissimos molestiae cupiditate quo. Ipsa adipisci error beatae, deleniti accusantium molestias quae cumque nulla quasi sunt laborum! Possimus, numquam. Obcaecati animi aspernatur distinctio explicabo consequuntur.',
+            'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquam rerum ea doloribus quae alias velit porro eligendi laudantium dolor necessitatibus delectus ab esse, corporis labore dignissimos molestiae cupiditate quo. Ipsa adipisci error beatae, deleniti accusantium molestias quae cumque nulla quasi sunt laborum! Possimus, numquam.',
+        ],
+        createdAt: new Date().toDateString(),
+        views: 120,
+    },
+    {
+        id: 4,
+        img: bImg4,
+        title: 'How to cure wanderlust without leaving your home',
+        tags: ['Travel', 'Communication', 'Tourist Guide', 'City'],
+        text: [
+            'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquam rerum ea doloribus quae alias velit porro eligendi laudantium dolor necessitatibus delectus ab esse, corporis labore dignissimos molestiae cupiditate quo. Ipsa adipisci error beatae, deleniti accusantium molestias quae cumque nulla quasi sunt laborum! Possimus, numquam. Obcaecati animi aspernatur distinctio explicabo consequuntur.',
+            'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquam rerum ea doloribus quae alias velit porro eligendi laudantium dolor necessitatibus delectus ab esse, corporis labore dignissimos molestiae cupiditate quo. Ipsa adipisci error beatae, deleniti accusantium molestias quae cumque nulla quasi sunt laborum! Possimus, numquam.',
+        ],
+        createdAt: new Date().toDateString(),
+        views: 802,
+    },
+    {
+        id: 5,
+        img: bImg1,
+        title: 'How to cure wanderlust without leaving your home',
+        tags: ['Travel', 'Communication', 'Tourist Guide'],
+        text: [
+            'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquam rerum ea doloribus quae alias velit porro eligendi laudantium dolor necessitatibus delectus ab esse, corporis labore dignissimos molestiae cupiditate quo. Ipsa adipisci error beatae, deleniti accusantium molestias quae cumque nulla quasi sunt laborum! Possimus, numquam. Obcaecati animi aspernatur distinctio explicabo consequuntur.',
+            'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquam rerum ea doloribus quae alias velit porro eligendi laudantium dolor necessitatibus delectus ab esse, corporis labore dignissimos molestiae cupiditate quo. Ipsa adipisci error beatae, deleniti accusantium molestias quae cumque nulla quasi sunt laborum! Possimus, numquam.',
+        ],
+        createdAt: new Date().toDateString(),
+        views: 122,
+    },
+];
+
 export default function Home() {
     return (
         <div className={styles.container}>
@@ -102,6 +170,7 @@ export default function Home() {
                 <Propertys propertyDetails={propertyDetails} />
                 <LovelyHomeDetail homeDetails={HomesDetails} />
                 <SpecialServices />
+                <BlogComponent blogDetail={Blogs} />
                 <Newsletter />
                 <Footer />
             </main>

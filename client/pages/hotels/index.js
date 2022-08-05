@@ -47,6 +47,7 @@ const index = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        // fetch data from server by search values
 
         console.log(destination);
         console.log(options);

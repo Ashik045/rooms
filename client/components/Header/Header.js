@@ -107,6 +107,7 @@ function Header({type}) {
             <div className={style.header_main}>
                 <div className={style.header_menus} style={{ paddingBottom: type === "hList" && '0px'}}>
                     {menus.map((menu) => (
+                        <Link href="/">
                         <div
                             className={`${
                                 menu.isActive
@@ -119,6 +120,7 @@ function Header({type}) {
                                 {menu.icon} {menu.txt}
                             </h3>
                         </div>
+                        </Link>
                     ))}
                 </div>
 

@@ -135,6 +135,7 @@ const hotelDetails = () => {
                         <p>
                             <span>${details.price * days} </span> / 10 nights
                         </p>
+
                         <button type="button">Reserve or Book now</button>
                     </div>
                 </div>
