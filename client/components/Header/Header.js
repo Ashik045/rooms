@@ -1,3 +1,5 @@
+/* eslint-disable no-param-reassign */
+/* eslint-disable no-return-assign */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable prettier/prettier */
 import { format } from 'date-fns';
@@ -7,10 +9,8 @@ import React, { useState } from 'react';
 import { DateRange } from 'react-date-range';
 import 'react-date-range/dist/styles.css'; // main css file
 import 'react-date-range/dist/theme/default.css'; // theme css file
-import { FaCalendarAlt, FaUserFriends } from 'react-icons/fa';
+import { FaCalendarAlt, FaHome, FaNewspaper, FaUserFriends } from 'react-icons/fa';
 import {
-    MdDirectionsCarFilled,
-    MdFlight,
     MdLocalHotel,
     MdLocalTaxi,
     MdMapsHomeWork
@@ -35,36 +35,48 @@ function Header({type}) {
         }
       ]);
 
-      const router = useRouter()
+
+    const router = useRouter()
 
     const menus = [
         {
             id: 1,
-            icon: <MdMapsHomeWork />,
-            txt: 'Stays',
-            isActive: true,
+            icon: <FaHome />,
+            txt: 'Home',
+            isActive: false,
+            href: '/'
         },
         {
             id: 2,
-            icon: <MdFlight />,
-            txt: 'Flights',
+            icon: <MdMapsHomeWork />,
+            txt: 'Hotels',
+            isActive: false,
+            href: '/hotels'
         },
         {
             id: 3,
-            icon: <MdDirectionsCarFilled />,
-            txt: 'Car rentals',
+            icon: <FaNewspaper />,
+            txt: 'Blogs',
+            isActive: false,
+            href: '/blogs'
         },
         {
             id: 4,
             icon: <MdLocalHotel />,
-            txt: 'Attractions',
+            txt: 'Car rentals',
+            isActive: false,
+            href: '/'
         },
         {
             id: 5,
             icon: <MdLocalTaxi />,
-            txt: 'Ariport taxis',
+            txt: 'Taxis',
+            isActive: false,
+            href: '/'
         },
     ];
+
+
 
     const handleBtn = (name, operation) => {
         setOptions((prev) => ({
@@ -102,17 +114,17 @@ function Header({type}) {
 
     const { user } = useState(false);
 
+
     return (
         <div className={style.header}>
             <div className={style.header_main}>
                 <div className={style.header_menus} style={{ paddingBottom: type === "hList" && '0px'}}>
                     {menus.map((menu) => (
-                        <Link href="/">
+                        <Link href={menu.href}>
                         <div
+
                             className={`${
-                                menu.isActive
-                                    ? style.header_menu_item_active
-                                    : style.header_menu_item
+                                menu.isActive ? style.header_menu_item_active : style.header_menu_item
                             }`}
                             key={menu.id}
                         >

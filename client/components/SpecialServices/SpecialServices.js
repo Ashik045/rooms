@@ -45,7 +45,7 @@ function SpecialServices() {
             <div className={style.SpecialServices_main}>
                 <div className={style.SpecialServices_header}>
                     <h1>Special Services</h1>
-                    <p>Choose the rith Destination. The main benefits to choose Rooms.</p>
+                    <p>Choose the rigth Destination. The main benefits to choose Rooms.</p>
                 </div>
 
                 <div className={style.service_slider}>

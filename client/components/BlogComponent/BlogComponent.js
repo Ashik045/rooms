@@ -1,10 +1,10 @@
 /* eslint-disable import/no-unresolved */
-import React from 'react';
-import { Pagination } from 'swiper';
-import { Swiper, SwiperSlide } from 'swiper/react';
-
 import Image from 'next/image';
 import Link from 'next/link';
+import React from 'react';
+import { FaCalendarAlt, FaRegEye } from 'react-icons/fa';
+import { Pagination } from 'swiper';
+import { Swiper, SwiperSlide } from 'swiper/react';
 import style from './blogcomponent.module.scss';
 
 // Import Swiper styles
@@ -63,8 +63,14 @@ function BlogComponent({ blogDetail }) {
                                     <p>{item.text}</p>
 
                                     <div className={style.blog_card_btm}>
-                                        <p>{item.createdAt}</p>
-                                        <p>{item.views} views</p>
+                                        <p>
+                                            <FaCalendarAlt style={{ marginRight: '3px' }} />{' '}
+                                            {item.createdAt}
+                                        </p>
+                                        <p>
+                                            <FaRegEye style={{ marginRight: '3px' }} /> {item.views}{' '}
+                                            views
+                                        </p>
                                     </div>
                                 </div>
                             </SwiperSlide>

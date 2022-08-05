@@ -1,0 +1,26 @@
+.blog_page {
+  background-color: #fefbf6;
+  .blog_page_main {
+    width: 100%;
+    max-width: 1224px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: -120px;
+
+    display: grid;
+    grid-template-columns: 65% 35%;
+    grid-gap: 25px;
+    justify-content: space-between;
+    align-items: center;
+
+    .blog_list {
+      p {
+        color: rgb(117, 116, 116);
+      }
+    }
+
+    .blog_search {
+      height: max-content;
+    }
+  }
+}

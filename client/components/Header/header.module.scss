@@ -28,7 +28,7 @@
       .header_menu_item {
         cursor: pointer;
         height: 60px;
-        width: 170px;
+        width: 150px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -242,10 +242,11 @@
         align-items: center;
         gap: 10px;
         padding-top: 0px;
-        padding-bottom: 10px;
+        padding-bottom: 0px;
+        margin-top: -50px;
 
         .header_menu_item {
-          height: 50px;
+          height: 40px;
           width: 170px;
           display: flex;
           justify-content: start;
