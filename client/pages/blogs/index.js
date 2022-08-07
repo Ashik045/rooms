@@ -4,6 +4,7 @@ import Footer from '../../components/Footer/Footer';
 import Header from '../../components/Header/Header';
 import Navbar from '../../components/Navbar/Navbar';
 import Newsletter from '../../components/Newsletter/Newsletter';
+import Tags from '../../components/Tags/Tags';
 import bImg1 from '../../images/blog1.jpg';
 import bImg2 from '../../images/blog2.jpg';
 import bImg3 from '../../images/blog3.jpg';
@@ -79,14 +80,20 @@ const index = () => (
         <Header type="hList" />
         <div className={style.blog_page_main}>
             <div className={style.blog_list}>
+                <form action="" className={style.blog_search}>
+                    <input type="text" name="" placeholder="Search blogs..." />
+                    <input type="submit" value="Search" />
+                </form>
+
                 <p>{Blogs.length} blogs found.</p>
                 {Blogs.map((blogs) => (
                     <Blog blogs={blogs} />
                 ))}
             </div>
 
-            <div className={style.blog_search}>
-                <h2>search component</h2>
+            <div className={style.blog_search_tag}>
+                <h2>Tags</h2>
+                <Tags />
             </div>
         </div>
         <Newsletter />

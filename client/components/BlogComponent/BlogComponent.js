@@ -11,12 +11,12 @@ import style from './blogcomponent.module.scss';
 import 'swiper/css';
 import 'swiper/css/pagination';
 
-function BlogComponent({ blogDetail }) {
+function BlogComponent({ blogDetail, title }) {
     return (
         <div className={style.blog_component}>
             <div className={style.blog_component_main}>
                 <div className={style.blog_component_header}>
-                    <h1 style={{ marginBottom: '30px' }}>Rooms Blogs</h1>
+                    <h1 style={{ marginBottom: '30px' }}>{title}</h1>
                     <Link href="/blogs">
                         <button type="button" className={style.seeall_btn}>
                             View All Blogs
@@ -57,7 +57,7 @@ function BlogComponent({ blogDetail }) {
                                         alt="Rooms News"
                                     />
                                     <p className={style.blog_card_tag}>{item.tags[0]}</p>
-                                    <Link href="/blogs">
+                                    <Link href="/blogs/12">
                                         <h2>{item.title}</h2>
                                     </Link>
                                     <p>{item.text}</p>
