@@ -18,13 +18,17 @@ function Navbar() {
 
                 <div className={style.registration}>
                     {user ? (
-                        <button className={style.reg_btn} type="button">
-                            log out
-                        </button>
+                        <Link href="/login">
+                            <button className={style.reg_btn} type="button">
+                                log out
+                            </button>
+                        </Link>
                     ) : (
-                        <button className={style.reg_btn} type="button">
-                            sign up
-                        </button>
+                        <Link href="/signup">
+                            <button className={style.reg_btn} type="button">
+                                sign up
+                            </button>
+                        </Link>
                     )}
                 </div>
             </div>

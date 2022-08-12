@@ -6,8 +6,8 @@ function FooterItem({ footerDetail, footerHeader }) {
     return (
         <div className={style.footer_item}>
             <h2>{footerHeader}</h2>
-            {footerDetail.map((detail) => (
-                <Link href={detail.to}>
+            {footerDetail.map((detail, index) => (
+                <Link href={detail.to} key={index}>
                     <p>{detail.link}</p>
                 </Link>
             ))}
