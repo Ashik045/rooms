@@ -52,22 +52,23 @@ const index = () => {
 
   const PageTitle = ["Sign Up", "Personal Info", "Social Links"]
 
+  const userDetails = {
+    email: email,
+    pass: pass,
+    conPass: conPass,
+    fName: fName,
+    lName: lName,
+    userName: userName,
+    facebookUrl: facebookUrl,
+    twitterUrl: twitterUrl,
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    const userDetails = {
-      email: email,
-      pass: pass,
-      conPass: conPass,
-      fName: fName,
-      lName: lName,
-      userName: userName,
-      facebookUrl: facebookUrl,
-      twitterUrl: twitterUrl,
-    }
 
     try {
-      // Router.push('/login')
       console.log(userDetails);
+      Router.push('/login')
     } catch (error) {
       console.log(error);
     }
@@ -103,16 +104,16 @@ const index = () => {
                   </div>
 
                 <div className={styles.form_footer}>
-                  {page !== 0 && ( <button className={styles.form_btns} style={{marginRight: "3px"}} onClick={() => setPage((current) => current - 1)}>Prev</button>
+                  {page !== 0 && ( <span className={styles.form_btns} style={{marginRight: "3px"}} onClick={() => setPage((curr) => curr - 1)}>Prev</span>
                   )}
-                  {page !== PageTitle.length - 1 &&( <button className={styles.form_btns} style={{marginLeft: "3px"}} onClick={() => setPage((current) => current + 1)}>Next</button>
+                  {page !== PageTitle.length - 1 &&( <span className={styles.form_btns} style={{marginLeft: "3px"}} onClick={() => setPage((curr) => curr + 1)}>Next</span>
                   )} 
                 </div>
                 
                   {page === 2 && (
                     <input type="submit" value="Submit" className={styles.submit_btn}/>
                   )}
-                  <p style={{marginTop: '5px'}}><Link href="/login" > Already have an account? Log in here..</Link></p>
+                  <p style={{marginTop: '10px'}}><Link href="/login" > Already have an account? Log in here..</Link></p>
 
                 </form>
               </div>
