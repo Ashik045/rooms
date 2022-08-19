@@ -62,3 +62,22 @@
     }
   }
 }
+
+@media screen and (max-width: 768px) {
+  .signup_page {
+    .signup_page_main {
+      .signup_page_form {
+        padding: 20px;
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+
+        .signup_progress {
+          width: 90%;
+          margin-left: auto;
+          margin-right: auto;
+        }
+      }
+    }
+  }
+}

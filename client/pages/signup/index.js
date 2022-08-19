@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React, { useState } from 'react'
 import Footer from '../../components/Footer/Footer'
@@ -11,23 +12,15 @@ const index = () => {
   const Router = useRouter()
   const [page, setPage] = useState(0)
   const [email, setEmail] = useState('')
-  const [emailErr, setEmailErr] = useState(false)
   const [pass, setPass] = useState('')
-  const [passErr, setPassErr] = useState(false)
   const [conPass, setConPass] = useState('')
-  const [conPassErr, setConPassErr] = useState(false)
 
   const [fName, setfName] = useState('')
-  const [fNameErr, setfNameErr] = useState(false)
   const [lName, setlName] = useState('')
-  const [lNameErr, setlNameErr] = useState(false)
   const [userName, setUserName] = useState('')
-  const [userNameErr, setUserNameErr] = useState(false)
 
   const [facebookUrl, setFacebookUrl] = useState('')
-  const [facebookUrlErr, setFacebookUrlErr] = useState(false)
   const [twitterUrl, setTwitterUrl] = useState('')
-  const [twitterUrlErr, setTwitterUrlErr] = useState(false)
 
 
   const eChng = (e) => {
@@ -72,29 +65,18 @@ const index = () => {
       twitterUrl: twitterUrl,
     }
 
-
-    // setEmailErr(false)
-    
-  }
-
-  const inputErrHandler = () => {
-      if(fName === "") {
-      setFNameErr(true)
-    } else if(lName === "") {
-      setLNameErr(true)
-    } else if(userName === "") {
-      setUserNameErr(true)
-    } else if(facebookUrl === "") {
-      setFacebookUrlErr(true)
-    } else {
+    try {
+      // Router.push('/login')
       console.log(userDetails);
-      Router.push('/login')
+    } catch (error) {
+      console.log(error);
     }
+
   }
 
   const PageBody = function () {
     if(page === 0) {
-      return <Email eVal={email} pVal={pass} cVal={conPass} eChng={eChng} pChng={pChng} cChng={cChng} emailErr={emailErr} setEmailErr={setEmailErr} setPassErr={setPassErr} setConPassErr={setConPassErr} passErr={passErr} conPassErr={conPassErr} inputErrHandler={inputErrHandler}/>;
+      return <Email eVal={email} pVal={pass} cVal={conPass} eChng={eChng} pChng={pChng} cChng={cChng}/>;
     } else if (page === 1) {
       return <PersonalInfo fnVal={fName} lnVal={lName} unVal={userName} fnChng={fChng} lnChng={lChng} usChng={uChng}  />
     } else {
@@ -115,9 +97,9 @@ const index = () => {
                   <h3>{PageTitle[page]}</h3>
                 </div>
 
-                <form action="" onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit}>
                   <div className={styles.form_body}>
-                    <h3>{PageBody()}</h3>
+                    <div>{PageBody()}</div>
                   </div>
 
                 <div className={styles.form_footer}>
@@ -130,7 +112,7 @@ const index = () => {
                   {page === 2 && (
                     <input type="submit" value="Submit" className={styles.submit_btn}/>
                   )}
-                  
+                  <p style={{marginTop: '5px'}}><Link href="/login" > Already have an account? Log in here..</Link></p>
 
                 </form>
               </div>

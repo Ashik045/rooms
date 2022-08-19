@@ -1,5 +1,9 @@
-.exact_form {
-  .exact_form_inp {
+.input_div {
+  //   width: 90%;
+  //   margin-left: auto;
+  //   margin-right: auto;
+  //   text-align: center;
+  input {
     display: block;
     width: 80%;
     margin-left: auto;
@@ -12,31 +16,25 @@
     border: 1px solid #2650b1;
   }
 
-  p {
+  span {
     color: red;
-    font-size: 13px;
-    margin-top: -15px;
-    margin-bottom: 15px;
+    float: left;
+    margin: -12px 0px 10px;
     display: none;
-    width: 80%;
-    margin-left: auto;
-    margin-right: auto;
+    width: 100%;
   }
 
-  input:invalid[focused="true"] ~ p {
+  input:invalid[focused="true"] ~ span {
     display: block;
   }
 }
 
-@media screen and (max-width: 768px) {
-  .exact_form {
-    .exact_form_inp {
-      width: 100%;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    p {
+@media screen and (max-width: 767px) {
+  .input_div {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    input {
       width: 100%;
       margin-left: auto;
       margin-right: auto;
