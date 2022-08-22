@@ -27,8 +27,12 @@ const userSchema = new mongoose.Schema(
         twlink: {
             type: String,
         },
+        isadmin: {
+            type: Boolean,
+            default: false,
+        },
     },
-    { timeStamps: true },
+    { timestamps: true },
 );
 
 const UserModel = mongoose.model('User', userSchema);

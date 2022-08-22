@@ -3,15 +3,18 @@ const express = require('express');
 const dotenv = require('dotenv');
 const cors = require('cors');
 const mongoose = require('mongoose');
+const cookieparser = require('cookie-parser');
 
 // import internal modules
 const userRoute = require('./routes/user');
+const hotelRoute = require('./routes/hotel');
 
 const app = express();
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors());
+app.use(cookieparser());
 dotenv.config();
 
 // database connection
@@ -28,12 +31,7 @@ mongoose
 
 // application routing
 app.use('/api', userRoute);
-
-app.get('/api', (req, res) => {
-    res.status(200).json({
-        message: 'Success',
-    });
-});
+app.use('/api', hotelRoute);
 
 // error handling
 app.use((err, req, res, next) => {
