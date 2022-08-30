@@ -13,13 +13,13 @@ const {
 const router = express.Router();
 
 // create room
-router.post('/room/create/:id', createRoom);
+router.post('/room/:id', createRoom);
 
 // find room by id and update
 router.put('/room/:id', updateRoom);
 
 // find room by id and delete
-router.delete('/room/:id', deleteRoom);
+router.delete('/room/:id/:hotelid', deleteRoom);
 
 // find room by id
 router.get('/room/:id', getOneRoom);

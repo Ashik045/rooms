@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable prettier/prettier */
 // internal import
 const HotelModel = require('../models/hotelModel');
@@ -68,7 +69,7 @@ const getOneHotel = async (req, res) => {
             error: 'Hotel not found!!',
         });
         }
-    };
+};
 
     // get a hotel by id
 const getAllHotel = async (req, res) => {
@@ -83,7 +84,23 @@ const getAllHotel = async (req, res) => {
             error,
         });
         }
-    };
+};
+
+const getHotelByCity = async (req, res) => {
+    const cities = req.query.cities.split(',');
+
+        try {
+            const list = await Promise.all(cities.map((city) => HotelModel.countDocuments({ city })));
+
+            res.status(200).json({
+                message: list,
+            });
+        } catch (error) {
+            res.status(500).json({
+                error,
+            });
+        }
+};
 
 module.exports = {
     createHotel,
@@ -91,4 +108,5 @@ module.exports = {
     deleteHotel,
     getOneHotel,
     getAllHotel,
+    getHotelByCity,
 };

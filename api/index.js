@@ -8,6 +8,7 @@ const cookieparser = require('cookie-parser');
 // import internal modules
 const userRoute = require('./routes/user');
 const hotelRoute = require('./routes/hotel');
+const roomRoute = require('./routes/room');
 
 const app = express();
 
@@ -32,6 +33,7 @@ mongoose
 // application routing
 app.use('/api', userRoute);
 app.use('/api', hotelRoute);
+app.use('/api', roomRoute);
 
 // error handling
 app.use((err, req, res, next) => {

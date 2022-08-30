@@ -8,6 +8,7 @@ const {
     deleteHotel,
     getOneHotel,
     getAllHotel,
+    getHotelByCity,
 } = require('../controllers/hotelController');
 
 const router = express.Router();
@@ -26,5 +27,10 @@ router.get('/hotel/:id', getOneHotel);
 
 // find all hotels
 router.get('/hotels', getAllHotel);
+
+// get hotels by city names
+router.get('/hotels/getHotelByCity', getHotelByCity);
+
+router.get('/hotelss', getAllHotel);
 
 module.exports = router;

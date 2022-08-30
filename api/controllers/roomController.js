@@ -55,7 +55,7 @@ const updateRoom = async (req, res) => {
 
 // find a room an delete
 const deleteRoom = async (req, res) => {
-    const hotelId = req.params.id;
+    const hotelId = req.params.hotelid;
     try {
         await RoomModel.findByIdAndDelete(req.params.id);
 
