@@ -18,12 +18,12 @@ const footer_detail1 = [
     {
         id: 3,
         link: 'Rooms',
-        to: '/rooms',
+        to: '/hotels',
     },
     {
         id: 4,
         link: 'News',
-        to: '/news',
+        to: '/blogs',
     },
 ];
 

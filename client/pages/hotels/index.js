@@ -201,3 +201,14 @@ const index = () => {
 };
 
 export default index;
+
+// fetch the data using getStaticProps
+// export async function getStaticProps() {
+//     // api route
+
+//     return {
+//         props: {
+
+//         }
+//     }
+// }

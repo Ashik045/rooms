@@ -149,3 +149,43 @@ const hotelDetails = () => {
 };
 
 export default hotelDetails;
+
+// export getStaticPaths for dynamic routes
+// export async function getStaticPaths() {
+//     const { params } = context;
+//     const res = await fetch(`/api/hotel/${params.hotel}`)
+//     const data = res.json();
+
+//     // const paths = data.map((hotel) => {
+//     //     return {
+//     //         params: {
+//     //             hotel: `${hotel._id}`
+//     //         }
+//     //     }
+//     // })
+
+//     return {
+//         paths: [
+//             {
+//                 params: '_id'
+//             },
+//             {
+//                 params: '_id'
+//             },
+//         ],
+//         fallback: true
+//     }
+// }
+
+// fetch the individual item data using getStaticProps
+// export async function getStaticProps({context}) {
+//     // api route
+//     const { params } = context;
+//     const res = await fetch(`/api/hotel/${params.hotel}`)
+
+//     return {
+//         props: {
+
+//         }
+//     }
+// }
