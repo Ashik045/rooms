@@ -114,19 +114,17 @@ function Header({type}) {
 
     const { user } = useState(false);
 
-
     return (
         <div className={style.header}>
             <div className={style.header_main}>
                 <div className={style.header_menus} style={{ paddingBottom: type === "hList" && '0px'}}>
                     {menus.map((menu) => (
-                        <Link href={menu.href}>
+                        <Link href={menu.href} key={menu.id}>
                         <div
 
                             className={`${
                                 menu.isActive ? style.header_menu_item_active : style.header_menu_item
                             }`}
-                            key={menu.id}
                         >
                             <h3>
                                 {menu.icon} {menu.txt}

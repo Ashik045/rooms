@@ -69,7 +69,7 @@ function SpecialServices() {
                         className="mySwiper"
                     >
                         {serviceDetails.map((service) => (
-                            <SwiperSlide>
+                            <SwiperSlide key={service.id}>
                                 <div key={service.id} className={style.service_card}>
                                     <Image
                                         src={service.image}

@@ -1,3 +1,4 @@
+import axios from 'axios';
 import Head from 'next/head';
 import BlogComponent from '../components/BlogComponent/BlogComponent';
 import Features from '../components/Features/Features';
@@ -154,7 +155,7 @@ const Blogs = [
     },
 ];
 
-export default function Home() {
+export default function Home({propertyList, propertyList2}) {
     return (
         <div className={styles.container}>
             <Head>
@@ -166,8 +167,8 @@ export default function Home() {
             <main className={styles.main}>
                 <Navbar />
                 <Header />
-                <Features />
-                <Propertys propertyDetails={propertyDetails} />
+                <Features propertyList={propertyList} />
+                <Propertys propertyDetails={propertyDetails} propertyList2={propertyList2} />
                 <LovelyHomeDetail homeDetails={HomesDetails} />
                 <SpecialServices />
                 <BlogComponent blogDetail={Blogs} title="Rooms Blogs" />
@@ -176,4 +177,19 @@ export default function Home() {
             </main>
         </div>
     );
+}
+
+export async function getStaticProps() {
+    const response = await axios.get('http://localhost:4000/api/hotels/getHotelByCity?cities=Berlin,Tokyo,Dubai')
+    const response2 = await axios.get('http://localhost:4000/api/hotels/getHotelByType')
+
+    const data = await response.data.message
+    const data2 = await response2.data.message
+
+    return {
+        props: {
+            propertyList: data,
+            propertyList2: data2,
+        }
+    }
 }

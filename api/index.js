@@ -35,10 +35,10 @@ app.use('/api', userRoute);
 app.use('/api', hotelRoute);
 app.use('/api', roomRoute);
 
-// error handling
-app.use((err, req, res, next) => {
-    res.status(500).json({
-        error: err,
+// home route
+app.get('/api', (req, res) => {
+    res.status(200).json({
+        message: 'server running.',
     });
 });
 
@@ -48,8 +48,17 @@ app.use((req, res, next) => {
         error: 'URL not Found',
     });
 });
+// error handling
+app.use((err, req, res, next) => {
+    res.status(500).json({
+        error: err,
+    });
+});
+
+const port = process.env.PORT || 4000;
+const host = process.env.HOST || '0.0.0.0';
 
 // application running port
-app.listen(process.env.APP_PORT || 4000, (req, res) => {
-    console.log(`Server listening on port ${process.env.APP_PORT}`);
+app.listen(port, host, (req, res) => {
+    console.log(`Server listening on port ${process.env.PORT}`);
 });

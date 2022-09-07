@@ -9,6 +9,7 @@ const {
     getOneHotel,
     getAllHotel,
     getHotelByCity,
+    getHotelByType,
 } = require('../controllers/hotelController');
 
 const router = express.Router();
@@ -30,6 +31,9 @@ router.get('/hotels', getAllHotel);
 
 // get hotels by city names
 router.get('/hotels/getHotelByCity', getHotelByCity);
+
+// get hotels by hotel types
+router.get('/hotels/getHotelByType', getHotelByType);
 
 router.get('/hotelss', getAllHotel);
 

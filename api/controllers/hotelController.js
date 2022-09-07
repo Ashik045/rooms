@@ -81,7 +81,7 @@ const getAllHotel = async (req, res) => {
         });
     } catch (error) {
         res.status(500).json({
-            error,
+            error: 'Hotels not found!!',
         });
         }
 };
@@ -97,7 +97,31 @@ const getHotelByCity = async (req, res) => {
             });
         } catch (error) {
             res.status(500).json({
-                error,
+                error: 'Can not found hotel by cityname!',
+            });
+        }
+};
+
+const getHotelByType = async (req, res) => {
+        try {
+            const apartmentCount = await HotelModel.countDocuments({ type: 'apartment' });
+            const hotelCount = await HotelModel.countDocuments({ type: 'hotel' });
+            const resortCount = await HotelModel.countDocuments({ type: 'resort' });
+            const villaCount = await HotelModel.countDocuments({ type: 'villa' });
+            const cabinCount = await HotelModel.countDocuments({ type: 'cabin' });
+
+            res.status(200).json({
+                message: [
+                    { type: 'apartments', count: apartmentCount },
+                    { type: 'hotels', count: hotelCount },
+                    { type: 'resorts', count: resortCount },
+                    { type: 'villas', count: villaCount },
+                    { type: 'cabins', count: cabinCount },
+                ],
+            });
+        } catch (error) {
+            res.status(500).json({
+                error: 'Can not found hotel by hotel type!',
             });
         }
 };
@@ -109,4 +133,5 @@ module.exports = {
     getOneHotel,
     getAllHotel,
     getHotelByCity,
+    getHotelByType,
 };

@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@react-icons/all-files": "^4.1.0",
+    "axios": "^0.27.2",
     "date-fns": "^2.28.0",
     "moment": "^2.29.4",
     "next": "12.1.6",

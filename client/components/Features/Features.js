@@ -5,7 +5,7 @@ import item2 from '../../images/img2.jpg';
 import item3 from '../../images/img3.jpg';
 import style from './features.module.scss';
 
-function Features() {
+function Features({propertyList}) {
     return (
         <div className={style.feature_sec}>
             <div className={style.feature_sec_main}>
@@ -13,7 +13,7 @@ function Features() {
                     <Image src={item1} className={style.feature_item_img} />
                     <div className={style.feature_item_txt}>
                         <h1>Berlin</h1>
-                        <h2>332 properties</h2>
+                        <h2>{propertyList[0]} properties</h2>
                     </div>
                 </div>
 
@@ -21,15 +21,15 @@ function Features() {
                     <Image src={item2} className={style.feature_item_img} />
                     <div className={style.feature_item_txt}>
                         <h1>Tokyo</h1>
-                        <h2>32 properties</h2>
+                        <h2>{propertyList[1]} properties</h2>
                     </div>
                 </div>
 
                 <div className={style.feature_item}>
                     <Image src={item3} className={style.feature_item_img} />
                     <div className={style.feature_item_txt}>
-                        <h1>Andress</h1>
-                        <h2>442 properties</h2>
+                        <h1>Dubai</h1>
+                        <h2>{propertyList[2]} properties</h2>
                     </div>
                 </div>
             </div>
