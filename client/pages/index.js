@@ -13,84 +13,42 @@ import bImg1 from '../images/blog1.jpg';
 import bImg2 from '../images/blog2.jpg';
 import bImg3 from '../images/blog3.jpg';
 import bImg4 from '../images/blog4.jpg';
-import item1 from '../images/item1.jpg';
-import item2 from '../images/item2.jpg';
-import item3 from '../images/item3.jpg';
-import item4 from '../images/item4.jpg';
-import item5 from '../images/item5.jpg';
-import item6 from '../images/item6.jpg';
-import item7 from '../images/item7.jpg';
-import item8 from '../images/item8.jpg';
-import item9 from '../images/item9.jpg';
 import styles from '../styles/index.module.scss';
 
-const propertyDetails = [
-    {
-        id: 2,
-        img: item2,
-        title: 'Apartments',
-        items: '306 Apartments',
-    },
-    {
-        id: 1,
-        img: item1,
-        title: 'Hotels',
-        items: '1100 Hotels',
-    },
-    {
-        id: 3,
-        img: item3,
-        title: 'Resorts',
-        items: '2123 Resorts',
-    },
-    {
-        id: 4,
-        img: item4,
-        title: 'Villas',
-        items: '1350 Villas',
-    },
-    {
-        id: 5,
-        img: item5,
-        title: 'Cabins',
-        items: '1780 Cabins',
-    },
-];
-
-const HomesDetails = [
-    {
-        id: 2,
-        img: item6,
-        title: 'The patio Barcelona',
-        location: 'Barcelona',
-        price: '$135',
-        rating: '9.5',
-    },
-    {
-        id: 1,
-        img: item7,
-        title: 'Flora Ciado Apartments',
-        location: 'Lisbon',
-        price: '$105',
-        rating: '8.7',
-    },
-    {
-        id: 3,
-        img: item8,
-        title: 'Sea front Apartments',
-        location: 'London',
-        price: '$165',
-        rating: '9.5',
-    },
-    {
-        id: 4,
-        img: item9,
-        title: 'The tower of Chevel',
-        location: 'Chevel',
-        price: '$135',
-        rating: '9.6',
-    },
-];
+// const HomesDetails = [
+//     {
+//         id: 2,
+//         img: item6,
+//         title: 'The patio Barcelona',
+//         location: 'Barcelona',
+//         price: '$135',
+//         rating: '9.5',
+//     },
+//     {
+//         id: 1,
+//         img: item7,
+//         title: 'Flora Ciado Apartments',
+//         location: 'Lisbon',
+//         price: '$105',
+//         rating: '8.7',
+//     },
+//     {
+//         id: 3,
+//         img: item8,
+//         title: 'Sea front Apartments',
+//         location: 'London',
+//         price: '$165',
+//         rating: '9.5',
+//     },
+//     {
+//         id: 4,
+//         img: item9,
+//         title: 'The tower of Chevel',
+//         location: 'Chevel',
+//         price: '$135',
+//         rating: '9.6',
+//     },
+// ];
 
 const Blogs = [
     {
@@ -155,7 +113,7 @@ const Blogs = [
     },
 ];
 
-export default function Home({propertyList, propertyList2}) {
+export default function Home({propertyList, propertyList2, homesDetails}) {
     return (
         <div className={styles.container}>
             <Head>
@@ -168,8 +126,8 @@ export default function Home({propertyList, propertyList2}) {
                 <Navbar />
                 <Header />
                 <Features propertyList={propertyList} />
-                <Propertys propertyDetails={propertyDetails} propertyList2={propertyList2} />
-                <LovelyHomeDetail homeDetails={HomesDetails} />
+                <Propertys propertyList2={propertyList2} />
+                <LovelyHomeDetail homesDetails={homesDetails} />
                 <SpecialServices />
                 <BlogComponent blogDetail={Blogs} title="Rooms Blogs" />
                 <Newsletter />
@@ -182,14 +140,17 @@ export default function Home({propertyList, propertyList2}) {
 export async function getStaticProps() {
     const response = await axios.get('http://localhost:4000/api/hotels/getHotelByCity?cities=Berlin,Tokyo,Dubai')
     const response2 = await axios.get('http://localhost:4000/api/hotels/getHotelByType')
+    const response3 = await axios.get('http://localhost:4000/api/hotels?featured=true&limit=4')
 
     const data = await response.data.message
     const data2 = await response2.data.message
+    const data3 = await response3.data.message
 
     return {
         props: {
             propertyList: data,
             propertyList2: data2,
+            homesDetails: data3
         }
     }
 }

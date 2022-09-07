@@ -73,8 +73,10 @@ const getOneHotel = async (req, res) => {
 
     // get a hotel by id
 const getAllHotel = async (req, res) => {
+    const { min, max, ...others } = req.query;
+
     try {
-        const hotels = await HotelModel.find().sort({ createdAt: -1 });
+           const hotels = await HotelModel.find({ ...others, chipestprice: { $gt: min || 5, $lt: max || 1000 } }).limit(req.query.limit);
 
         res.status(200).json({
             message: hotels,
