@@ -2,6 +2,7 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/label-has-associated-control */
+import axios from 'axios';
 import { format } from 'date-fns';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
@@ -18,9 +19,9 @@ import img2 from '../../images/img2.jpg';
 import img3 from '../../images/img3.jpg';
 import style from '../../styles/hotels.module.scss';
 
-const index = () => {
+const index = ({hotelList}) => {
     const { query } = useRouter();
-    console.log(query);
+    // console.log(query);
     const [openDate, setOpenDate] = useState(false);
     const [destination, setDestination] = useState(query.destination);
     const [options, setOptions] = useState({
@@ -36,24 +37,20 @@ const index = () => {
         },
     ]);
 
-    // const handleBtn = (name) => {
-    //     //  setOptions((prev) => {
-    //     //      return {
-    //     //          ...prev,
-    //     //         [name]: options[name]
-    //     //      }
-    //     //  })
-    // };
-
-    const handleSubmit = (e) => {
+    console.log(hotelList);
+    const handleSubmit = async (e) => {
         e.preventDefault();
         // fetch data from server by search values
+        const hotels = await axios.get(`http://localhost:4000/api/hotels?city=${destination.toLocaleLowerCase()}`)
+        const hotelData = await hotels.data.message
 
         console.log(destination);
+        console.log(hotelData);
         console.log(options);
         console.log(date[0]);
     };
 
+    // remove this dummy data and fetch from database
     const resultDetail = [
         {
             id: 1,
@@ -107,7 +104,7 @@ const index = () => {
                     <h2>Search</h2>
                     <div className={style.search_item}>
                         <label>Destination</label>
-                        <input type="text" placeholder={destination} value={destination} />
+                        <input type="text" placeholder={destination} value={destination} onChange={(e) => setDestination(e.target.value)} />
                     </div>
 
                     <div className={style.search_item}>
@@ -151,6 +148,8 @@ const index = () => {
                             <input
                                 type="number"
                                 min={1}
+                                value={options.adult}
+                                onChange={(e) => setOptions({ ...options, adult: e.target.value })}
                                 className={style.option_inp}
                                 placeholder={options.adult}
                             />
@@ -161,6 +160,8 @@ const index = () => {
                             <span className={style.option_txt}>Children</span>
                             <input
                                 type="number"
+                                value={options.children}
+                                onChange={(e) => setOptions({...options, children: e.target.value})}
                                 className={style.option_inp}
                                 placeholder={options.children}
                                 min={0}
@@ -171,6 +172,8 @@ const index = () => {
                             <span className={style.option_txt}>Room</span>
                             <input
                                 type="number"
+                                value={options.room}
+                                onChange={(e) => setOptions({...options, room: e.target.value})}
                                 className={style.option_inp}
                                 placeholder={options.room}
                                 min={1}
@@ -203,12 +206,17 @@ const index = () => {
 export default index;
 
 // fetch the data using getStaticProps
-// export async function getStaticProps() {
-//     // api route
+export async function getServerSideProps(context) {
+    const {params, query} = context;
+    const {destination} = query;
+    
+    const response  = await axios.get(`http://localhost:4000/api/hotels?city=${destination.toLocaleLowerCase()}`)
+    
+    const data = await response.data.message;
 
-//     return {
-//         props: {
-
-//         }
-//     }
-// }
+    return {
+        props: {
+            hotelList: data
+        }
+    }
+}

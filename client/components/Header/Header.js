@@ -35,7 +35,6 @@ function Header({type}) {
         }
       ]);
 
-
     const router = useRouter()
 
     const menus = [
@@ -97,8 +96,6 @@ function Header({type}) {
 
     const states = {
         destination,
-        date,
-        options
     }
 
     const handleSubmit = (e) => {
@@ -108,8 +105,7 @@ function Header({type}) {
             pathname: '/hotels',
             query: states
         })
-       
-        console.log(states);
+
     }
 
     const { user } = useState(false);

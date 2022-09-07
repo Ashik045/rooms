@@ -71,7 +71,7 @@ const getOneHotel = async (req, res) => {
         }
 };
 
-    // get a hotel by id
+    // get a hotels
 const getAllHotel = async (req, res) => {
     const { min, max, ...others } = req.query;
 
