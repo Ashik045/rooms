@@ -5,7 +5,7 @@
 import { format } from 'date-fns';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { DateRange } from 'react-date-range';
 import 'react-date-range/dist/styles.css'; // main css file
 import 'react-date-range/dist/theme/default.css'; // theme css file
@@ -15,6 +15,7 @@ import {
     MdLocalTaxi,
     MdMapsHomeWork
 } from 'react-icons/md';
+import { Context } from '../../ContextApi/Context';
 import style from './header.module.scss';
 
 
@@ -27,7 +28,7 @@ function Header({type}) {
         children: 0,
         room: 1
     })
-    const [date, setDate] = useState([
+    const [dates, setDates] = useState([
         {
           startDate: new Date(),
           endDate: new Date(),
@@ -97,10 +98,13 @@ function Header({type}) {
     const states = {
         destination,
     }
+    
+    const {dispatch} = useContext(Context);
 
     const handleSubmit = (e) => {
         e.preventDefault()
         // router.push(`/hotels?destination=${destination}&options=${options.adult}`)
+        dispatch({type: 'NEW_SEARCH', payload: {destination, dates, options}})
         router.push({
             pathname: '/hotels',
             query: states
@@ -164,13 +168,13 @@ function Header({type}) {
 
                             <div className={style.header_search_item}>
                                 <FaCalendarAlt className={style.header_search_icon} />
-                                <span onClick={handleCalender} className={style.header_search_date}>{`${format(date[0].startDate, "MM/dd/yyyy")} to ${format(date[0].endDate, "MM/dd/yyyy")}`}
+                                <span onClick={handleCalender} className={style.header_search_date}>{`${format(dates[0].startDate, "MM/dd/yyyy")} to ${format(dates[0].endDate, "MM/dd/yyyy")}`}
                                 </span>
                                     {openDate && <DateRange
                                         editableDateInputs
-                                        onChange={item => setDate([item.selection])}
+                                        onChange={item => setDates([item.selection])}
                                         moveRangeOnFirstSelection={false}
-                                        ranges={date}
+                                        ranges={dates}
                                         className={style.header_search_calender}
                                         minDate={new Date()}
                                     />}

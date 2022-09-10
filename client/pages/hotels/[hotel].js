@@ -9,11 +9,14 @@ import 'swiper/css/effect-fade';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 // import required modules
+import axios from 'axios';
+import { useContext } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import Footer from '../../components/Footer/Footer';
 import Header from '../../components/Header/Header';
 import Navbar from '../../components/Navbar/Navbar';
 import Newsletter from '../../components/Newsletter/Newsletter';
+import { Context } from '../../ContextApi/Context';
 import img1 from '../../images/img1.jpg';
 import item2 from '../../images/medium1.jpg';
 import item1 from '../../images/medium2.jpg';
@@ -21,7 +24,7 @@ import item4 from '../../images/medium3.jpg';
 import item3 from '../../images/medium4.jpg';
 import style from '../../styles/hotelDetail.module.scss';
 
-const hotelDetails = () => {
+const hotelDetails = ({hotel}) => {
     const days = 10;
     const details = {
         id: 1,
@@ -47,6 +50,10 @@ const hotelDetails = () => {
         price: '231',
     };
 
+    console.log(hotel.images)
+    const {dates, options} = useContext(Context);
+    console.log(dates);
+
     return (
         <div className={style.hotel_detail}>
             <Navbar />
@@ -55,7 +62,7 @@ const hotelDetails = () => {
             {/* hotel details */}
             <div className={style.hotel_detail_main}>
                 <div className={style.hotel_detail_left}>
-                    <h1>{details.title}</h1>
+                    <h1>{hotel.title}</h1>
                     <Swiper
                         effect="fade"
                         navigation
@@ -65,14 +72,15 @@ const hotelDetails = () => {
                         modules={[Navigation, EffectFade, Pagination]}
                         className="mySwiper"
                     >
-                        {details.image.map((imgs) => (
-                            <SwiperSlide className={style.swiper_slide}>
+                        {hotel.image?.map((imgs, i) => (
+                            <SwiperSlide className={style.swiper_slide} key={i}>
                                 <Image
                                     className={style.swiper_slide_img}
                                     src={imgs}
                                     height={400}
                                     layout="fill"
                                     objectFit="cover"
+                                    alt="hotels"
                                 />
                             </SwiperSlide>
                         ))}
@@ -81,24 +89,24 @@ const hotelDetails = () => {
                     <div className={style.hotel_detail_rooms}>
                         <p style={{ marginRight: '8px' }}>
                             <FaBed size={22} className={style.search_item_bed_icon} />
-                            {details.sleep}
+                            {hotel.rooms.length}
                         </p>
                         <p>
                             <FaBath className={style.search_item_bed_icon} />
-                            {details.bathroom}
+                            {hotel.bathroom}
                         </p>
                     </div>
 
                     <div className={style.hotel_detail_desc}>
-                        {details.desc.map((des) => (
-                            <p>{des}</p>
+                        {hotel.desc?.map((des, i) => (
+                            <p key={i}>{des}</p>
                         ))}
                     </div>
 
                     <h2>Room Facilities</h2>
                     <div className={style.hotel_detail_facilities}>
-                        {details.facilities.map((list) => (
-                            <p>
+                        {details.facilities?.map((list, i) => (
+                            <p key={i}>
                                 <FaCheck style={{ marginRight: '5px' }} /> {list}
                             </p>
                         ))}
@@ -112,28 +120,30 @@ const hotelDetails = () => {
                         modules={[EffectCards]}
                         className={style.mySwiper}
                     >
-                        {details.image.slice(1).map((imgs) => (
+                        {hotel.image?.slice(1).map((imgs, i) => (
                             <SwiperSlide
                                 className={style.swiper_slide2}
                                 style={{ position: 'relative' }}
+                                key={i}
                             >
                                 <Image
                                     className={style.swiper_slide_img2}
                                     src={imgs}
                                     objectFit="cover"
+                                    alt="hotels"
                                 />
                             </SwiperSlide>
                         ))}
                     </Swiper>
 
                     <div className={style.hotel_detail_booking}>
-                        <h2>Perfect for 10 days stay!</h2>
+                        <h2>Perfect for {dates} days stay!</h2>
                         <p>
                             Located in the real heart of Krakow, this hotel has an excellent review
-                            of <b>9.5</b>.
+                            of <b>{details.rating}</b>.
                         </p>
                         <p>
-                            <span>${details.price * days} </span> / 10 nights
+                            <span>${hotel.chipestprice * dates * options.rooms} </span> / 10 nights
                         </p>
 
                         <button type="button">Reserve or Book now</button>
@@ -177,15 +187,37 @@ export default hotelDetails;
 //     }
 // }
 
+
+
+// export getStaticPaths for dynamic routes
+export async function getStaticPaths() {
+    const response  = await axios.get(`http://localhost:4000/api/hotels`)
+    const data = await response.data.message;
+
+    const paths = data.map((item) => {
+        return {
+            params: {
+                hotel: item._id
+            }
+        }
+    })
+
+    return {
+        paths,
+        fallback: true
+    }
+}
+
 // fetch the individual item data using getStaticProps
-// export async function getStaticProps({context}) {
-//     // api route
-//     const { params } = context;
-//     const res = await fetch(`/api/hotel/${params.hotel}`)
+export async function getStaticProps(context) {
+    // api route
+    const { params } = context;
+    const res = await axios.get(`http://localhost:4000/api/hotel/${params.hotel}`)
+    const data = await res.data.message
 
-//     return {
-//         props: {
-
-//         }
-//     }
-// }
+    return {
+        props: {
+            hotel: data
+        }
+    }
+}

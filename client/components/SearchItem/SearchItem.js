@@ -7,21 +7,22 @@ import style from './searchitem.module.scss';
 function SearchItem({ results }) {
     return (
         <div className={style.search_item}>
-            <div className={style.search_item_img} style={{ position: 'relative' }}>
-                <Link href="/hotels/12">
-                    <Image src={results.image} layout="fill" objectFit="cover" />
-                </Link>
-            </div>
+            <Link href={`/hotels/${results._id}`}>
+                <div className={style.search_item_img} style={{ position: 'relative' }}>
+                    <Image src={results.images[0]} height={300} width={270} layout="responsive" alt="Hotels"  />
+                </div>
+            </Link>
 
             <div className={style.search_item_details}>
-                <Link href="/hotels/12">
-                    <h3>{results.title}</h3>
+                <Link href={`/hotels/${results._id}`}>
+                    <h3>{results.name}</h3>
                 </Link>
-                <p>{results.desc}</p>
+
+                    <p >{results.desc[0]}</p>
                 <span className={style.free}>Free dining room</span>
                 <div className={style.search_item_bed}>
                     <p style={{ marginRight: '8px' }}>
-                        <FaBed size={19} className={style.search_item_bed_icon} /> {results.sleep}
+                        <FaBed size={19} className={style.search_item_bed_icon} /> {results.rooms.length}
                     </p>
                     <p>
                         <FaBath className={style.search_item_bed_icon} />
@@ -40,9 +41,9 @@ function SearchItem({ results }) {
                     <span>{results.rating}</span>
                 </div>
                 <div className={style.search_item_price}>
-                    <p>${results.price}</p>
+                    <p>${results.chipestprice}</p>
 
-                    <Link href="/hotels/12">
+                    <Link href={`/hotels/${results._id}`}>
                         <button type="button">View Details</button>
                     </Link>
                 </div>

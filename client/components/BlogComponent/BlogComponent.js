@@ -48,9 +48,9 @@ function BlogComponent({ blogDetail, title }) {
                         modules={[Pagination]}
                         className={style.mySwiper}
                     >
-                        {blogDetail.slice(0, 4).map((item) => (
-                            <SwiperSlide>
-                                <div key={item.id} className={style.blog_card}>
+                        {blogDetail.slice(0, 4).map((item, i) => (
+                            <SwiperSlide key={i}>
+                                <div className={style.blog_card}>
                                     <Image
                                         className={style.blog_card_image}
                                         src={item.img}

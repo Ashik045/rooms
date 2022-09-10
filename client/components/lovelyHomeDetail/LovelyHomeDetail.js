@@ -7,8 +7,8 @@ function LovelyHomeDetail({ homesDetails }) {
         <div className={style.LovelyHome_detail}>
             <h2>Guests Love Homes</h2>
             <div className={style.LovelyHome_detail_main}>
-                {homesDetails?.map((details) => (
-                    <LovelyHome hmDetails={details} key={details.key} />
+                {homesDetails?.map((details, i) => (
+                    <LovelyHome hmDetails={details} key={i} />
                 ))}
             </div>
         </div>

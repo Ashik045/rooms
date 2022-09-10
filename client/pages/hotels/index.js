@@ -5,7 +5,7 @@
 import axios from 'axios';
 import { format } from 'date-fns';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { DateRange } from 'react-date-range';
 import 'react-date-range/dist/styles.css'; // main css file
 import 'react-date-range/dist/theme/default.css'; // theme css file
@@ -14,6 +14,7 @@ import Header from '../../components/Header/Header';
 import Navbar from '../../components/Navbar/Navbar';
 import Newsletter from '../../components/Newsletter/Newsletter';
 import SearchItem from '../../components/SearchItem/SearchItem';
+import { Context } from '../../ContextApi/Context';
 import img1 from '../../images/img1.jpg';
 import img2 from '../../images/img2.jpg';
 import img3 from '../../images/img3.jpg';
@@ -29,25 +30,33 @@ const index = ({hotelList}) => {
         children: 0,
         room: 1,
     });
-    const [date, setDate] = useState([
+    const [dates, setDates] = useState([
         {
             startDate: new Date(),
             endDate: new Date(),
             key: 'selection',
         },
     ]);
+    const [min, setMin] = useState(0)
+    const [max, setMax] = useState(999)
+    const [hotelData, setHotelData] = useState(hotelList)
 
-    console.log(hotelList);
+    console.log(hotelData);
+
+    const {dispatch} = useContext(Context);
+    
     const handleSubmit = async (e) => {
         e.preventDefault();
+        dispatch({type: 'NEW_SEARCH', payload: {destination, dates, options}})
         // fetch data from server by search values
-        const hotels = await axios.get(`http://localhost:4000/api/hotels?city=${destination.toLocaleLowerCase()}`)
-        const hotelData = await hotels.data.message
+        const hotels = await axios.get(`http://localhost:4000/api/hotels?city=${destination.toLocaleLowerCase()}&min=${min}&max=${max}`)
+        const hotelDatas = await hotels.data.message
+        setHotelData(hotelDatas)
 
         console.log(destination);
         console.log(hotelData);
         console.log(options);
-        console.log(date[0]);
+        console.log(dates[0]);
     };
 
     // remove this dummy data and fetch from database
@@ -112,15 +121,15 @@ const index = ({hotelList}) => {
                         <span
                             className={style.search_item_date}
                             onClick={() => setOpenDate(!openDate)}
-                        >{`${format(date[0]?.startDate, 'MM/dd/yyyy')} to ${format(
-                            date[0].endDate,
+                        >{`${format(dates[0]?.startDate, 'MM/dd/yyyy')} to ${format(
+                            dates[0].endDate,
                             'MM/dd/yyyy'
                         )}`}</span>
                         {openDate && (
                             <DateRange
                                 editableDateInputs
-                                onChange={(item) => setDate([item.selection])}
-                                ranges={date}
+                                onChange={(item) => setDates([item.selection])}
+                                ranges={dates}
                                 className={style.header_search_calender}
                                 minDate={new Date()}
                             />
@@ -133,14 +142,14 @@ const index = ({hotelList}) => {
                             <span className={style.option_txt}>
                                 Min price <small className={style.night_batch}>per night</small>
                             </span>
-                            <input type="number" className={style.option_inp} min={1} />
+                            <input type="number" className={style.option_inp} min={1} onChange={(e) => setMin(e.target.value)} />
                         </div>
 
                         <div className={style.search_item_option}>
                             <span className={style.option_txt}>
                                 Max price <small className={style.night_batch}>per night</small>
                             </span>
-                            <input type="number" className={style.option_inp} max={5000} min={1} />
+                            <input type="number" className={style.option_inp} max={5000} min={1} onChange={(e) => setMax(e.target.value)} />
                         </div>
 
                         <div className={style.search_item_option}>
@@ -190,9 +199,9 @@ const index = ({hotelList}) => {
                 </div>
 
                 <div className={style.hotels_page_result}>
-                    <span className={style.page_result}>{resultDetail.length} results found</span>
-                    {resultDetail.map((results_item) => (
-                        <SearchItem results={results_item} />
+                    <span className={style.page_result}>{hotelData.length} results found</span>
+                    {hotelData.map((results_item) => (
+                        <SearchItem results={results_item} key={results_item._id} />
                     ))}
                 </div>
             </div>
