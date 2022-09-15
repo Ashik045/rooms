@@ -5,11 +5,17 @@ export default function Reducer(state, action) {
         case 'RESET_SEARCH':
             return {
                 city: undefined,
-                dates: [],
+                dates: [
+                    {
+                        startDate: new Date(),
+                        endDate: new Date(),
+                        key: 'selection',
+                    },
+                ],
                 options: {
-                    adult: undefined,
-                    children: undefined,
-                    rooms: undefined
+                    adult: 1,
+                    children: 0,
+                    rooms: 1
                 }
             }
         default: 

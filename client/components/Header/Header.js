@@ -109,7 +109,6 @@ function Header({type}) {
             pathname: '/hotels',
             query: states
         })
-
     }
 
     const { user } = useState(false);

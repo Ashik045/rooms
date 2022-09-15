@@ -3,11 +3,17 @@ import Reducer from "./Reducer"
 
 const initial_state = {
     city: undefined,
-    dates: [],
+    dates: [
+        {
+            startDate: new Date(),
+            endDate: new Date(),
+            key: 'selection',
+        },
+    ],
     options: {
-        adult: undefined,
-        children: undefined,
-        rooms: undefined
+        adult: 1,
+        children: 0,
+        rooms: 1
     }
 }
 
@@ -19,7 +25,7 @@ export const ContextProvider = ({children}) => {
     return (
         <Context.Provider value={{
             city: state.city,
-            dates: state.date,
+            dates: state.dates,
             options: state.options,
             dispatch,
         }}>

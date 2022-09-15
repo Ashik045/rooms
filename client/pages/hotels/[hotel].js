@@ -50,11 +50,18 @@ const hotelDetails = ({hotel}) => {
         price: '231',
     };
 
-    console.log(hotel.images)
     const {dates, options} = useContext(Context);
-    console.log(dates)
-    console.log(options);
+    
+    console.log(hotel.images)
+    const MILISEC_PER_DAY = 1000 * 60 * 60 * 24; 
+    function dayDifference(date1, date2) {
+        const timeDiference = Math.abs(date2.getTime() - date1.getTime())
+        const differenceDays = Math.ceil(timeDiference / MILISEC_PER_DAY)
+        return differenceDays === 0 ? 1 : differenceDays;
+    }
 
+    const day = dayDifference(dates[0].endDate, dates[0].startDate);
+    
     return (
         <div className={style.hotel_detail}>
             <Navbar />
@@ -138,13 +145,13 @@ const hotelDetails = ({hotel}) => {
                     </Swiper>
 
                     <div className={style.hotel_detail_booking}>
-                        <h2>Perfect for {dates} days stay!</h2>
+                        <h2>Perfect for {day} days stay!</h2>
                         <p>
                             Located in the real heart of Krakow, this hotel has an excellent review
                             of <b>{details.rating}</b>.
                         </p>
                         <p>
-                            <span>${hotel.chipestprice * dates * options.rooms} </span> / 10 nights
+                            <span>${hotel.chipestprice * options.room * day } </span> / {day} nights
                         </p>
 
                         <button type="button">Reserve or Book now</button>

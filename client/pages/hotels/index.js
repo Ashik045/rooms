@@ -52,11 +52,6 @@ const index = ({hotelList}) => {
         const hotels = await axios.get(`http://localhost:4000/api/hotels?city=${destination.toLocaleLowerCase()}&min=${min}&max=${max}`)
         const hotelDatas = await hotels.data.message
         setHotelData(hotelDatas)
-
-        console.log(destination);
-        console.log(hotelData);
-        console.log(options);
-        console.log(dates[0]);
     };
 
     // remove this dummy data and fetch from database
