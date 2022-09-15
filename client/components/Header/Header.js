@@ -99,7 +99,7 @@ function Header({type}) {
         destination,
     }
     
-    const {dispatch} = useContext(Context);
+    const {user ,dispatch} = useContext(Context);
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -110,8 +110,6 @@ function Header({type}) {
             query: states
         })
     }
-
-    const { user } = useState(false);
 
     return (
         <div className={style.header}>
@@ -143,7 +141,7 @@ function Header({type}) {
                 </p>
 
                 {user ? (
-                    <p>Welcome {user.username}.</p>
+                    <div className={style.username}>Welcome <b> {user.username}.</b></div>
                 ) : (
                     <Link href="login">
                         <button className={style.reg_btn} type="button">

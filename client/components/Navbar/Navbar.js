@@ -1,10 +1,16 @@
 import Link from 'next/link';
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import { MdLocalHotel } from 'react-icons/md';
+import { Context } from '../../ContextApi/Context';
 import style from './Navbar.module.scss';
 
 function Navbar() {
-    const { user } = useState(false);
+    const {user, dispatch} = useContext(Context)
+
+    const handleLogOut = () => {
+        dispatch({type: 'LOG_OUT'})
+    }
+    
     return (
         <div className={style.navbar}>
             <div className={style.navbar_main}>
@@ -18,11 +24,9 @@ function Navbar() {
 
                 <div className={style.registration}>
                     {user ? (
-                        <Link href="/login">
-                            <button className={style.reg_btn} type="button">
+                            <button className={style.reg_btn} type="button" onClick={handleLogOut}>
                                 log out
                             </button>
-                        </Link>
                     ) : (
                         <Link href="/signup">
                             <button className={style.reg_btn} type="button">

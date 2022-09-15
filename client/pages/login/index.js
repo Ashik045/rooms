@@ -1,10 +1,12 @@
+import axios from 'axios'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import Swal from 'sweetalert2'
 import Footer from '../../components/Footer/Footer'
 import Input from '../../components/Input/Input'
 import Navbar from '../../components/Navbar/Navbar'
+import { Context } from '../../ContextApi/Context'
 import styles from '../../styles/login.module.scss'
 
 const index = () => {
@@ -14,6 +16,7 @@ const index = () => {
     })
     const [err, setErr] = useState(false)
     const router = useRouter()
+    const {user, loading, error, dispatch} = useContext(Context);
 
     const inpDetail = [
         {
@@ -52,11 +55,13 @@ const index = () => {
         }
       })
     
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
+        dispatch({type: 'LOGIN_START'})
+
         try {
-          console.log('Log in Successfull.');
-          console.log(inpval.email, inpval.password);
+          const res = await axios.post('http://localhost:4000/api/user/login', inpval)
+          dispatch({type: 'LOGIN_SUCCESS', payload: res.data.message})
           
             setInpval({
               password: '',
@@ -66,8 +71,9 @@ const index = () => {
                 icon: 'success',
                 title: 'Log In Succesfully.'
               })
-              router.push('/')
+            router.push('/')
         } catch (error) {
+          dispatch({type: 'LOGIN_FAILURE'})
             console.log(error);
             setErr(true)
         }

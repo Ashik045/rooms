@@ -1,3 +1,4 @@
+import axios from 'axios'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React, { useState } from 'react'
@@ -52,27 +53,36 @@ const index = () => {
 
   const PageTitle = ["Sign Up", "Personal Info", "Social Links"]
 
-  const userDetails = {
-    email: email,
-    pass: pass,
-    conPass: conPass,
-    fName: fName,
-    lName: lName,
-    userName: userName,
-    facebookUrl: facebookUrl,
-    twitterUrl: twitterUrl,
-  }
+  // const userDetails = {
+  //   email: email,
+  //   password: pass,
+  //   firstname: conPass,
+  //   fName: fName,
+  //   lName: lName,
+  //   userName: userName,
+  //   facebookUrl: facebookUrl,
+  //   twitterUrl: twitterUrl,
+  // }
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
+  const handleSubmit = async (e) => {
+    e.preventDefault()
     try {
-      console.log(userDetails);
+      await axios.post('http://localhost:4000/api/user/signup', {
+        email: email,
+        password: pass,
+        firstname: fName,
+        lastname: lName,
+        username: userName,
+        fblink: facebookUrl,
+        twlink: twitterUrl
+      })
+      
+      console.log('signup successful');
       Router.push('/login')
     } catch (error) {
       console.log(error);
+      console.log('signup failed');
     }
-
   }
 
   const PageBody = function () {
