@@ -52,7 +52,8 @@ const hotelDetails = ({hotel}) => {
 
     console.log(hotel.images)
     const {dates, options} = useContext(Context);
-    console.log(dates);
+    console.log(dates)
+    console.log(options);
 
     return (
         <div className={style.hotel_detail}>

@@ -1,4 +1,4 @@
-import { createContext, useReducer } from "react"
+import React, { useReducer } from "react"
 import Reducer from "./Reducer"
 
 const initial_state = {
@@ -11,7 +11,7 @@ const initial_state = {
     }
 }
 
-export const Context = createContext(initial_state)
+export const Context = React.createContext(initial_state)
 
 export const ContextProvider = ({children}) => {
     const [state, dispatch] = useReducer(Reducer, initial_state)
