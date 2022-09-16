@@ -1,11 +1,11 @@
 import Link from 'next/link';
 import React, { useContext } from 'react';
 import { MdLocalHotel } from 'react-icons/md';
-import { Context } from '../../ContextApi/Context';
+import { Contexts } from '../../ContextUser/Contexts';
 import style from './Navbar.module.scss';
 
 function Navbar() {
-    const {user, dispatch} = useContext(Context)
+    const {user, dispatch} = useContext(Contexts)
 
     const handleLogOut = () => {
         dispatch({type: 'LOG_OUT'})

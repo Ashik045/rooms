@@ -214,7 +214,7 @@ export async function getServerSideProps(context) {
     const {params, query} = context;
     const {destination} = query;
     
-    const response  = await axios.get(`http://localhost:4000/api/hotels?city=${destination.toLocaleLowerCase()}`)
+    const response  = await axios.get(`http://localhost:4000/api/hotels?city=${destination}`)
     
     const data = await response.data.message;
 

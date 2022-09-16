@@ -16,8 +16,8 @@ import {
     MdMapsHomeWork
 } from 'react-icons/md';
 import { Context } from '../../ContextApi/Context';
+import { Contexts } from '../../ContextUser/Contexts';
 import style from './header.module.scss';
-
 
 function Header({type}) {
     const [openDate, setOpenDate] = useState(false)
@@ -76,8 +76,6 @@ function Header({type}) {
         },
     ];
 
-
-
     const handleBtn = (name, operation) => {
         setOptions((prev) => ({
                 ...prev,
@@ -99,7 +97,8 @@ function Header({type}) {
         destination,
     }
     
-    const {user ,dispatch} = useContext(Context);
+    const {dispatch} = useContext(Context);
+    const {user} = useContext(Contexts)
 
     const handleSubmit = (e) => {
         e.preventDefault()

@@ -1,10 +1,8 @@
-import React, { useEffect, useReducer } from "react"
-import Reducer from "./Reducer"
-
-const isServer = typeof window !== "undefined"
+import React, { useReducer } from "react";
+import Reducer from "./Reducer";
 
 const initial_state = {
-    city: undefined,
+    destination: undefined,
     dates: [
         {
             startDate: new Date(),
@@ -17,9 +15,6 @@ const initial_state = {
         children: 0,
         rooms: 1
     },
-    user: isServer && JSON.parse(localStorage.getItem('user')) || null,
-    loading: false,
-    error: false,
 }
 
 export const Context = React.createContext(initial_state)
@@ -27,18 +22,11 @@ export const Context = React.createContext(initial_state)
 export const ContextProvider = ({children}) => {
     const [state, dispatch] = useReducer(Reducer, initial_state);
 
-    useEffect(() => {
-        localStorage.setItem('user', JSON.stringify(state.user))
-    }, [state.user]);
-
     return (
         <Context.Provider value={{
-            city: state.city,
+            destination: state.destination,
             dates: state.dates,
             options: state.options,
-            user: state.user,
-            loading: state.loading,
-            error: state.error,
             dispatch,
         }}>
             {children}

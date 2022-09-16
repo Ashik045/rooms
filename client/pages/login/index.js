@@ -6,7 +6,7 @@ import Swal from 'sweetalert2'
 import Footer from '../../components/Footer/Footer'
 import Input from '../../components/Input/Input'
 import Navbar from '../../components/Navbar/Navbar'
-import { Context } from '../../ContextApi/Context'
+import { Contexts } from '../../ContextUser/Contexts'
 import styles from '../../styles/login.module.scss'
 
 const index = () => {
@@ -14,9 +14,9 @@ const index = () => {
         email: '',
         password: '',
     })
-    const [err, setErr] = useState(false)
+    const [err, setErr] = useState(false);
     const router = useRouter()
-    const {user, loading, error, dispatch} = useContext(Context);
+    const {user, loading, error, dispatch} = useContext(Contexts);
 
     const inpDetail = [
         {
@@ -62,10 +62,6 @@ const index = () => {
         try {
           const res = await axios.post('http://localhost:4000/api/user/login', inpval)
           dispatch({type: 'LOGIN_SUCCESS', payload: res.data.message})
-          
-            setInpval({
-              password: '',
-            })
     
             Toast.fire({
                 icon: 'success',
@@ -73,9 +69,11 @@ const index = () => {
               })
             router.push('/')
         } catch (error) {
-          dispatch({type: 'LOGIN_FAILURE'})
-            console.log(error);
+            dispatch({type: 'LOGIN_FAILURE'})
             setErr(true)
+            setInpval({
+              password: '',
+            })
         }
     }
 
@@ -91,7 +89,7 @@ const index = () => {
               })}
 
                 {err && <p style={{color: 'red', marginBottom: '0px'}}>Authentication failed!</p>}
-                  <input type="submit" value="Log In" className={styles.submit_btn} />
+                  <input type="submit" value="Log In" className={styles.submit_btn} disabled={loading} />
                   <Link href="/signup">
                       <a href="" className={styles.login_link}>
                           Don't have an account? Register hare..
