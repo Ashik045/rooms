@@ -49,6 +49,6 @@ const roomSchema = new mongoose.Schema(
 //     {number: 102, unavailableDates: [20.9.2022, 22.9.2022]},
 // ]
 
-const roomModel = mongoose.model('room', roomSchema);
+const RoomModel = mongoose.model('room', roomSchema);
 
-module.exports = roomModel;
+module.exports = RoomModel;

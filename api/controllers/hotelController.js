@@ -2,6 +2,8 @@
 /* eslint-disable prettier/prettier */
 // internal import
 const HotelModel = require('../models/hotelModel');
+const RoomModel = require('../models/roomModel');
+const roomModel = require('../models/roomModel');
 
 // create new hotel
 const createHotel = async (req, res) => {
@@ -128,6 +130,21 @@ const getHotelByType = async (req, res) => {
         }
 };
 
+const getHotelRooms = async (req, res) => {
+    try {
+        const hotel = await HotelModel.findById(req.params.id);
+        const lists = await Promise.all(hotel.rooms.map((room) => RoomModel.findById(room)));
+
+        res.status(200).json({
+            message: lists,
+        });
+    } catch (error) {
+        res.status(500).json({
+            error: 'Can not found rooms on this hotel!',
+        });
+    }
+};
+
 module.exports = {
     createHotel,
     updateHotel,
@@ -136,4 +153,5 @@ module.exports = {
     getAllHotel,
     getHotelByCity,
     getHotelByType,
+    getHotelRooms,
 };

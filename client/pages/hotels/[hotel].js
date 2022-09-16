@@ -10,13 +10,16 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 // import required modules
 import axios from 'axios';
-import { useContext } from 'react';
+import Link from 'next/link';
+import { useContext, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import Footer from '../../components/Footer/Footer';
 import Header from '../../components/Header/Header';
 import Navbar from '../../components/Navbar/Navbar';
 import Newsletter from '../../components/Newsletter/Newsletter';
+import Reserve from '../../components/Reserve/Reserve';
 import { Context } from '../../ContextApi/Context';
+import { Contexts } from '../../ContextUser/Contexts';
 import img1 from '../../images/img1.jpg';
 import item2 from '../../images/medium1.jpg';
 import item1 from '../../images/medium2.jpg';
@@ -24,8 +27,12 @@ import item4 from '../../images/medium3.jpg';
 import item3 from '../../images/medium4.jpg';
 import style from '../../styles/hotelDetail.module.scss';
 
-const hotelDetails = ({hotel}) => {
-    const days = 10;
+const hotelDetails = ({hotel, rooms}) => {
+    const {dates, options} = useContext(Context);
+    const {user} = useContext(Contexts);
+    const [sliderNum, setSliderNum] = useState(0);
+    const [open, setOpen] = useState(false);
+
     const details = {
         id: 1,
         image: [img1, item1, item2, item3, item4],
@@ -50,7 +57,13 @@ const hotelDetails = ({hotel}) => {
         price: '231',
     };
 
-    const {dates, options} = useContext(Context);
+    const handleClick = () => {
+        if(user) {
+            setOpen(true);
+        } else {
+            setOpen(false);
+        }
+    }
     
     console.log(hotel.images)
     const MILISEC_PER_DAY = 1000 * 60 * 60 * 24; 
@@ -151,14 +164,22 @@ const hotelDetails = ({hotel}) => {
                             of <b>{details.rating}</b>.
                         </p>
                         <p>
-                            <span>${hotel.chipestprice * options.room * day } </span> / {day} nights
+                            <span>${hotel.chipestprice * options.rooms * day } </span> / {day} nights
                         </p>
 
-                        <button type="button">Reserve or Book now</button>
+                       {user ? (
+                        <button type="button" onClick={handleClick}>Reserve or Book now</button>
+                       ) : (
+                        <Link href={'/login'}>
+                            <button type="button">Reserve or Book now</button>
+                        </Link>
+                       )} 
                     </div>
                 </div>
                 <hr />
+
             </div>
+            {open && <Reserve setOpen={setOpen} hotelId={hotel._id} rooms={rooms} /> }
 
             <Newsletter />
             <Footer />
@@ -220,12 +241,16 @@ export async function getStaticPaths() {
 export async function getStaticProps(context) {
     // api route
     const { params } = context;
-    const res = await axios.get(`http://localhost:4000/api/hotel/${params.hotel}`)
-    const data = await res.data.message
+    const res = await axios.get(`http://localhost:4000/api/hotel/${params.hotel}`);
+    const res2 = await axios.get(`http://localhost:4000/api/rooms/${params.hotel}`);
+
+    const data = await res.data.message;
+    const data2 = await res2.data.message;
 
     return {
         props: {
-            hotel: data
+            hotel: data,
+            rooms: data2
         }
     }
 }
