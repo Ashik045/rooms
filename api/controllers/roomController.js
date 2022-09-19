@@ -53,6 +53,25 @@ const updateRoom = async (req, res) => {
     }
 };
 
+// find room and update room abailability
+const updateRoomAvailability = async (req, res) => {
+    try {
+        await RoomModel.updateOne({ 'roomNumbers._id': req.params.id }, {
+            $push: {
+                'roomNumbers.$.unabailableDate': req.body.dates,
+            },
+        });
+
+        res.status(200).json({
+            message: 'Room availability updated',
+        });
+    } catch (error) {
+        res.status(500).json({
+            error: 'Room availability update failed!',
+        });
+    }
+};
+
 // find a room an delete
 const deleteRoom = async (req, res) => {
     const hotelId = req.params.hotelid;
@@ -115,4 +134,5 @@ module.exports = {
     deleteRoom,
     getOneRoom,
     getAllRoom,
+    updateRoomAvailability,
 };

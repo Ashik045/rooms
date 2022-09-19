@@ -28,7 +28,7 @@ const index = ({hotelList}) => {
     const [options, setOptions] = useState({
         adult: 1,
         children: 0,
-        room: 1,
+        rooms: 1,
     });
     const [dates, setDates] = useState([
         {
@@ -49,7 +49,7 @@ const index = ({hotelList}) => {
         e.preventDefault();
         dispatch({type: 'NEW_SEARCH', payload: {destination, dates, options}})
         // fetch data from server by search values
-        const hotels = await axios.get(`http://localhost:4000/api/hotels?city=${destination.toLocaleLowerCase()}&min=${min}&max=${max}`)
+        const hotels = await axios.get(`http://localhost:4000/api/hotels?city=${destination?.toLocaleLowerCase()}&min=${min}&max=${max}`)
         const hotelDatas = await hotels.data.message
         setHotelData(hotelDatas)
     };
@@ -176,10 +176,10 @@ const index = ({hotelList}) => {
                             <span className={style.option_txt}>Room</span>
                             <input
                                 type="number"
-                                value={options.room}
-                                onChange={(e) => setOptions({...options, room: e.target.value})}
+                                value={options.rooms}
+                                onChange={(e) => setOptions({...options, rooms: e.target.value})}
                                 className={style.option_inp}
-                                placeholder={options.room}
+                                placeholder={options.rooms}
                                 min={1}
                             />
                         </div>

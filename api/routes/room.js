@@ -8,6 +8,7 @@ const {
     deleteRoom,
     getOneRoom,
     getAllRoom,
+    updateRoomAvailability,
 } = require('../controllers/roomController');
 
 const router = express.Router();
@@ -17,6 +18,9 @@ router.post('/room/:id', createRoom);
 
 // find room by id and update
 router.put('/room/:id', updateRoom);
+
+// room update
+router.put('/room/availability/:id', updateRoomAvailability);
 
 // find room by id and delete
 router.delete('/room/:id/:hotelid', deleteRoom);

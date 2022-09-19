@@ -27,7 +27,19 @@ const Reserve = ({setOpen, hotelId, rooms}) => {
         return list;
     }
 
-    console.log(getDateRange(dates[0].startDate, dates[0].endDate));
+    const allDates = getDateRange(dates[0].startDate, dates[0].endDate);
+
+    const isAvailable = (roomNumber) => {
+        const isFound = roomNumber.unavailableDates.some((date) => {
+            allDates.includes(new Date(date).getTime());
+        })
+
+        return !isFound;
+    }
+    
+    const handleBlur = () => {
+        setOpen(false);
+    }
 
     const handleClick = () => {
 // 
@@ -35,24 +47,31 @@ const Reserve = ({setOpen, hotelId, rooms}) => {
 
   return (
     <div className={style.reserve_component}>
-        <div className={style.reserve_modal}>
+        <div className={style.reserve_modal} >
             <span>Select your rooms:</span>
-            <FaTimes />
+            <FaTimes onClick={handleBlur} className={style.reserve_modal_close} />
 
             {rooms?.map((room) => {
                 return (
                     <div className={style.room_item} key={room._id}>
                         <div className={style.room_item_info}>
-                            <h3>{room.title}</h3>
-                            <p>desc</p>
-                            <p>Max people {room.maxPeople}</p>
-                            <p>${room.price}</p>
+                            <p className={style.room_item_title}>{room.title}</p>
+                            <p>{room.bathroom} Bathroom, {room.sleep} Sleep</p>
+                            <p>Max people: {room.maxPeople}</p>
+                            <span>${room.price}</span>
+                        </div>
 
+                        <div className={style.room_item_room}>
                             {room.roomNumbers?.map((roomNumber) => {
                                 return (
                                     <div className={style.room} key={roomNumber._id}>
                                         <label htmlFor="">{roomNumber.number}</label>
-                                        <input type="checkbox" value={roomNumber._id} onChange={handleSlect}/>
+                                        <input 
+                                            type="checkbox"
+                                            value={roomNumber._id} 
+                                            onChange={handleSlect}
+                                            disabled={!isAvailable(roomNumber)}
+                                        />
                                     </div>
                                 )
                             })}

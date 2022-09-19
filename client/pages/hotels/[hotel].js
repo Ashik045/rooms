@@ -74,7 +74,7 @@ const hotelDetails = ({hotel, rooms}) => {
     }
 
     const day = dayDifference(dates[0].endDate, dates[0].startDate);
-    
+
     return (
         <div className={style.hotel_detail}>
             <Navbar />

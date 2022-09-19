@@ -26,7 +26,7 @@ function Header({type}) {
     const [options, setOptions] = useState({
         adult: 1,
         children: 0,
-        room: 1
+        rooms: 1
     })
     const [dates, setDates] = useState([
         {
@@ -178,7 +178,7 @@ function Header({type}) {
 
                             <div className={style.header_search_item}>
                                 <FaUserFriends className={style.header_search_icon_first} />
-                                <span className={style.header_search_date} onClick={handleRoomss}>{`${options.adult} adult ${options.children} children ${options.room} room `}</span>
+                                <span className={style.header_search_date} onClick={handleRoomss}>{`${options.adult} adult ${options.children} children ${options.rooms} room `}</span>
                             {openOption && <div className={style.search_options}>
                                 <div className={style.search_option_item}>
                                     <span className={style.option_txt}>Adult</span>
@@ -201,9 +201,9 @@ function Header({type}) {
                                 <div className={style.search_option_item}>
                                     <span className={style.option_txt}>Room</span>
                                     <div className={style.search_option_btnss}>
-                                        <button className={style.option_btn} type="button" onClick={() => handleBtn("room", "d")} disabled={options.room <= 1}>-</button>
-                                        <span className={style.option_txt_num}>{options.room}</span>
-                                        <button className={style.option_btn} type="button" onClick={() => handleBtn("room", "i")}>+</button>
+                                        <button className={style.option_btn} type="button" onClick={() => handleBtn("rooms", "d")} disabled={options.rooms <= 1}>-</button>
+                                        <span className={style.option_txt_num}>{options.rooms}</span>
+                                        <button className={style.option_btn} type="button" onClick={() => handleBtn("rooms", "i")}>+</button>
                                     </div>
                                 </div>
                             </div>}

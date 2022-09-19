@@ -16,7 +16,6 @@ function LatestBlogs({ blog }) {
 
             <div className={style.recent_blog_txt}>
             <Link href="/blogs/12" >
-
                 <h3>{title}</h3>
             </Link>
                 <p>{date}</p>

@@ -28,11 +28,11 @@ function Navbar() {
                                 log out
                             </button>
                     ) : (
-                        <Link href="/signup">
-                            <button className={style.reg_btn} type="button">
-                                sign up
-                            </button>
-                        </Link>
+                            <Link href="/signup">
+                                <button className={style.reg_btn} type="button">
+                                    sign up
+                                </button>
+                            </Link>
                     )}
                 </div>
             </div>

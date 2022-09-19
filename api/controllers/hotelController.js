@@ -3,7 +3,6 @@
 // internal import
 const HotelModel = require('../models/hotelModel');
 const RoomModel = require('../models/roomModel');
-const roomModel = require('../models/roomModel');
 
 // create new hotel
 const createHotel = async (req, res) => {
