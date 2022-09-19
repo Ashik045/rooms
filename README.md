@@ -1,9 +1,8 @@
 **Rooms is a MERN stack Hotel Booking application**
 
 Technologies:
-
-- Front-end: Next.js, React, JavaScript, SASS, CSS3, HTML5, SwiperJs, Sweetalert2, Axios
-- Back-end: Node.js, Express.js MongoDB, JWT
+👉 Front-end: Next.js, React, JavaScript, SASS, CSS3, HTML5, SwiperJs, Sweetalert2, Axios
+👉 Back-end: Node.js, Express.js MongoDB, JWT
 
 Features:
 
