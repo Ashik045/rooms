@@ -51,7 +51,7 @@ const index = () => {
     setTwitterUrl(e.target.value);
   };
 
-  const PageTitle = ["Sign Up", "Personal Info", "Social Links"]
+  const PageTitle = ["Sign In", "Personal Info", "Social Links"]
 
   // const userDetails = {
   //   email: email,

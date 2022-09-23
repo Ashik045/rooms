@@ -2,6 +2,7 @@ import axios from 'axios'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React, { useContext, useState } from 'react'
+import { FaGoogle, FaTwitter } from 'react-icons/fa'
 import Swal from 'sweetalert2'
 import Footer from '../../components/Footer/Footer'
 import Input from '../../components/Input/Input'
@@ -71,9 +72,6 @@ const index = () => {
         } catch (error) {
             dispatch({type: 'LOGIN_FAILURE'})
             setErr(true)
-            setInpval({
-              password: '',
-            })
         }
     }
 
@@ -90,6 +88,11 @@ const index = () => {
 
                 {err && <p style={{color: 'red', marginBottom: '0px'}}>Authentication failed!</p>}
                   <input type="submit" value="Log In" className={styles.submit_btn} disabled={loading} />
+
+                <hr className={styles.hr_line} />
+                <div className={`${styles.auth_next} ${styles.google}`}><FaGoogle style={{marginRight: '5px'}} /> Google</div>
+                <div className={`${styles.auth_next} ${styles.twitter}`}><FaTwitter style={{marginRight: '5px'}} /> Twitter</div>
+
                   <Link href="/signup">
                       <a href="" className={styles.login_link}>
                           Don't have an account? Register hare..

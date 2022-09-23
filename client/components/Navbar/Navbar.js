@@ -30,7 +30,7 @@ function Navbar() {
                     ) : (
                             <Link href="/signup">
                                 <button className={style.reg_btn} type="button">
-                                    sign up
+                                    sign in
                                 </button>
                             </Link>
                     )}

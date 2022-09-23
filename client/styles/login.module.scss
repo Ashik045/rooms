@@ -29,9 +29,57 @@
         cursor: pointer;
       }
 
+      .hr_line {
+        color: #e7f6f2;
+        width: 80%;
+        margin-top: 15px;
+        margin-bottom: 20px;
+      }
+
+      .auth_next {
+        // width: 100px;
+        padding: 5px 10px;
+        text-align: center;
+        border-radius: 4px;
+        font-size: 19px;
+        font-weight: 500;
+        width: 50%;
+        margin-left: 25%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .google {
+        margin-bottom: 10px;
+        background-color: #eb1d36;
+        color: white;
+        cursor: pointer;
+      }
+
+      .twitter {
+        background-color: #2650b1;
+        color: white;
+        cursor: pointer;
+        // margin-bottom: 20px;
+      }
+
       .login_link {
         display: block;
-        margin-top: 5px;
+        margin-top: 10px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .login_page {
+    .login_page_main {
+      .signup_page_form {
+        .auth_next {
+          width: 80%;
+          margin-left: 10%;
+        }
       }
     }
   }
