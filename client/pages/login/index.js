@@ -1,4 +1,5 @@
 import axios from 'axios'
+// import { signIn, signOut, useSession } from "next-auth/react"
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React, { useContext, useState } from 'react'
@@ -18,6 +19,7 @@ const index = () => {
     const [err, setErr] = useState(false);
     const router = useRouter()
     const {user, loading, error, dispatch} = useContext(Contexts);
+    // const { data: session } = useSession()
 
     const inpDetail = [
         {
@@ -90,8 +92,20 @@ const index = () => {
                   <input type="submit" value="Log In" className={styles.submit_btn} disabled={loading} />
 
                 <hr className={styles.hr_line} />
-                <div className={`${styles.auth_next} ${styles.google}`}><FaGoogle style={{marginRight: '5px'}} /> Google</div>
-                <div className={`${styles.auth_next} ${styles.twitter}`}><FaTwitter style={{marginRight: '5px'}} /> Twitter</div>
+
+                {/* {session ? (
+                  <>
+                    Signed in as  <br /> 
+                    <button onClick={() => signOut('google')}>Sign out</button>
+                  </>
+                ) : (
+                  <>
+                  Not signed in <br />
+                  <button onClick={() => signIn('google')}>Sign in</button>
+                  </>
+                )} */}
+                  <div className={`${styles.auth_next} ${styles.google}`}><FaGoogle style={{marginRight: '5px'}} /> Google</div>
+                  <div className={`${styles.auth_next} ${styles.twitter}`}><FaTwitter style={{marginRight: '5px'}} /> Twitter</div>
 
                   <Link href="/signup">
                       <a href="" className={styles.login_link}>

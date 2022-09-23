@@ -4,7 +4,7 @@ import { ContextProvider } from '../ContextApi/Context';
 import { UserContext } from '../ContextUser/Contexts';
 import '../styles/globals.css';
 
-function MyApp({ Component, pageProps }) {
+function MyApp({ Component, pageProps: {session, ...pageProps} }) {
     const [showChild, setShowChild] = useState(false);
 
     useEffect(() => {
@@ -16,11 +16,13 @@ function MyApp({ Component, pageProps }) {
     }
 
         return (
-            <UserContext>
-                <ContextProvider>
-                    <Component {...pageProps} />
-                </ContextProvider>
-            </UserContext>
+            // <SessionProvider session={session}>
+                <UserContext>
+                    <ContextProvider>
+                        <Component {...pageProps} />
+                    </ContextProvider>
+                </UserContext>
+            // </SessionProvider>
         );
 }
 
