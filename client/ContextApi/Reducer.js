@@ -1,7 +1,7 @@
 export default function Reducer(state, action) {
     switch (action.type) {
         case 'NEW_SEARCH':
-            return action.payload
+            return action.payload;
         case 'RESET_SEARCH':
             return {
                 destination: undefined,
@@ -15,10 +15,10 @@ export default function Reducer(state, action) {
                 options: {
                     adult: 1,
                     children: 0,
-                    rooms: 1
-                }
-            }
-        default: 
+                    rooms: 1,
+                },
+            };
+        default:
             return state;
     }
-} 
+}

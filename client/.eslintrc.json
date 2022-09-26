@@ -28,6 +28,9 @@
     "react/prop-types": 0,
     "jsx-a11y/click-events-have-key-events": 0,
     "camelcase": 0,
+    "react/no-array-index-key": 0,
+    "no-unused-vars": 0,
+    "no-underscore-dangle": 0,
     "react/jsx-filename-extension": [
       1,
       {

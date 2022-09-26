@@ -113,7 +113,7 @@ const Blogs = [
     },
 ];
 
-export default function Home({propertyList, propertyList2, homesDetails}) {
+export default function Home({ propertyList, propertyList2, homesDetails }) {
     return (
         <div className={styles.container}>
             <Head>
@@ -138,19 +138,21 @@ export default function Home({propertyList, propertyList2, homesDetails}) {
 }
 
 export async function getStaticProps() {
-    const response = await axios.get('http://localhost:4000/api/hotels/getHotelByCity?cities=Berlin,Tokyo,Dubai')
-    const response2 = await axios.get('http://localhost:4000/api/hotels/getHotelByType')
-    const response3 = await axios.get('http://localhost:4000/api/hotels?featured=true&limit=4')
+    const response = await axios.get(
+        'http://localhost:4000/api/hotels/getHotelByCity?cities=Berlin,Tokyo,Dubai'
+    );
+    const response2 = await axios.get('http://localhost:4000/api/hotels/getHotelByType');
+    const response3 = await axios.get('http://localhost:4000/api/hotels?featured=true&limit=4');
 
-    const data = await response.data.message
-    const data2 = await response2.data.message
-    const data3 = await response3.data.message
+    const data = await response.data.message;
+    const data2 = await response2.data.message;
+    const data3 = await response3.data.message;
 
     return {
         props: {
             propertyList: data,
             propertyList2: data2,
-            homesDetails: data3
-        }
-    }
+            homesDetails: data3,
+        },
+    };
 }

@@ -5,12 +5,12 @@ import { Contexts } from '../../ContextUser/Contexts';
 import style from './Navbar.module.scss';
 
 function Navbar() {
-    const {user, dispatch} = useContext(Contexts)
+    const { user, dispatch } = useContext(Contexts);
 
     const handleLogOut = () => {
-        dispatch({type: 'LOG_OUT'})
-    }
-    
+        dispatch({ type: 'LOG_OUT' });
+    };
+
     return (
         <div className={style.navbar}>
             <div className={style.navbar_main}>
@@ -24,15 +24,15 @@ function Navbar() {
 
                 <div className={style.registration}>
                     {user ? (
-                            <button className={style.reg_btn} type="button" onClick={handleLogOut}>
-                                log out
-                            </button>
+                        <button className={style.reg_btn} type="button" onClick={handleLogOut}>
+                            log out
+                        </button>
                     ) : (
-                            <Link href="/signup">
-                                <button className={style.reg_btn} type="button">
-                                    sign in
-                                </button>
-                            </Link>
+                        <Link href="/signup">
+                            <button className={style.reg_btn} type="button">
+                                sign in
+                            </button>
+                        </Link>
                     )}
                 </div>
             </div>

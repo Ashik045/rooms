@@ -5,7 +5,7 @@ import item2 from '../../images/img2.jpg';
 import item3 from '../../images/img3.jpg';
 import style from './features.module.scss';
 
-function Features({propertyList}) {
+function Features({ propertyList }) {
     return (
         <div className={style.feature_sec}>
             <div className={style.feature_sec_main}>

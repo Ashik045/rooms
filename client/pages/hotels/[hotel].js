@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable import/no-unresolved */
 import Image from 'next/image';
 import { FaBath, FaBed, FaCheck } from 'react-icons/fa';
@@ -27,9 +28,9 @@ import item4 from '../../images/medium3.jpg';
 import item3 from '../../images/medium4.jpg';
 import style from '../../styles/hotelDetail.module.scss';
 
-const hotelDetails = ({hotel, rooms}) => {
-    const {dates, options} = useContext(Context);
-    const {user} = useContext(Contexts);
+const hotelDetails = ({ hotel, rooms }) => {
+    const { dates, options } = useContext(Context);
+    const { user } = useContext(Contexts);
     const [sliderNum, setSliderNum] = useState(0);
     const [open, setOpen] = useState(false);
 
@@ -58,18 +59,18 @@ const hotelDetails = ({hotel, rooms}) => {
     };
 
     const handleClick = () => {
-        if(user) {
+        if (user) {
             setOpen(true);
         } else {
             setOpen(false);
         }
-    }
-    
-    console.log(hotel.images)
-    const MILISEC_PER_DAY = 1000 * 60 * 60 * 24; 
+    };
+
+    console.log(hotel.images);
+    const MILISEC_PER_DAY = 1000 * 60 * 60 * 24;
     function dayDifference(date1, date2) {
-        const timeDiference = Math.abs(date2.getTime() - date1.getTime())
-        const differenceDays = Math.ceil(timeDiference / MILISEC_PER_DAY)
+        const timeDiference = Math.abs(date2.getTime() - date1.getTime());
+        const differenceDays = Math.ceil(timeDiference / MILISEC_PER_DAY);
         return differenceDays === 0 ? 1 : differenceDays;
     }
 
@@ -164,22 +165,23 @@ const hotelDetails = ({hotel, rooms}) => {
                             of <b>{details.rating}</b>.
                         </p>
                         <p>
-                            <span>${hotel.chipestprice * options.rooms * day } </span> / {day} nights
+                            <span>${hotel.chipestprice * options.rooms * day} </span> / {day} nights
                         </p>
 
-                       {user ? (
-                        <button type="button" onClick={handleClick}>Reserve or Book now</button>
-                       ) : (
-                        <Link href={'/login'}>
-                            <button type="button">Reserve or Book now</button>
-                        </Link>
-                       )} 
+                        {user ? (
+                            <button type="button" onClick={handleClick}>
+                                Reserve or Book now
+                            </button>
+                        ) : (
+                            <Link href="/login">
+                                <button type="button">Reserve or Book now</button>
+                            </Link>
+                        )}
                     </div>
                 </div>
                 <hr />
-
             </div>
-            {open && <Reserve setOpen={setOpen} hotelId={hotel._id} rooms={rooms} /> }
+            {open && <Reserve setOpen={setOpen} hotelId={hotel._id} rooms={rooms} />}
 
             <Newsletter />
             <Footer />
@@ -216,25 +218,21 @@ export default hotelDetails;
 //     }
 // }
 
-
-
 // export getStaticPaths for dynamic routes
 export async function getStaticPaths() {
-    const response  = await axios.get(`http://localhost:4000/api/hotels`)
+    const response = await axios.get(`http://localhost:4000/api/hotels`);
     const data = await response.data.message;
 
-    const paths = data.map((item) => {
-        return {
-            params: {
-                hotel: item._id
-            }
-        }
-    })
+    const paths = data.map((item) => ({
+        params: {
+            hotel: item._id,
+        },
+    }));
 
     return {
         paths,
-        fallback: true
-    }
+        fallback: true,
+    };
 }
 
 // fetch the individual item data using getStaticProps
@@ -250,7 +248,7 @@ export async function getStaticProps(context) {
     return {
         props: {
             hotel: data,
-            rooms: data2
-        }
-    }
+            rooms: data2,
+        },
+    };
 }

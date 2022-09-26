@@ -20,7 +20,7 @@ import img2 from '../../images/img2.jpg';
 import img3 from '../../images/img3.jpg';
 import style from '../../styles/hotels.module.scss';
 
-const index = ({hotelList}) => {
+const index = ({ hotelList }) => {
     const { query } = useRouter();
     // console.log(query);
     const [openDate, setOpenDate] = useState(false);
@@ -37,21 +37,23 @@ const index = ({hotelList}) => {
             key: 'selection',
         },
     ]);
-    const [min, setMin] = useState(0)
-    const [max, setMax] = useState(999)
-    const [hotelData, setHotelData] = useState(hotelList)
+    const [min, setMin] = useState(0);
+    const [max, setMax] = useState(999);
+    const [hotelData, setHotelData] = useState(hotelList);
 
     console.log(hotelData);
 
-    const {dispatch} = useContext(Context);
-    
+    const { dispatch } = useContext(Context);
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-        dispatch({type: 'NEW_SEARCH', payload: {destination, dates, options}})
+        dispatch({ type: 'NEW_SEARCH', payload: { destination, dates, options } });
         // fetch data from server by search values
-        const hotels = await axios.get(`http://localhost:4000/api/hotels?city=${destination?.toLocaleLowerCase()}&min=${min}&max=${max}`)
-        const hotelDatas = await hotels.data.message
-        setHotelData(hotelDatas)
+        const hotels = await axios.get(
+            `http://localhost:4000/api/hotels?city=${destination?.toLocaleLowerCase()}&min=${min}&max=${max}`
+        );
+        const hotelDatas = await hotels.data.message;
+        setHotelData(hotelDatas);
     };
 
     // remove this dummy data and fetch from database
@@ -108,7 +110,12 @@ const index = ({hotelList}) => {
                     <h2>Search</h2>
                     <div className={style.search_item}>
                         <label>Destination</label>
-                        <input type="text" placeholder={destination} value={destination} onChange={(e) => setDestination(e.target.value)} />
+                        <input
+                            type="text"
+                            placeholder={destination}
+                            value={destination}
+                            onChange={(e) => setDestination(e.target.value)}
+                        />
                     </div>
 
                     <div className={style.search_item}>
@@ -137,14 +144,25 @@ const index = ({hotelList}) => {
                             <span className={style.option_txt}>
                                 Min price <small className={style.night_batch}>per night</small>
                             </span>
-                            <input type="number" className={style.option_inp} min={1} onChange={(e) => setMin(e.target.value)} />
+                            <input
+                                type="number"
+                                className={style.option_inp}
+                                min={1}
+                                onChange={(e) => setMin(e.target.value)}
+                            />
                         </div>
 
                         <div className={style.search_item_option}>
                             <span className={style.option_txt}>
                                 Max price <small className={style.night_batch}>per night</small>
                             </span>
-                            <input type="number" className={style.option_inp} max={5000} min={1} onChange={(e) => setMax(e.target.value)} />
+                            <input
+                                type="number"
+                                className={style.option_inp}
+                                max={5000}
+                                min={1}
+                                onChange={(e) => setMax(e.target.value)}
+                            />
                         </div>
 
                         <div className={style.search_item_option}>
@@ -165,7 +183,9 @@ const index = ({hotelList}) => {
                             <input
                                 type="number"
                                 value={options.children}
-                                onChange={(e) => setOptions({...options, children: e.target.value})}
+                                onChange={(e) =>
+                                    setOptions({ ...options, children: e.target.value })
+                                }
                                 className={style.option_inp}
                                 placeholder={options.children}
                                 min={0}
@@ -177,7 +197,7 @@ const index = ({hotelList}) => {
                             <input
                                 type="number"
                                 value={options.rooms}
-                                onChange={(e) => setOptions({...options, rooms: e.target.value})}
+                                onChange={(e) => setOptions({ ...options, rooms: e.target.value })}
                                 className={style.option_inp}
                                 placeholder={options.rooms}
                                 min={1}
@@ -211,16 +231,16 @@ export default index;
 
 // fetch the data using getStaticProps
 export async function getServerSideProps(context) {
-    const {params, query} = context;
-    const {destination} = query;
-    
-    const response  = await axios.get(`http://localhost:4000/api/hotels?city=${destination}`)
-    
+    const { params, query } = context;
+    const { destination } = query;
+
+    const response = await axios.get(`http://localhost:4000/api/hotels?city=${destination}`);
+
     const data = await response.data.message;
 
     return {
         props: {
-            hotelList: data
-        }
-    }
+            hotelList: data,
+        },
+    };
 }

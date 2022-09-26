@@ -9,15 +9,14 @@ function LatestBlogs({ blog }) {
     const date = moment(createdAt).fromNow();
     return (
         <div className={style.recent_blog}>
-        <Link href="/blogs/12" >
-
-            <Image src={img} alt="recent blog" className={style.recent_blog_img} />
-        </Link>
+            <Link href="/blogs/12">
+                <Image src={img} alt="recent blog" className={style.recent_blog_img} />
+            </Link>
 
             <div className={style.recent_blog_txt}>
-            <Link href="/blogs/12" >
-                <h3>{title}</h3>
-            </Link>
+                <Link href="/blogs/12">
+                    <h3>{title}</h3>
+                </Link>
                 <p>{date}</p>
             </div>
         </div>
