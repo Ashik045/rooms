@@ -1,15 +1,19 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable no-nested-ternary */
 /* eslint-disable react-hooks/rules-of-hooks */
 import axios from 'axios';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
+import { MdDriveFolderUpload } from 'react-icons/md';
 import Footer from '../../components/Footer/Footer';
 import Email from '../../components/FormComponents/Email';
 import PersonalInfo from '../../components/FormComponents/PersonalInfo';
 import SocialLink from '../../components/FormComponents/SocialLink';
 import Navbar from '../../components/Navbar/Navbar';
+import noImage from '../../images/user.png';
 import styles from '../../styles/signuppage.module.scss';
 
 const index = () => {
@@ -19,12 +23,18 @@ const index = () => {
     const [pass, setPass] = useState('');
     const [conPass, setConPass] = useState('');
 
-    const [fName, setfName] = useState('');
-    const [lName, setlName] = useState('');
+    const [fullname, setFullname] = useState('');
     const [userName, setUserName] = useState('');
+    const [country, setCountry] = useState('');
 
+    const [phone, setPhone] = useState('');
     const [facebookUrl, setFacebookUrl] = useState('');
     const [twitterUrl, setTwitterUrl] = useState('');
+
+    const [photo, setPhoto] = useState(null);
+    const [error, setError] = useState(false);
+
+    const [loading, setLoading] = useState(false);
 
     const eChng = (e) => {
         setEmail(e.target.value);
@@ -37,15 +47,17 @@ const index = () => {
     };
 
     const fChng = (e) => {
-        setfName(e.target.value);
+        setFullname(e.target.value);
     };
     const lChng = (e) => {
-        setlName(e.target.value);
+        setCountry(e.target.value);
     };
     const uChng = (e) => {
         setUserName(e.target.value);
     };
-
+    const phnChng = (e) => {
+        setPhone(e.target.value);
+    };
     const facebookUrlChng = (e) => {
         setFacebookUrl(e.target.value);
     };
@@ -55,35 +67,45 @@ const index = () => {
 
     const PageTitle = ['Sign In', 'Personal Info', 'Social Links'];
 
-    // const userDetails = {
-    //   email: email,
-    //   password: pass,
-    //   firstname: conPass,
-    //   fName: fName,
-    //   lName: lName,
-    //   userName: userName,
-    //   facebookUrl: facebookUrl,
-    //   twitterUrl: twitterUrl,
-    // }
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.post('http://localhost:4000/api/user/signup', {
-                email,
-                password: pass,
-                firstname: fName,
-                lastname: lName,
-                username: userName,
-                fblink: facebookUrl,
-                twlink: twitterUrl,
-            });
+            setLoading(true);
+            const data = new FormData();
+            data.append('file', photo);
+            data.append('upload_preset', 'uploads');
 
-            console.log('signup successful');
-            Router.push('/login');
-        } catch (error) {
-            console.log(error);
-            console.log('signup failed');
+            const uploadRes = await axios.post(
+                'https://api.cloudinary.com/v1_1/dqctmbhde/image/upload',
+                data
+            );
+            console.log(uploadRes);
+            const { url } = uploadRes.data;
+
+            try {
+                await axios.post('http://localhost:4000/api/user/signup', {
+                    email,
+                    password: pass,
+                    fullname,
+                    country,
+                    image: url,
+                    username: userName,
+                    phone,
+                    fblink: facebookUrl,
+                    twlink: twitterUrl,
+                });
+
+                Router.push('/login');
+                setLoading(false);
+            } catch (err) {
+                setError(true);
+                console.log('signup error', err);
+                setLoading(false);
+            }
+        } catch (errr) {
+            console.log('image error', errr);
+            setError(true);
+            setLoading(false);
         }
     };
 
@@ -103,8 +125,8 @@ const index = () => {
         if (page === 1) {
             return (
                 <PersonalInfo
-                    fnVal={fName}
-                    lnVal={lName}
+                    fnVal={fullname}
+                    lnVal={country}
                     unVal={userName}
                     fnChng={fChng}
                     lnChng={lChng}
@@ -116,6 +138,8 @@ const index = () => {
             <SocialLink
                 facebookUrl={facebookUrl}
                 twitterUrl={twitterUrl}
+                phoneUrl={phone}
+                phnChng={phnChng}
                 facebookUrlChng={facebookUrlChng}
                 twitterUrlChng={twitterUrlChng}
             />
@@ -139,6 +163,30 @@ const index = () => {
                         </div>
 
                         <form onSubmit={handleSubmit}>
+                            <div className={styles.upload_img}>
+                                <div className={styles.form_inp}>
+                                    <label htmlFor="file">
+                                        Upload: <MdDriveFolderUpload className={styles.file_icon} />
+                                    </label>
+
+                                    <input
+                                        type="file"
+                                        name="file"
+                                        id="file"
+                                        style={{ display: 'none' }}
+                                        onChange={(e) => setPhoto(e.target.files[0])}
+                                    />
+                                </div>
+
+                                <Image
+                                    src={photo ? URL.createObjectURL(photo) : noImage}
+                                    alt="upload image"
+                                    width={100}
+                                    height={100}
+                                    className={styles.img}
+                                />
+                            </div>
+
                             <div className={styles.form_body}>
                                 <div>{PageBody()}</div>
                             </div>
@@ -164,8 +212,11 @@ const index = () => {
                                 )}
                             </div>
 
+                            {error && (
+                                <p style={{ color: 'red', marginBottom: '-5px' }}>SignUp failed!</p>
+                            )}
                             {page === 2 && (
-                                <input type="submit" value="Submit" className={styles.submit_btn} />
+                                <input type="submit" value={loading ? "Loading..." : "Submit"} className={styles.submit_btn} style={{cursor: loading ? "not-allowed" : "pointer"}} />
                             )}
                             <p style={{ marginTop: '10px' }}>
                                 <Link href="/login"> Already have an account? Log in here..</Link>

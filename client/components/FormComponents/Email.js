@@ -14,7 +14,7 @@ function Email({ eVal, pVal, cVal, cChng, eChng, pChng }) {
             <input
                 className={style.exact_form_inp}
                 placeholder="Email"
-                type="text"
+                type="email"
                 value={eVal}
                 onChange={eChng}
                 required

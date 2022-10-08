@@ -43,9 +43,9 @@ const login = async (req, res) => {
             if (comparePassword) {
                 // jwt process
 
-                const { password, isAdmin, ...userDetail } = isUser[0]._doc;
+                const { password, isadmin, ...userDetail } = isUser[0]._doc;
                 const jwtToken = jwt.sign(
-                    { id: isUser._id, isAdmin: isUser.isAdmin, email: isUser.email },
+                    { id: isUser._id, isadmin: isUser.isadmin, email: isUser.email },
                     process.env.JWT_SECRET_KEY,
                     {
                         expiresIn: '2d',
@@ -54,7 +54,7 @@ const login = async (req, res) => {
                 res.cookie('access_token', jwtToken, {
                     httpOnly: true,
                 }).status(200).json({
-                    message: { ...userDetail },
+                    message: { details: { ...userDetail }, isadmin },
                     jwtToken,
                 });
             } else {

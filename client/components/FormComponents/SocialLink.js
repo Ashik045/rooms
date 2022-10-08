@@ -1,7 +1,14 @@
 import React, { useState } from 'react';
 import style from './formcomponent.module.scss';
 
-function SocialLink({ facebookUrl, facebookUrlChng, twitterUrl, twitterUrlChng }) {
+function SocialLink({
+    facebookUrl,
+    facebookUrlChng,
+    twitterUrl,
+    twitterUrlChng,
+    phnChng,
+    phoneUrl,
+}) {
     const [focus, setFocus] = useState(false);
 
     const onBlur = () => {
@@ -13,10 +20,23 @@ function SocialLink({ facebookUrl, facebookUrlChng, twitterUrl, twitterUrlChng }
             <input
                 className={style.exact_form_inp}
                 type="text"
+                placeholder="Phone Number"
+                value={phoneUrl}
+                onChange={phnChng}
+                required
+            />
+            <p
+                clasName={style.form_err}
+                style={{ color: 'red', marginTop: '-13px', fontSize: '14px', marginBottom: '10px' }}
+            >
+                Phone is required.
+            </p>
+            <input
+                className={style.exact_form_inp}
+                type="text"
                 placeholder="Facebook Link"
                 value={facebookUrl}
                 onChange={facebookUrlChng}
-                required
             />
             <p
                 clasName={style.form_err}

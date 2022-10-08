@@ -13,34 +13,17 @@ function PersonalInfo({ fnVal, lnVal, unVal, fnChng, lnChng, usChng }) {
             <input
                 className={style.exact_form_inp}
                 type="text"
-                placeholder="First Name"
+                placeholder="Fullname"
                 value={fnVal}
                 onChange={fnChng}
                 onBlur={onBlur}
                 focused={focus.toString()}
-                pattern="^[A-Za-z0-9]{3,15}$"
             />
             <p
                 clasName={style.form_err}
                 style={{ color: 'red', marginTop: '-13px', fontSize: '14px', marginBottom: '10px' }}
             >
-                Firstname is required.
-            </p>
-            <input
-                className={style.exact_form_inp}
-                type="text"
-                placeholder="Last Name"
-                value={lnVal}
-                onChange={lnChng}
-                onBlur={onBlur}
-                focused={focus.toString()}
-                pattern="^[A-Za-z0-9]{3,15}$"
-            />
-            <p
-                clasName={style.form_err}
-                style={{ color: 'red', marginTop: '-13px', fontSize: '14px', marginBottom: '10px' }}
-            >
-                Lastname is required.
+                Name is required!
             </p>
             <input
                 className={style.exact_form_inp}
@@ -57,6 +40,21 @@ function PersonalInfo({ fnVal, lnVal, unVal, fnChng, lnChng, usChng }) {
                 style={{ color: 'red', marginTop: '-13px', fontSize: '14px', marginBottom: '10px' }}
             >
                 Username should be 5-15 characters and should not include any special character!
+            </p>
+            <input
+                className={style.exact_form_inp}
+                type="text"
+                placeholder="Country Name"
+                value={lnVal}
+                onChange={lnChng}
+                onBlur={onBlur}
+                focused={focus.toString()}
+            />
+            <p
+                clasName={style.form_err}
+                style={{ color: 'red', marginTop: '-13px', fontSize: '14px', marginBottom: '10px' }}
+            >
+                Country is required!
             </p>
         </div>
     );

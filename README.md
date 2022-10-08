@@ -8,7 +8,7 @@ Technologies:
 
 Features:
 
-- Admin Dashboard (upcoming).
+- Admin Dashboard.
 - SSG & SSR using Next.js.
 - Multistep Form.
 - Image Slider.
