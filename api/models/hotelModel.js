@@ -25,7 +25,7 @@ const hotelSchema = new mongoose.Schema(
             type: String,
             required: true,
         },
-        images: {
+        image: {
             type: Array,
         },
         desc: {

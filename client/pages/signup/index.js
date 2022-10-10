@@ -71,37 +71,59 @@ const index = () => {
         e.preventDefault();
         try {
             setLoading(true);
-            const data = new FormData();
-            data.append('file', photo);
-            data.append('upload_preset', 'uploads');
+            
+            if (photo) {
+                const data = new FormData();
+                data.append('file', photo);
+                data.append('upload_preset', 'upload');
+                    
+                const uploadRes = await axios.post(
+                    'https://api.cloudinary.com/v1_1/drbvugloj/image/upload',
+                    data
+                    );
+                    
+                const { url } = uploadRes.data;
+                try {
+                    await axios.post('http://localhost:4000/api/user/signup', {
+                            email,
+                            password: pass,
+                            fullname,
+                            country,
+                            username: userName,
+                            image: url,
+                            phone,
+                            fblink: facebookUrl,
+                            twlink: twitterUrl,
+                    });
+        
+                    Router.push('/login');
+                    setLoading(false);
+                    } catch (err) {
+                        setError(true);
+                        console.log('signup error', err);
+                        setLoading(false);
+                    }
+                } else {
+                    try {
+                        await axios.post('http://localhost:4000/api/user/signup', {
+                            email,
+                            password: pass,
+                            fullname,
+                            country,
+                            username: userName,
+                            phone,
+                            fblink: facebookUrl,
+                            twlink: twitterUrl,
+                        });
 
-            const uploadRes = await axios.post(
-                'https://api.cloudinary.com/v1_1/dqctmbhde/image/upload',
-                data
-            );
-            console.log(uploadRes);
-            const { url } = uploadRes.data;
-
-            try {
-                await axios.post('http://localhost:4000/api/user/signup', {
-                    email,
-                    password: pass,
-                    fullname,
-                    country,
-                    image: url,
-                    username: userName,
-                    phone,
-                    fblink: facebookUrl,
-                    twlink: twitterUrl,
-                });
-
-                Router.push('/login');
-                setLoading(false);
-            } catch (err) {
-                setError(true);
-                console.log('signup error', err);
-                setLoading(false);
-            }
+                        Router.push('/login');
+                        setLoading(false);
+                    } catch (err) {
+                        setError(true);
+                        console.log('signup error', err);
+                        setLoading(false);
+                    }
+                }
         } catch (errr) {
             console.log('image error', errr);
             setError(true);
