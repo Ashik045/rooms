@@ -23,7 +23,7 @@ router.post('/user/login', login);
 router.put('/user/:id', updateUser);
 
 // find user by userId and delete
-router.delete('/user/:id', deleteUser);
+router.delete('/users/:id', deleteUser);
 
 // find a user by userId
 router.get('/user/:id', getOneUser);
