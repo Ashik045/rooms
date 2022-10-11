@@ -6,7 +6,7 @@ const HotelModel = require('../models/hotelModel');
 
 // create new room
 const createRoom = async (req, res) => {
-    const hotelId = req.params.id;
+    const hotelId = req.params.hotelid;
     const newRoom = new RoomModel(req.body);
     try {
        const savedRoom = await newRoom.save();

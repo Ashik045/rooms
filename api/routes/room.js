@@ -14,7 +14,7 @@ const {
 const router = express.Router();
 
 // create room
-router.post('/room/:id', createRoom);
+router.post('/room/:hotelid', createRoom);
 
 // find room by id and update
 router.put('/room/:id', updateRoom);

@@ -9,10 +9,6 @@ const roomSchema = new mongoose.Schema(
             type: String,
             required: true,
         },
-        image: {
-            type: Array,
-            required: true,
-        },
         price: {
             type: Number,
             required: true,
@@ -23,16 +19,6 @@ const roomSchema = new mongoose.Schema(
         desc: {
             type: Array,
             required: true,
-        },
-        rating: {
-            type: String,
-            required: true,
-        },
-        sleep: {
-            type: String,
-        },
-        bathroom: {
-            type: String,
         },
         roomNumbers: [{ number: Number, unavailableDates: { type: [Date] } }],
         facilities: {
