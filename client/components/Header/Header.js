@@ -9,11 +9,9 @@ import React, { useContext, useState } from 'react';
 import { DateRange } from 'react-date-range';
 import 'react-date-range/dist/styles.css'; // main css file
 import 'react-date-range/dist/theme/default.css'; // theme css file
-import { FaCalendarAlt, FaHome, FaNewspaper, FaUserFriends } from 'react-icons/fa';
+import { FaCalendarAlt, FaUserFriends } from 'react-icons/fa';
 import {
-    MdLocalHotel,
-    MdLocalTaxi,
-    MdMapsHomeWork
+    MdLocalHotel
 } from 'react-icons/md';
 import { Context } from '../../ContextApi/Context';
 import { Contexts } from '../../ContextUser/Contexts';
@@ -37,44 +35,6 @@ function Header({type}) {
       ]);
 
     const router = useRouter()
-
-    const menus = [
-        {
-            id: 1,
-            icon: <FaHome />,
-            txt: 'Home',
-            isActive: false,
-            href: '/'
-        },
-        {
-            id: 2,
-            icon: <MdMapsHomeWork />,
-            txt: 'Hotels',
-            isActive: false,
-            href: '/hotels'
-        },
-        {
-            id: 3,
-            icon: <FaNewspaper />,
-            txt: 'Blogs',
-            isActive: false,
-            href: '/blogs'
-        },
-        {
-            id: 4,
-            icon: <MdLocalHotel />,
-            txt: 'Car rentals',
-            isActive: false,
-            href: '/'
-        },
-        {
-            id: 5,
-            icon: <MdLocalTaxi />,
-            txt: 'Taxis',
-            isActive: false,
-            href: '/'
-        },
-    ];
 
     const handleBtn = (name, operation) => {
         setOptions((prev) => ({
@@ -113,40 +73,23 @@ function Header({type}) {
     return (
         <div className={style.header}>
             <div className={style.header_main}>
-                <div className={style.header_menus} style={{ paddingBottom: type === "hList" && '0px'}}>
-                    {menus.map((menu) => (
-                        <Link href={menu.href} key={menu.id}>
-                        <div
-
-                            className={`${
-                                menu.isActive ? style.header_menu_item_active : style.header_menu_item
-                            }`}
-                        >
-                            <h3>
-                                {menu.icon} {menu.txt}
-                            </h3>
-                        </div>
-                        </Link>
-                    ))}
-                </div>
-
                 {type !== "hList" && (
                     <>
                         
-                <h1>Amazing hostel for the free spirited traveler.</h1>
-                <p>
-                    A life time of discounts? - We have everything you need. It&apos;s simple: the
-                    longer you stay, the more you save!
-                </p>
+                    <h1 >Amazing hostel for the free spirited traveler.</h1>
+                    <p>
+                        A life time of discounts? - We have everything you need. It&apos;s simple: the
+                        longer you stay, the more you save!
+                    </p>
 
-                {user ? (
-                    <div className={style.username}>Welcome <b> {user.username}.</b></div>
-                ) : (
-                    <Link href="login">
-                        <button className={style.reg_btn} type="button">
-                            Sign In / Register
-                        </button>
-                    </Link>
+                    {user ? (
+                        <div className={style.username}>Welcome <b> {user.username}.</b></div>
+                    ) : (
+                        <Link href="login">
+                            <button className={style.reg_btn} type="button">
+                                Sign In / Register
+                            </button>
+                        </Link>
                 )}
 
                 {/* header search */}

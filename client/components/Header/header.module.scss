@@ -11,59 +11,16 @@
     color: white;
     margin-left: auto;
     margin-right: auto;
-    padding-top: 50px;
-    padding-bottom: 50px;
+    // padding-top: 50px;
+    // padding-bottom: 50px;
     padding-left: 15px;
     padding-right: 15px;
-
-    .header_menus {
-      display: flex;
-      align-items: center;
-      gap: 35px;
-      flex-wrap: wrap;
-      padding-left: 10px;
-      padding-top: 20px;
-      padding-bottom: 90px;
-
-      .header_menu_item {
-        cursor: pointer;
-        height: 60px;
-        width: 150px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        h3 {
-          font-size: 22px;
-          gap: 10px;
-          display: flex;
-          align-items: center;
-        }
-      }
-
-      .header_menu_item_active {
-        border: 1px solid white;
-        border-radius: 100px;
-        cursor: pointer;
-        height: 60px;
-        width: 170px;
-        padding: 0px 10px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        h3 {
-          font-size: 22px;
-          gap: 10px;
-          display: flex;
-          align-items: center;
-        }
-      }
-    }
 
     h1 {
       font-size: 50px;
       font-weight: bold;
+      padding-top: 150px;
+      margin-top: 0px;
     }
 
     p {
@@ -94,7 +51,7 @@
       background-color: white;
       transition: all 0.3s ease;
       margin-top: 80px;
-      margin-bottom: 30px;
+      margin-bottom: 80px;
     }
 
     .reg_btn:hover {
@@ -285,6 +242,7 @@
 
       h1 {
         font-size: 45px;
+        padding-top: 80px;
       }
 
       p {
@@ -293,7 +251,7 @@
 
       .reg_btn {
         padding: 11px 10px;
-        margin-top: 40px;
+        margin-top: 10px;
       }
 
       .header_search {

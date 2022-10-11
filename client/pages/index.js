@@ -9,6 +9,7 @@ import Navbar from '../components/Navbar/Navbar';
 import Newsletter from '../components/Newsletter/Newsletter';
 import Propertys from '../components/Propertys/Propertys';
 import SpecialServices from '../components/SpecialServices/SpecialServices';
+import WhyUs from '../components/WhyUs/WhyUs';
 import bImg1 from '../images/blog1.jpg';
 import bImg2 from '../images/blog2.jpg';
 import bImg3 from '../images/blog3.jpg';
@@ -127,8 +128,9 @@ export default function Home({ propertyList, propertyList2, homesDetails }) {
                 <Navbar />
                 <Header />
                 <Features propertyList={propertyList} />
-                <Propertys propertyList2={propertyList2} />
                 <LovelyHomeDetail homesDetails={homesDetails} />
+                <Propertys propertyList2={propertyList2} />
+                <WhyUs />
                 <SpecialServices />
                 <BlogComponent blogDetail={Blogs} title="Rooms Blogs" />
                 <Newsletter />
