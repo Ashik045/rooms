@@ -38,6 +38,7 @@ function AddRoom({ inputs, title, type }) {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const rooms = roomNums.split(',').map((room) => ({ number: room }));
+        console.log(rooms);
         const datas = {
             ...inpVal,
             roomNumbers: rooms,

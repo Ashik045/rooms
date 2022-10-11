@@ -66,7 +66,6 @@ const hotelDetails = ({ hotel, rooms }) => {
         }
     };
 
-    console.log(hotel.images);
     const MILISEC_PER_DAY = 1000 * 60 * 60 * 24;
     function dayDifference(date1, date2) {
         const timeDiference = Math.abs(date2.getTime() - date1.getTime());
@@ -94,7 +93,7 @@ const hotelDetails = ({ hotel, rooms }) => {
                         modules={[Navigation, EffectFade, Pagination]}
                         className="mySwiper"
                     >
-                        {hotel.image?.map((imgs, i) => (
+                        {hotel.images?.map((imgs, i) => (
                             <SwiperSlide className={style.swiper_slide} key={i}>
                                 <Image
                                     className={style.swiper_slide_img}
@@ -142,7 +141,7 @@ const hotelDetails = ({ hotel, rooms }) => {
                         modules={[EffectCards]}
                         className={style.mySwiper}
                     >
-                        {hotel.image?.slice(1).map((imgs, i) => (
+                        {hotel.images?.slice(1).map((imgs, i) => (
                             <SwiperSlide
                                 className={style.swiper_slide2}
                                 style={{ position: 'relative' }}
@@ -153,6 +152,8 @@ const hotelDetails = ({ hotel, rooms }) => {
                                     src={imgs}
                                     objectFit="cover"
                                     alt="hotels"
+                                    width={300}
+                                    height={200}
                                 />
                             </SwiperSlide>
                         ))}
@@ -165,7 +166,7 @@ const hotelDetails = ({ hotel, rooms }) => {
                             of <b>{details.rating}</b>.
                         </p>
                         <p>
-                            <span>${hotel.chipestprice * options.rooms * day} </span> / {day} nights
+                            <span>${hotel.price * options.rooms * day } </span> / {day} nights
                         </p>
 
                         {user ? (
@@ -190,33 +191,6 @@ const hotelDetails = ({ hotel, rooms }) => {
 };
 
 export default hotelDetails;
-
-// export getStaticPaths for dynamic routes
-// export async function getStaticPaths() {
-//     const { params } = context;
-//     const res = await fetch(`/api/hotel/${params.hotel}`)
-//     const data = res.json();
-
-//     // const paths = data.map((hotel) => {
-//     //     return {
-//     //         params: {
-//     //             hotel: `${hotel._id}`
-//     //         }
-//     //     }
-//     // })
-
-//     return {
-//         paths: [
-//             {
-//                 params: '_id'
-//             },
-//             {
-//                 params: '_id'
-//             },
-//         ],
-//         fallback: true
-//     }
-// }
 
 // export getStaticPaths for dynamic routes
 export async function getStaticPaths() {

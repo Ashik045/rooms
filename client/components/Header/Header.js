@@ -22,7 +22,7 @@ import style from './header.module.scss';
 function Header({type}) {
     const [openDate, setOpenDate] = useState(false)
     const [openOption, setOpenOption] = useState(false)
-    const [destination, setDestination] = useState('')
+    const [city, setCity] = useState('')
     const [options, setOptions] = useState({
         adult: 1,
         children: 0,
@@ -94,7 +94,7 @@ function Header({type}) {
     }
 
     const states = {
-        destination,
+        city,
     }
     
     const {dispatch} = useContext(Context);
@@ -102,11 +102,11 @@ function Header({type}) {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        // router.push(`/hotels?destination=${destination}&options=${options.adult}`)
-        dispatch({type: 'NEW_SEARCH', payload: {destination, dates, options}})
+        // router.push(`http://localhost:4000/api/hotels?city=${city?.toLocaleLowerCase()}`)
+        dispatch({type: 'NEW_SEARCH', payload: {city, dates, options}})
         router.push({
             pathname: '/hotels',
-            query: states
+            query: states,
         })
     }
 
@@ -155,10 +155,10 @@ function Header({type}) {
                                 <MdLocalHotel className={style.header_search_icon_first} />
                                 <input
                                     type="text"
-                                    placeholder="Where are you going?"
+                                    placeholder="Berlin, Tokyo, Dubai"
                                     className={style.searc_inp}
-                                    value={destination}
-                                    onChange={(e) => setDestination(e.target.value)}
+                                    value={city?.toLowerCase()}
+                                    onChange={(e) => setCity(e.target.value)}
                                 />
                             </div>
 

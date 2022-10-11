@@ -9,6 +9,7 @@ import styles from './propertys.module.scss';
 
 function Propertys({ propertyList2 }) {
     const images = [item1, item2, item3, item4, item5];
+    
     return (
         <div className={styles.propertys}>
             <h2>Browse by propertys</h2>

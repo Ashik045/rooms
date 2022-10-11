@@ -159,7 +159,7 @@ const hotelInpDetails = [
         name: 'type',
         lable: 'Type',
         type: 'text',
-        placeholder: 'Hotel, Redidential',
+        placeholder: 'Hotel, Resort',
         required: true,
         errorMsg: 'Type is required!',
     },

@@ -3,7 +3,7 @@ import React, { useReducer } from 'react';
 import Reducer from './Reducer';
 
 const initial_state = {
-    destination: undefined,
+    city: undefined,
     dates: [
         {
             startDate: new Date(),
@@ -26,7 +26,7 @@ export function ContextProvider({ children }) {
     return (
         <Context.Provider
             value={{
-                destination: state.destination,
+                city: state.city,
                 dates: state.dates,
                 options: state.options,
                 dispatch,

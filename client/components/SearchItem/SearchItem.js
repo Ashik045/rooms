@@ -42,7 +42,7 @@ function SearchItem({ results }) {
                     <span>{results.rating}</span>
                 </div>
                 <div className={style.search_item_price}>
-                    <p>${results.chipestprice}</p>
+                    <p>${results.price}</p>
 
                     <Link href={`/hotels/${results._id}`}>
                         <button type="button">View Details</button>

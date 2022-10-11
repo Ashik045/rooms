@@ -36,8 +36,6 @@ router.get('/hotels/getHotelByCity', getHotelByCity);
 // get hotels by hotel types
 router.get('/hotels/getHotelByType', getHotelByType);
 
-router.get('/hotelss', getAllHotel);
-
 // find hotel rooms by hotelid and go for reservations
 router.get('/rooms/:id', getHotelRooms);
 

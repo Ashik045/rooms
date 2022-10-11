@@ -118,7 +118,10 @@
 
     .search_item_img {
       height: 200px;
-      object-fit: cover;
+
+      Image {
+        object-fit: cover;
+      }
     }
 
     .search_item_details {

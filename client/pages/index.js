@@ -50,6 +50,7 @@ import styles from '../styles/index.module.scss';
 //     },
 // ];
 
+// dumm
 const Blogs = [
     {
         id: 1,
@@ -139,7 +140,7 @@ export default function Home({ propertyList, propertyList2, homesDetails }) {
 
 export async function getStaticProps() {
     const response = await axios.get(
-        'http://localhost:4000/api/hotels/getHotelByCity?cities=Berlin,Tokyo,Dubai'
+        'http://localhost:4000/api/hotels/getHotelByCity?cities=berlin,tokyo,dubai'
     );
     const response2 = await axios.get('http://localhost:4000/api/hotels/getHotelByType');
     const response3 = await axios.get('http://localhost:4000/api/hotels?featured=true&limit=4');
