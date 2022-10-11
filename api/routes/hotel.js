@@ -22,7 +22,7 @@ router.post('/hotel/create', createHotel);
 router.put('/hotel/:id', updateHotel);
 
 // find hotel by id and delete
-router.delete('/hotel/:id', deleteHotel);
+router.delete('/hotels/:id', deleteHotel);
 
 // find hotel by id
 router.get('/hotel/:id', getOneHotel);

@@ -15,7 +15,7 @@ const createHotel = async (req, res) => {
         });
     } catch (error) {
         res.status(500).json({
-            error: 'Hotel not created!',
+            error: `Hotel not created! ${error}`,
         });
     }
 };
