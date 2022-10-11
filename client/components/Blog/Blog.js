@@ -6,22 +6,22 @@ import { FaCalendarAlt, FaRegEye } from 'react-icons/fa';
 import style from './blog.module.scss';
 
 function Blog({ blogs }) {
-    const { title, img, text, createdAt, views, tags } = blogs;
+    const { title, image, desc, createdAt, view, tags, _id } = blogs;
     return (
         <div className={style.blog}>
             <div className={style.blog_img} style={{ position: 'relative' }}>
-                <Link href="/blogs/12">
-                    <Image src={img} className={style.blog_imggg} />
+                <Link href={`/blogs/${_id}`}>
+                    <Image src={image} className={style.blog_imggg} height={200} width={300} layout="responsive" objectFit="cover" />
                 </Link>
 
                 <p className={style.blog_tag}>{tags[0]}</p>
             </div>
 
             <div className={style.blog_details}>
-                <Link href="/blogs/12">
+                <Link href={`/blogs/${_id}`}>
                     <h2>{title}</h2>
                 </Link>
-                <p>{text[0]}</p>
+                <p>{desc}</p>
 
                 <div className={style.blog_foter}>
                     <p>
@@ -30,7 +30,7 @@ function Blog({ blogs }) {
                     </p>
                     <p>
                         <FaRegEye style={{ marginRight: '3px' }} />
-                        {views} views
+                        {view} views
                     </p>
                 </div>
             </div>

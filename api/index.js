@@ -9,6 +9,7 @@ const cookieparser = require('cookie-parser');
 const userRoute = require('./routes/user');
 const hotelRoute = require('./routes/hotel');
 const roomRoute = require('./routes/room');
+const blogRoute = require('./routes/blog');
 
 const app = express();
 
@@ -34,6 +35,7 @@ mongoose
 app.use('/api', userRoute);
 app.use('/api', hotelRoute);
 app.use('/api', roomRoute);
+app.use('/api', blogRoute);
 
 // home route
 app.get('/api', (req, res) => {

@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React from 'react';
 import Blog from '../../components/Blog/Blog';
 import Footer from '../../components/Footer/Footer';
@@ -74,7 +75,7 @@ const Blogs = [
     },
 ];
 
-const index = () => (
+const index = ({blogs}) => (
     <div className={style.blog_page}>
         <Navbar />
         <Header type="hList" />
@@ -85,9 +86,9 @@ const index = () => (
                     <input type="submit" value="Search" />
                 </form>
 
-                <p>{Blogs.length} blogs found.</p>
-                {Blogs.map((blogs) => (
-                    <Blog blogs={blogs} />
+                <p>{blogs.length} blogs found.</p>
+                {blogs.map((blogs) => (
+                    <Blog blogs={blogs} key={blogs._id} />
                 ))}
             </div>
 
@@ -102,3 +103,14 @@ const index = () => (
 );
 
 export default index;
+
+export async function getStaticProps() {
+    const res = await axios.get('http://localhost:4000/api/blogs')
+    const data = await res.data.message;
+
+    return {
+        props: {
+            blogs: data
+        }
+    }
+}

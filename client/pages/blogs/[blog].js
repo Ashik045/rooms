@@ -1,3 +1,4 @@
+import axios from 'axios';
 import Image from 'next/image';
 import React from 'react';
 import { FaCalendarAlt, FaRegEye } from 'react-icons/fa';
@@ -11,7 +12,6 @@ import bImgg1 from '../../images/blog1.jpg';
 import bImg2 from '../../images/blog2.jpg';
 import bImg3 from '../../images/blog3.jpg';
 import bImg4 from '../../images/blog4.jpg';
-import bImg1 from '../../images/blog_detail.jpg';
 import style from '../../styles/blogdetail.module.scss';
 
 const Blogs = [
@@ -65,30 +65,18 @@ const Blogs = [
     },
 ];
 
-const blogDetails = () => {
-    const blogDetail = {
-        id: 1,
-        img: bImg1,
-        title: 'How to cure wanderlust without leaving your home',
-        tags: ['Travel', 'Communication', 'Tourist Guide'],
-        text: [
-            'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquam rerum ea doloribus quae alias velit porro eligendi laudantium dolor necessitatibus delectus ab esse, corporis labore dignissimos molestiae cupiditate quo. Ipsa adipisci error beatae, deleniti accusantium molestias quae cumque nulla quasi sunt laborum! Possimus, numquam. Obcaecati animi aspernatur distinctio explicabo consequuntur.',
-            'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquam rerum ea doloribus quae alias velit porro eligendi laudantium dolor necessitatibus delectus ab esse, corporis labore dignissimos molestiae cupiditate quo. Ipsa adipisci error beatae, deleniti accusantium molestias quae cumque nulla quasi sunt laborum! Possimus, numquam.',
-        ],
-        createdAt: new Date().toDateString(),
-        views: 122,
-    };
-
+const blogDetails = ({blogList1}) => {
+    
     return (
         <div className={style.blog_detail}>
             <Navbar />
             <Header type="hList" />
             <div className={style.blog_detail_main}>
                 <div className={style.blog_detailss}>
-                    <h1>{blogDetail.title}</h1>
+                    <h1>{blogList1.title}</h1>
 
                     <Image
-                        src={blogDetail.img}
+                        src={blogList1.image}
                         alt="Travel blogs"
                         className={style.blog_detail_img}
                     />
@@ -96,20 +84,17 @@ const blogDetails = () => {
                     <div className={style.blog_detail_tv}>
                         <p>
                             <FaCalendarAlt style={{ marginRight: '3px' }} />
-                            {blogDetail.createdAt}
+                            {blogList1.createdAt}
                         </p>
                         <p>
                             <FaRegEye style={{ marginRight: '3px' }} />
-                            {blogDetail.views} views
+                            {blogList1.view} views
                         </p>
                     </div>
-
-                    {blogDetail.text.map((t) => (
-                        <p className={style.blog_detail_txt}>{t}</p>
-                    ))}
-
+                    
+                    <p className={style.blog_detail_txt}>{blogList1.desc}</p>
                     <h3>Tags:</h3>
-                    {blogDetail.tags.map((tag) => (
+                    {blogList1.tags.map((tag) => (
                         <span className={style.blog_detail_tag}>{tag}</span>
                     ))}
                 </div>
@@ -130,3 +115,36 @@ const blogDetails = () => {
     );
 };
 export default blogDetails;
+
+// export getStaticPaths for dynamic routes
+export async function getStaticPaths() {
+    const response = await axios.get(`http://localhost:4000/api/blogs`);
+    const data = await response.data.message;
+
+    const paths = data.map((item) => ({
+        params: {
+            blogs: item._id,
+        },
+    }));
+
+    return {
+        paths,
+        fallback: true,
+    };
+}
+
+// fetch the individual item data using getStaticProps
+export async function getStaticProps(context) {
+    // api route
+    const { params } = context;
+    console.log(params);
+    const res = await axios.get(`http://localhost:4000/api/blog/${params.blog}`);
+
+    const data = await res.data.message;
+
+    return {
+        props: {
+            blogList1: data,
+        },
+    };
+}
