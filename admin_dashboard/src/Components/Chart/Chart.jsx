@@ -71,8 +71,8 @@ function Chart({ height, title }) {
                 >
                     <defs>
                         <linearGradient id="totals" x1="0" y1="0" x2="0" y2="1">
-                            <stop offset="5%" stopColor="#7451f8" stopOpacity={0.9} />
-                            <stop offset="95%" stopColor="#7451f8" stopOpacity={0} />
+                            <stop offset="5%" stopColor="#4665fdce" stopOpacity={0.9} />
+                            <stop offset="95%" stopColor="#4665fdce" stopOpacity={0} />
                         </linearGradient>
                     </defs>
                     <XAxis dataKey="name" stroke="gray" />
