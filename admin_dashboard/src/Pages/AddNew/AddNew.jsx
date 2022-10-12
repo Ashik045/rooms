@@ -19,35 +19,29 @@ function AddNew({ inputs, title, type }) {
         case 'USER':
             dynamicInpVal = {
                 username: '',
-                name: '',
+                fullname: '',
                 email: '',
                 password: '',
-                address: '',
-            };
-            break;
-        case 'PRODUCT':
-            dynamicInpVal = {
-                title: '',
-                description: '',
-                category: '',
-                price: '',
-                stock: '',
+                country: '',
             };
             break;
         case 'BLOG':
             dynamicInpVal = {
                 title: '',
-                description: '',
+                desc: '',
                 tags: '',
             };
             break;
         default:
             break;
     }
+
     const [userInp, setUserInp] = useState(dynamicInpVal);
     const [roomData, setroomData] = useState([]);
     const [photo, setPhoto] = useState(null);
     const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(false);
+    const [emailErr, setEmailErr] = useState(null);
     const nevigate = useNavigate();
     // Dynamicaly change the data for different pages
 
@@ -74,21 +68,17 @@ function AddNew({ inputs, title, type }) {
                 userInp.image = url;
             }
 
+            await axios.post(
+                `http://localhost:4000/api/${type === 'USER' ? 'user/signup' : 'blog/create'}`,
+                userInp
+            );
             console.log(userInp);
             setLoading(false);
-            nevigate(
-                `/${
-                    type === 'USER'
-                        ? 'users'
-                        : type === 'PRODUCT'
-                        ? 'products'
-                        : type === 'HOTEL'
-                        ? 'hotels'
-                        : 'blogs'
-                }`
-            );
-        } catch (error) {
-            console.log(error);
+            nevigate(`/${type === 'USER' ? 'users' : 'blogs'}`);
+        } catch (err) {
+            console.log(err.response.data.error);
+            setError(true);
+            setEmailErr(err.response.data.error);
             setLoading(false);
         }
     };
@@ -106,38 +96,52 @@ function AddNew({ inputs, title, type }) {
                             <img src={photo ? URL.createObjectURL(photo) : noImage} alt="add img" />
                         </div>
 
-                        <form onSubmit={handleSubmit} className="form">
-                            <div className="form_inp">
-                                <label htmlFor="file">
-                                    Upload: <DriveFolderUploadIcon className="file_icon" />
-                                </label>
+                        <div className="form_top">
+                            <form onSubmit={handleSubmit} className="form">
+                                <div className="form_inp">
+                                    <label htmlFor="file">
+                                        Upload: <DriveFolderUploadIcon className="file_icon" />
+                                    </label>
 
-                                <input
-                                    type="file"
-                                    name="file"
-                                    id="file"
-                                    style={{ display: 'none' }}
-                                    onChange={(e) => setPhoto(e.target.files[0])}
-                                />
-                            </div>
+                                    <input
+                                        type="file"
+                                        name="file"
+                                        id="file"
+                                        style={{ display: 'none' }}
+                                        onChange={(e) => setPhoto(e.target.files[0])}
+                                    />
+                                </div>
 
-                            {inputs.map((detail) => (
-                                <Input
-                                    key={detail.id}
-                                    {...detail}
-                                    value={userInp[detail.name]}
-                                    onChange={handleChange}
-                                />
-                            ))}
+                                {inputs.map((detail) => (
+                                    <Input
+                                        key={detail.id}
+                                        {...detail}
+                                        value={userInp[detail.name]}
+                                        onChange={handleChange}
+                                    />
+                                ))}
 
-                            <button
-                                type="submit"
-                                className="submit_btn"
-                                style={{ cursor: loading ? 'not-allowed' : 'pointer' }}
-                            >
-                                {loading ? 'Loading..' : 'Submit'}
-                            </button>
-                        </form>
+                                <button
+                                    type="submit"
+                                    className="submit_btn"
+                                    style={{ cursor: loading ? 'not-allowed' : 'pointer' }}
+                                >
+                                    {loading ? 'Loading..' : 'Submit'}
+                                </button>
+                            </form>
+                            {emailErr && (
+                                <p
+                                    style={{
+                                        display: 'block',
+                                        color: 'red',
+                                        marginTop: '10px',
+                                        marginLeft: '10px',
+                                    }}
+                                >
+                                    {emailErr}
+                                </p>
+                            )}
+                        </div>
                     </div>
                 </div>
             </div>

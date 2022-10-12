@@ -17,7 +17,7 @@ function AddHotel({ inputs, title, type }) {
         type: '',
         city: '',
         title: '',
-        description: '',
+        desc: '',
         image: '',
         price: '',
         rooms: '',

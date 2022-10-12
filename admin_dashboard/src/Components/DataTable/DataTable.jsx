@@ -25,7 +25,6 @@ function DataTable() {
         try {
             axios.delete(`http://localhost:4000/api/${path}/${id}`);
             setData(data.filter((item) => item.id !== id));
-            console.log(`deleted user ${id}`);
         } catch (error) {
             console.log(error);
         }

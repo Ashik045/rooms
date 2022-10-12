@@ -30,12 +30,11 @@ const userInpDetails = [
     },
     {
         id: 3,
-        name: 'name',
-        lable: 'Name',
+        name: 'fullname',
+        lable: 'Fullname',
         type: 'text',
         placeholder: 'John Smith',
         required: true,
-        pattern: '^[A-Za-z]{1,20}$',
         errorMsg: 'Name is required!',
     },
     {
@@ -60,7 +59,7 @@ const userInpDetails = [
     },
     {
         id: 6,
-        name: 'address',
+        name: 'country',
         lable: 'Address',
         type: 'text',
         placeholder: 'Address',
@@ -127,7 +126,7 @@ const blogInpDetails = [
     },
     {
         id: 2,
-        name: 'description',
+        name: 'desc',
         lable: 'Description',
         type: 'text',
         placeholder: 'Blog description',
@@ -139,7 +138,7 @@ const blogInpDetails = [
         name: 'tags',
         lable: 'Tags',
         type: 'text',
-        placeholder: 'Product tags',
+        placeholder: 'Travel, Tourist, Communication',
         required: true,
         errorMsg: 'Tag is required!',
     },
@@ -183,7 +182,7 @@ const hotelInpDetails = [
     },
     {
         id: 2,
-        name: 'description',
+        name: 'desc',
         lable: 'Description',
         type: 'text',
         placeholder: 'Hotel description',
@@ -430,18 +429,6 @@ function App() {
                                 element={
                                     <ProtectedRoute>
                                         <Lists type="product" />
-                                    </ProtectedRoute>
-                                }
-                            />
-                            <Route
-                                path="addnew"
-                                element={
-                                    <ProtectedRoute>
-                                        <AddNew
-                                            inputs={productInpDetails}
-                                            title="Add New Product"
-                                            type="PRODUCT"
-                                        />
                                     </ProtectedRoute>
                                 }
                             />

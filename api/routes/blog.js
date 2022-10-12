@@ -20,7 +20,7 @@ router.post('/blog/create', createBlog);
 router.put('/blog/:id', updateBlog);
 
 // find Blog by id and delete
-router.delete('/blog/:id', deleteBlog);
+router.delete('/blogs/:id', deleteBlog);
 
 // find Blog by id
 router.get('/blog/:id', getOneBlog);
@@ -28,7 +28,7 @@ router.get('/blog/:id', getOneBlog);
 // find all Blogs
 router.get('/blogs', getAllBlog);
 
-// // find all Blogs
-// router.get('/blogs/tag', getBlogByTag);
+// find all Blogs
+router.get('/blogs/search', getBlogByTag);
 
 module.exports = router;

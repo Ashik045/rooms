@@ -119,9 +119,7 @@ const hotelDetails = ({ hotel, rooms }) => {
                     </div>
 
                     <div className={style.hotel_detail_desc}>
-                        {hotel.desc?.map((des, i) => (
-                            <p key={i}>{des}</p>
-                        ))}
+                        <p >{hotel.desc}</p>
                     </div>
 
                     <h2>Room Facilities</h2>

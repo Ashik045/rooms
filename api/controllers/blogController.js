@@ -72,12 +72,12 @@ const getOneBlog = async (req, res) => {
 
 // get all Blogs
 const getAllBlog = async (req, res) => {
-    const { tag } = req.query;
+    // const { tag } = req.query;
     let allBlogs;
     try {
-        if (tag) {
-        allBlogs = await BlogModel.find({ tags: tag });
-        }
+        // if (tag) {
+        // allBlogs = await BlogModel.find({ tags: tag });
+        // }
         allBlogs = await BlogModel.find();
 
         res.status(200).json({
@@ -91,20 +91,20 @@ const getAllBlog = async (req, res) => {
 };
 
 // get all Blogs
-// const getBlogByTag = async (req, res) => {
-//     const { search } = req.query;
-//     try {
-//         const allBlogs = await BlogModel.find({ tags: search });
+const getBlogByTag = async (req, res) => {
+    const { tag } = req.query;
+    try {
+        const allBlogs = await BlogModel.find({ tags: tag });
 
-//         res.status(200).json({
-//             message: allBlogs,
-//         });
-//     } catch (error) {
-//         res.status(500).json({
-//             error: 'Blogs not found!!',
-//         });
-//     }
-// };
+        res.status(200).json({
+            message: allBlogs,
+        });
+    } catch (error) {
+        res.status(500).json({
+            error: 'Blogs not found!!',
+        });
+    }
+};
 
 module.exports = {
     createBlog,
@@ -112,4 +112,5 @@ module.exports = {
     deleteBlog,
     getOneBlog,
     getAllBlog,
+    getBlogByTag,
 };

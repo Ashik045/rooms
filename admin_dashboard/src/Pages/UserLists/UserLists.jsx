@@ -18,20 +18,22 @@ function Lists({ type }) {
 
                 {/* mui data table */}
                 <div className="data_table">
-                    <div className="btnn">
-                        <Link
-                            to={`/${
-                                type === 'user'
-                                    ? 'users'
-                                    : type === 'product'
-                                    ? 'orders'
-                                    : 'products'
-                            }/addnew`}
-                            style={{ textDecoration: 'none' }}
-                        >
-                            <button type="button">Add New {type}</button>
-                        </Link>
-                    </div>
+                    {type === 'user' && (
+                        <div className="btnn">
+                            <Link
+                                to={`/${
+                                    type === 'user'
+                                        ? 'users'
+                                        : type === 'product'
+                                        ? 'orders'
+                                        : 'products'
+                                }/addnew`}
+                                style={{ textDecoration: 'none' }}
+                            >
+                                <button type="button">Add New {type}</button>
+                            </Link>
+                        </div>
+                    )}
 
                     {type === 'user' ? (
                         <DataTable />

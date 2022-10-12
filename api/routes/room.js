@@ -23,7 +23,7 @@ router.put('/room/:id', updateRoom);
 router.put('/room/availability/:id', updateRoomAvailability);
 
 // find room by id and delete
-router.delete('/room/:id/:hotelid', deleteRoom);
+router.delete('/rooms/:id', deleteRoom);
 
 // find room by id
 router.get('/room/:id', getOneRoom);

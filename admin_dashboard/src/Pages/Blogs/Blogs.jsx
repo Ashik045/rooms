@@ -1,8 +1,9 @@
 /* eslint-disable no-constant-condition */
 /* eslint-disable no-nested-ternary */
 import { DataGrid } from '@mui/x-data-grid';
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import Navbar from '../../Components/Navbar/Navbar';
 import Sidebar from '../../Components/Sidebar/Sidebar';
 import blog1 from '../../Images/blog1.jpg';
@@ -11,6 +12,7 @@ import blog3 from '../../Images/blog3.jpg';
 import blog4 from '../../Images/blog4.jpg';
 import blog5 from '../../Images/book3.jpg';
 import blog6 from '../../Images/book5.jpg';
+import noUser from '../../Images/user.png';
 import './blogs.scss';
 
 const userData = [
@@ -59,10 +61,26 @@ const userData = [
 ];
 
 function Blogs({ type }) {
-    const [data, setData] = useState(userData);
+    const [data, setData] = useState([]);
+    const location = useLocation();
+    const path = location.pathname.split('/')[1];
+
+    useEffect(() => {
+        const getData = async () => {
+            const datas = await axios.get('http://localhost:4000/api/blogs');
+            setData(datas.data.message);
+        };
+        getData();
+    }, [data]);
 
     const handleDlt = (id) => {
-        setData(data.filter((item) => item.id !== id));
+        try {
+            axios.delete(`http://localhost:4000/api/${path}/${id}`);
+            setData(data.filter((item) => item.id !== id));
+            console.log(`deleted user ${id}`);
+        } catch (error) {
+            console.log(error);
+        }
     };
 
     const columns = [
@@ -72,19 +90,22 @@ function Blogs({ type }) {
             width: 310,
             renderCell: (param) => (
                 <div className="userr">
-                    <img src={param.row.image} alt="User" className="userr_image" />
-                    {param.row.id}
+                    <img
+                        src={param.row.image ? param.row.image : noUser}
+                        alt="User"
+                        className="userr_image"
+                    />
+                    {param.row._id}
                 </div>
             ),
         },
         {
             field: 'title',
             headerName: 'Title',
-            width: 400,
+            width: 520,
             style: { color: 'red' },
         },
-        { field: 'author', headerName: 'Author', width: 170 },
-        { field: 'createdAt', headerName: 'CreatedAt', width: 200 },
+        { field: 'createdAt', headerName: 'CreatedAt', width: 250 },
         {
             field: 'action',
             headerName: 'Action',
@@ -99,7 +120,7 @@ function Blogs({ type }) {
                     <button
                         type="button"
                         className="delete_btn"
-                        onClick={() => handleDlt(params.row.id)}
+                        onClick={() => handleDlt(params.row._id)}
                     >
                         Delete
                     </button>
@@ -133,6 +154,7 @@ function Blogs({ type }) {
                         pageSize={10}
                         rowsPerPageOptions={[10]}
                         checkboxSelection
+                        getRowId={(row) => row._id}
                     />
                 </div>
             </div>

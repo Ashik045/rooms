@@ -3,11 +3,28 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import LocalGroceryStoreOutlinedIcon from '@mui/icons-material/LocalGroceryStoreOutlined';
 import PaidOutlinedIcon from '@mui/icons-material/PaidOutlined';
 import PermIdentityIcon from '@mui/icons-material/PermIdentity';
-import React from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import './itemlists.scss';
 
 function ItemLists({ type }) {
+    const [userData, setUserData] = useState([]);
+    const [hotelData, setHotelData] = useState([]);
+    const [blogData, setBlogData] = useState([]);
+
+    useEffect(() => {
+        const datass = async () => {
+            const res = await axios.get('http://localhost:4000/api/rooms');
+            const res2 = await axios.get('http://localhost:4000/api/blogs');
+            const res3 = await axios.get('http://localhost:4000/api/users');
+            setHotelData(res.data.message);
+            setBlogData(res2.data.message);
+            setUserData(res3.data.message);
+        };
+        datass();
+    }, []);
+
     let data;
 
     // Dynamicaly change the ui content
@@ -16,7 +33,7 @@ function ItemLists({ type }) {
             data = {
                 title: 'USERS',
                 isMoney: false,
-                count: 23232,
+                count: userData.length,
                 icon: (
                     <PermIdentityIcon
                         style={{
@@ -32,9 +49,9 @@ function ItemLists({ type }) {
             break;
         case 'order':
             data = {
-                title: 'ORDERS',
+                title: 'HOTELS',
                 isMoney: false,
-                count: 342,
+                count: hotelData.length,
 
                 icon: (
                     <LocalGroceryStoreOutlinedIcon
@@ -45,15 +62,14 @@ function ItemLists({ type }) {
                         className="icon"
                     />
                 ),
-                link: 'View all orders',
-                linkto: '/',
+                link: 'View all hotels',
+                linkto: '/hotels',
             };
             break;
         case 'earning':
             data = {
-                title: 'EARNINGS',
-                isMoney: true,
-                count: 43231,
+                title: 'BLOGS',
+                count: blogData.length,
                 icon: (
                     <AttachMoneyOutlinedIcon
                         style={{
@@ -63,14 +79,14 @@ function ItemLists({ type }) {
                         className="icon"
                     />
                 ),
-                link: 'See net earnings',
-                linkto: '/',
+                link: 'See All Blogs',
+                linkto: '/blogs',
             };
             break;
         case 'balance':
             data = {
                 title: 'BALANCE',
-                count: 52144,
+                count: 544,
                 isMoney: true,
                 icon: (
                     <PaidOutlinedIcon

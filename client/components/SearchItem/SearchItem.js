@@ -19,7 +19,7 @@ function SearchItem({ results }) {
                     <h3>{results.name}</h3>
                 </Link>
 
-                    <p >{results.desc[0]}</p>
+                <p >{results.desc}</p>
                 <span className={style.free}>Free dining room</span>
                 <div className={style.search_item_bed}>
                     <p style={{ marginRight: '8px' }}>

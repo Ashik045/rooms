@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React from 'react';
+import React, { useState } from 'react';
 import Blog from '../../components/Blog/Blog';
 import Footer from '../../components/Footer/Footer';
 import Header from '../../components/Header/Header';
@@ -76,13 +76,21 @@ const Blogs = [
 ];
 
 const index = ({blogs}) => {
-    // const [blogData, setBlogData] =  useState([])
+    const [blogData, setBlogData] =  useState(blogs)
+    // const router = useRouter()
+    // const {query} = router;
+    // const {tag} = query;
+    // console.log(query);
 
-    // const handleClick = async (tag) => {
-    //     // const datas = await axios.get(`http://localhost:4000/api/blogs?tag=${tag}`)
-    //     // setBlogData(datas.data.message)
-    //     // console.log(blogData);
-    // }
+    // useEffect(() => {
+    //     const handleClick = async () => {
+    //         const datas = await axios.get(query.tag ? `http://localhost:4000/api/blogs/search?tag=${query.tag}` : 'http://localhost:4000/api/blogs')
+    //         setBlogData(datas.data.message)
+    //         console.log('fetch', datas.data.message);
+    //         console.log('state', blogData);
+    //     }
+    //     handleClick()
+    // }, [query.tag])
 
      return (
         <div className={style.blog_page}>
@@ -95,8 +103,8 @@ const index = ({blogs}) => {
                         <input type="submit" value="Search" />
                     </form>
 
-                    <p>{blogs.length} blogs found.</p>
-                    {blogs.map((blog) => (
+                    <p>{blogData.length} blogs found.</p>
+                    {blogData.length > 0 && blogData.map((blog) => (
                         <Blog blogs={blog} key={blog._id} />
                     ))}
                 </div>
@@ -104,7 +112,9 @@ const index = ({blogs}) => {
                 <div className={style.blog_search_tag}>
                     <h2>Tags</h2>
                     <div className={style.tags_main}>
+                    {/* <Link href="blogs/search?tag=Travel"> */}
                         <span>Travel</span>
+                    {/* </Link> */}
                         <span>Communication</span>
                         <span>Tourist</span>
                     </div>
