@@ -57,7 +57,13 @@
         border-radius: 4px;
         color: #2f509c;
         transition: all 0.3s ease;
-        margin-bottom: -150px !important;
+        margin-bottom: -170px !important;
+        cursor: pointer;
+
+        &:hover {
+          background-color: #2155cd;
+          color: white;
+        }
       }
     }
 

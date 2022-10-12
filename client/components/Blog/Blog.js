@@ -7,6 +7,7 @@ import style from './blog.module.scss';
 
 function Blog({ blogs }) {
     const { title, image, desc, createdAt, view, tags, _id } = blogs;
+
     return (
         <div className={style.blog}>
             <div className={style.blog_img} style={{ position: 'relative' }}>

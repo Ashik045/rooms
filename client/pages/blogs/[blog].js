@@ -14,6 +14,7 @@ import bImg3 from '../../images/blog3.jpg';
 import bImg4 from '../../images/blog4.jpg';
 import style from '../../styles/blogdetail.module.scss';
 
+// remove this dummy data and fetch from the database
 const Blogs = [
     {
         id: 1,
@@ -65,7 +66,7 @@ const Blogs = [
     },
 ];
 
-const blogDetails = ({blogList1}) => {
+const blogDetails = ({blogList1, blogss}) => {
     
     return (
         <div className={style.blog_detail}>
@@ -79,6 +80,10 @@ const blogDetails = ({blogList1}) => {
                         src={blogList1.image}
                         alt="Travel blogs"
                         className={style.blog_detail_img}
+                        height={400}
+                        width={600}
+                        objectFit="cover"
+                        layout='responsive'
                     />
 
                     <div className={style.blog_detail_tv}>
@@ -94,20 +99,20 @@ const blogDetails = ({blogList1}) => {
                     
                     <p className={style.blog_detail_txt}>{blogList1.desc}</p>
                     <h3>Tags:</h3>
-                    {blogList1.tags.map((tag) => (
-                        <span className={style.blog_detail_tag}>{tag}</span>
+                    {blogList1.tags.map((tag, i) => (
+                        <span key={i} className={style.blog_detail_tag}>{tag}</span>
                     ))}
                 </div>
 
                 <div className={style.blog_detail_right}>
                     <h2>Recent Blogs</h2>
-                    {Blogs.slice(0, 3).map((blog) => (
-                        <LatestBlogs blog={blog} />
+                    {blogss.filter((item) => item._id !== blogList1._id).slice(0, 3).map((blog, i) => (
+                        <LatestBlogs blog={blog} key={i} />
                     ))}
                 </div>
             </div>
 
-            <BlogComponent blogDetail={Blogs} title="You might also like" />
+            <BlogComponent blogDetail={blogss} title="You might also like" id={blogList1._id} />
 
             <Newsletter />
             <Footer />
@@ -123,7 +128,7 @@ export async function getStaticPaths() {
 
     const paths = data.map((item) => ({
         params: {
-            blogs: item._id,
+            blog: item._id,
         },
     }));
 
@@ -139,12 +144,15 @@ export async function getStaticProps(context) {
     const { params } = context;
     console.log(params);
     const res = await axios.get(`http://localhost:4000/api/blog/${params.blog}`);
+    const res2 = await axios.get("http://localhost:4000/api/blogs")
 
     const data = await res.data.message;
+    const blogss = await res2.data.message;
 
     return {
         props: {
             blogList1: data,
+            blogss: blogss,
         },
     };
 }

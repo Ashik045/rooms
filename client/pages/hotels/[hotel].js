@@ -83,7 +83,7 @@ const hotelDetails = ({ hotel, rooms }) => {
             {/* hotel details */}
             <div className={style.hotel_detail_main}>
                 <div className={style.hotel_detail_left}>
-                    <h1>{hotel.title}</h1>
+                    <h1>{hotel.name}</h1>
                     <Swiper
                         effect="fade"
                         navigation

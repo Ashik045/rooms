@@ -8,6 +8,7 @@ const {
     deleteBlog,
     getOneBlog,
     getAllBlog,
+    getBlogByTag,
 } = require('../controllers/blogController');
 
 const router = express.Router();
@@ -26,5 +27,8 @@ router.get('/blog/:id', getOneBlog);
 
 // find all Blogs
 router.get('/blogs', getAllBlog);
+
+// // find all Blogs
+// router.get('/blogs/tag', getBlogByTag);
 
 module.exports = router;

@@ -11,7 +11,7 @@ import style from './blogcomponent.module.scss';
 import 'swiper/css';
 import 'swiper/css/pagination';
 
-function BlogComponent({ blogDetail, title }) {
+function BlogComponent({ blogDetail, title, id }) {
     return (
         <div className={style.blog_component}>
             <div className={style.blog_component_main}>
@@ -48,19 +48,23 @@ function BlogComponent({ blogDetail, title }) {
                         modules={[Pagination]}
                         className={style.mySwiper}
                     >
-                        {blogDetail.slice(0, 4).map((item, i) => (
+                        {blogDetail.filter((blog) => blog._id !== id).slice(0, 4).map((item, i) => (
                             <SwiperSlide key={i}>
                                 <div className={style.blog_card}>
                                     <Image
                                         className={style.blog_card_image}
-                                        src={item.img}
-                                        alt="Rooms News"
+                                        src={item.image}
+                                        alt="News"
+                                        width={400}
+                                        height={250}
+                                        objectFit="cover"
+                                        layout='responsive'
                                     />
                                     <p className={style.blog_card_tag}>{item.tags[0]}</p>
-                                    <Link href="/blogs/12">
+                                    <Link href={`/blogs/${item._id}`}>
                                         <h2>{item.title}</h2>
                                     </Link>
-                                    <p>{item.text}</p>
+                                    <p>{item.desc}</p>
 
                                     <div className={style.blog_card_btm}>
                                         <p>
@@ -68,7 +72,7 @@ function BlogComponent({ blogDetail, title }) {
                                             {item.createdAt}
                                         </p>
                                         <p>
-                                            <FaRegEye style={{ marginRight: '3px' }} /> {item.views}{' '}
+                                            <FaRegEye style={{ marginRight: '3px' }} /> {item.view}{' '}
                                             views
                                         </p>
                                     </div>

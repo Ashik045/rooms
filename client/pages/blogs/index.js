@@ -5,13 +5,13 @@ import Footer from '../../components/Footer/Footer';
 import Header from '../../components/Header/Header';
 import Navbar from '../../components/Navbar/Navbar';
 import Newsletter from '../../components/Newsletter/Newsletter';
-import Tags from '../../components/Tags/Tags';
 import bImg1 from '../../images/blog1.jpg';
 import bImg2 from '../../images/blog2.jpg';
 import bImg3 from '../../images/blog3.jpg';
 import bImg4 from '../../images/blog4.jpg';
 import style from '../../styles/blogpage.module.scss';
 
+// remove this dummy data and fetch from database
 const Blogs = [
     {
         id: 1,
@@ -75,33 +75,46 @@ const Blogs = [
     },
 ];
 
-const index = ({blogs}) => (
-    <div className={style.blog_page}>
-        <Navbar />
-        <Header type="hList" />
-        <div className={style.blog_page_main}>
-            <div className={style.blog_list}>
-                <form action="" className={style.blog_search}>
-                    <input type="text" name="" placeholder="Search blogs..." />
-                    <input type="submit" value="Search" />
-                </form>
+const index = ({blogs}) => {
+    // const [blogData, setBlogData] =  useState([])
 
-                <p>{blogs.length} blogs found.</p>
-                {blogs.map((blogs) => (
-                    <Blog blogs={blogs} key={blogs._id} />
-                ))}
-            </div>
+    // const handleClick = async (tag) => {
+    //     // const datas = await axios.get(`http://localhost:4000/api/blogs?tag=${tag}`)
+    //     // setBlogData(datas.data.message)
+    //     // console.log(blogData);
+    // }
 
-            <div className={style.blog_search_tag}>
-                <h2>Tags</h2>
-                <Tags />
+     return (
+        <div className={style.blog_page}>
+            <Navbar />
+            <Header type="hList" />
+            <div className={style.blog_page_main}>
+                <div className={style.blog_list}>
+                    <form action="" className={style.blog_search}>
+                        <input type="text" name="" placeholder="Search blogs..." />
+                        <input type="submit" value="Search" />
+                    </form>
+
+                    <p>{blogs.length} blogs found.</p>
+                    {blogs.map((blog) => (
+                        <Blog blogs={blog} key={blog._id} />
+                    ))}
+                </div>
+
+                <div className={style.blog_search_tag}>
+                    <h2>Tags</h2>
+                    <div className={style.tags_main}>
+                        <span>Travel</span>
+                        <span>Communication</span>
+                        <span>Tourist</span>
+                    </div>
+                </div>
             </div>
+            <Newsletter />
+            <Footer />
         </div>
-        <Newsletter />
-        <Footer />
-    </div>
-);
-
+    );
+}
 export default index;
 
 export async function getStaticProps() {

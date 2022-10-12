@@ -47,7 +47,7 @@ function Reserve({ setOpen, hotelId, rooms }) {
     };
 
     const handleClick = () => {
-        //
+        setOpen(false);
     };
 
     return (
@@ -56,7 +56,7 @@ function Reserve({ setOpen, hotelId, rooms }) {
                 <span>Select your rooms:</span>
                 <FaTimes onClick={handleBlur} className={style.reserve_modal_close} />
 
-                {rooms?.map((room) => (
+                {rooms.length > 0 ? rooms.map((room) => (
                     <div className={style.room_item} key={room._id}>
                         <div className={style.room_item_info}>
                             <p className={style.room_item_title}>{room.title}</p>
@@ -81,7 +81,9 @@ function Reserve({ setOpen, hotelId, rooms }) {
                             ))}
                         </div>
                     </div>
-                ))}
+                )) : (
+                    <p>No room is available for this hotel.</p>
+                )}
 
                 <button type="button" className={style.button} onClick={handleClick}>
                     Reserve Now!
