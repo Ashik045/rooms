@@ -67,7 +67,7 @@ function Blogs({ type }) {
 
     useEffect(() => {
         const getData = async () => {
-            const datas = await axios.get('http://localhost:4000/api/blogs');
+            const datas = await axios.get('https://rooms-backend-main.onrender.com/api/blogs');
             setData(datas.data.message);
         };
         getData();
@@ -75,7 +75,7 @@ function Blogs({ type }) {
 
     const handleDlt = (id) => {
         try {
-            axios.delete(`http://localhost:4000/api/${path}/${id}`);
+            axios.delete(`https://rooms-backend-main.onrender.com/api/${path}/${id}`);
             setData(data.filter((item) => item.id !== id));
             console.log(`deleted user ${id}`);
         } catch (error) {
@@ -112,7 +112,7 @@ function Blogs({ type }) {
             width: 160,
             renderCell: (params) => (
                 <div className="actionn">
-                    <Link to={params.row.id}>
+                    <Link to={params.row._id}>
                         <button type="button" className="view_btn">
                             View
                         </button>

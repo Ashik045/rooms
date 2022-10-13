@@ -38,7 +38,7 @@ app.use('/api', roomRoute);
 app.use('/api', blogRoute);
 
 // home route
-app.get('/api', (req, res) => {
+app.use((req, res) => {
     res.status(200).json({
         message: 'server running.',
     });
@@ -58,9 +58,9 @@ app.use((err, req, res, next) => {
 });
 
 const port = process.env.PORT || 4000;
-const host = process.env.HOST || '0.0.0.0';
+// const host = process.env.HOST || '0.0.0.0';
 
 // application running port
-app.listen(port, host, (req, res) => {
-    console.log(`Server listening on port ${process.env.PORT}`);
+app.listen(port, (req, res) => {
+    console.log(`Server listening on http://localhost:${port}`);
 });

@@ -15,7 +15,7 @@ function DataTable() {
 
     useEffect(() => {
         const dataCall = async () => {
-            const res = await axios.get(`http://localhost:4000/api/${path}`);
+            const res = await axios.get(`https://rooms-backend-main.onrender.com/api/${path}`);
             setData(res.data.message.slice(1));
         };
         dataCall();
@@ -23,7 +23,7 @@ function DataTable() {
 
     const handleDlt = async (id) => {
         try {
-            axios.delete(`http://localhost:4000/api/${path}/${id}`);
+            axios.delete(`https://rooms-backend-main.onrender.com/api/${path}/${id}`);
             setData(data.filter((item) => item.id !== id));
         } catch (error) {
             console.log(error);

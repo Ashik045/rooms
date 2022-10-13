@@ -5,6 +5,7 @@ import PaidOutlinedIcon from '@mui/icons-material/PaidOutlined';
 import PermIdentityIcon from '@mui/icons-material/PermIdentity';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import CountUp from 'react-countup';
 import { Link } from 'react-router-dom';
 import './itemlists.scss';
 
@@ -15,9 +16,9 @@ function ItemLists({ type }) {
 
     useEffect(() => {
         const datass = async () => {
-            const res = await axios.get('http://localhost:4000/api/rooms');
-            const res2 = await axios.get('http://localhost:4000/api/blogs');
-            const res3 = await axios.get('http://localhost:4000/api/users');
+            const res = await axios.get('https://rooms-backend-main.onrender.com/api/rooms');
+            const res2 = await axios.get('https://rooms-backend-main.onrender.com/api/blogs');
+            const res3 = await axios.get('https://rooms-backend-main.onrender.com/api/users');
             setHotelData(res.data.message);
             setBlogData(res2.data.message);
             setUserData(res3.data.message);
@@ -33,7 +34,7 @@ function ItemLists({ type }) {
             data = {
                 title: 'USERS',
                 isMoney: false,
-                count: userData.length,
+                count: <CountUp end={userData.length} duration={1} />,
                 icon: (
                     <PermIdentityIcon
                         style={{
@@ -51,7 +52,7 @@ function ItemLists({ type }) {
             data = {
                 title: 'HOTELS',
                 isMoney: false,
-                count: hotelData.length,
+                count: <CountUp end={hotelData.length} duration={1} />,
 
                 icon: (
                     <LocalGroceryStoreOutlinedIcon
@@ -69,7 +70,7 @@ function ItemLists({ type }) {
         case 'earning':
             data = {
                 title: 'BLOGS',
-                count: blogData.length,
+                count: <CountUp end={blogData.length} duration={1} />,
                 icon: (
                     <AttachMoneyOutlinedIcon
                         style={{
@@ -86,7 +87,7 @@ function ItemLists({ type }) {
         case 'balance':
             data = {
                 title: 'BALANCE',
-                count: 544,
+                count: <CountUp end={520} duration={1} />,
                 isMoney: true,
                 icon: (
                     <PaidOutlinedIcon

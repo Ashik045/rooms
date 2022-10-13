@@ -69,10 +69,12 @@ function AddNew({ inputs, title, type }) {
             }
 
             await axios.post(
-                `http://localhost:4000/api/${type === 'USER' ? 'user/signup' : 'blog/create'}`,
+                `https://rooms-backend-main.onrender.com/api/${
+                    type === 'USER' ? 'user/signup' : 'blog/create'
+                }`,
                 userInp
             );
-            console.log(userInp);
+
             setLoading(false);
             nevigate(`/${type === 'USER' ? 'users' : 'blogs'}`);
         } catch (err) {

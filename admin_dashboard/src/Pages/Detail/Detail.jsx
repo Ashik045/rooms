@@ -1,43 +1,68 @@
-import React from 'react';
+/* eslint-disable react/jsx-no-useless-fragment */
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import Chart from '../../Components/Chart/Chart';
 import Navbar from '../../Components/Navbar/Navbar';
 import Sidebar from '../../Components/Sidebar/Sidebar';
 import TableList from '../../Components/TableList/TableList';
-import userPic from '../../Images/man2.jpg';
+import noImage from '../../Images/user.png';
 import './Detail.scss';
 
 function Detail() {
-    // const { userId, productId } = useParams();
+    const [userData, setUserData] = useState({});
+    const [loading, setLoading] = useState(false);
+    const location = useLocation();
+    const path = location.pathname.split('/')[2];
+
+    useEffect(() => {
+        setLoading(true);
+        const fetchData = async () => {
+            const data = await axios.get(
+                `https://rooms-backend-main.onrender.com/api/user/${path}`
+            );
+            setUserData(data.data.message);
+        };
+        fetchData();
+        setLoading(false);
+    }, [path]);
+
     return (
-        <div className="details">
-            <Sidebar />
+        <>
+            {loading ? (
+                <p style={{ textAlign: 'center' }}>Loading</p>
+            ) : (
+                <div className="details">
+                    <Sidebar />
 
-            <div className="detail_page_main">
-                <Navbar />
+                    <div className="detail_page_main">
+                        <Navbar />
 
-                <div className="user_info">
-                    <div className="user_detail">
-                        <img src={userPic} alt="user" className="user_image" />
+                        <div className="user_info">
+                            <div className="user_detail">
+                                <img src={noImage} alt="user" className="user_image" />
 
-                        <div className="user_detailss">
-                            <p className="name">Name: John</p>
-                            <p>Email: johndoe33@gmail.com</p>
-                            <p>Address: Berlin, Germany</p>
-                            <p>Status: Active</p>
+                                <div className="user_detailss">
+                                    <p className="name">Name: {userData.username}</p>
+                                    <p>Email: {userData.email}</p>
+                                    <p>Address: {userData.country ? userData.country : 'USA'}</p>
+                                    <p>Phone: {userData.phone ? userData.phone : '+00464564'}</p>
+                                </div>
+                            </div>
+
+                            <div className="user_chart">
+                                <Chart height={390} title="User spending" />
+                            </div>
+                        </div>
+
+                        <div className="table">
+                            <div className="title">Last Transactions</div>
+                            <TableList />
                         </div>
                     </div>
-
-                    <div className="user_chart">
-                        <Chart height={390} title="User spending" />
-                    </div>
                 </div>
-
-                <div className="table">
-                    <div className="title">Last Transactions</div>
-                    <TableList />
-                </div>
-            </div>
-        </div>
+            )}
+        </>
     );
 }
 

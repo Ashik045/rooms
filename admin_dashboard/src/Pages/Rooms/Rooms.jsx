@@ -15,7 +15,7 @@ function Rooms({ type }) {
 
     useEffect(() => {
         const datass = async () => {
-            const res = await axios.get('http://localhost:4000/api/rooms');
+            const res = await axios.get('https://rooms-backend-main.onrender.com/api/rooms');
             setData(res.data.message);
         };
         datass();
@@ -23,9 +23,9 @@ function Rooms({ type }) {
 
     const handleDlt = (id) => {
         try {
-            axios.delete(`http://localhost:4000/api/${path}/${id}`);
+            axios.delete(`https://rooms-backend-main.onrender.com/api/${path}/${id}`);
             setData(data.filter((item) => item.id !== id));
-            console.log(`deleted user ${id}`);
+            console.log(`deleted room ${id}`);
         } catch (error) {
             console.log(error);
         }

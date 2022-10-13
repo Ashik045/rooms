@@ -6,6 +6,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import Navbar from '../../Components/Navbar/Navbar';
 import Sidebar from '../../Components/Sidebar/Sidebar';
+import noImage from '../../Images/no hotel.jpg';
 import './hotels.scss';
 
 // dummy data
@@ -79,7 +80,7 @@ function Hotels({ type }) {
 
     useEffect(() => {
         const datass = async () => {
-            const res = await axios.get('http://localhost:4000/api/hotels');
+            const res = await axios.get('https://rooms-backend-main.onrender.com/api/hotels');
             setData(res.data.message);
         };
         datass();
@@ -87,7 +88,7 @@ function Hotels({ type }) {
 
     const handleDlt = (id) => {
         try {
-            axios.delete(`http://localhost:4000/api/${path}/${id}`);
+            axios.delete(`https://rooms-backend-main.onrender.com/api/${path}/${id}`);
             setData(data.filter((item) => item.id !== id));
             console.log(`deleted user ${id}`);
         } catch (error) {
@@ -102,7 +103,11 @@ function Hotels({ type }) {
             width: 310,
             renderCell: (param) => (
                 <div className="userr">
-                    <img src={param.row.images?.[0]} alt="Hotel" className="userr_image" />
+                    <img
+                        src={param.row.images?.[0] ? param.row.images?.[0] : noImage}
+                        alt="Hotel"
+                        className="userr_image"
+                    />
                     {param.row._id}
                 </div>
             ),

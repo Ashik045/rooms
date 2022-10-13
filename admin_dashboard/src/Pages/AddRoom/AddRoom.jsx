@@ -25,7 +25,7 @@ function AddRoom({ inputs, title, type }) {
 
     useEffect(() => {
         const roomsss = async () => {
-            const hotel = await axios.get('http://localhost:4000/api/hotels');
+            const hotel = await axios.get('https://rooms-backend-main.onrender.com/api/hotels');
             setRoomData(hotel.data.message);
         };
         roomsss();
@@ -38,7 +38,6 @@ function AddRoom({ inputs, title, type }) {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const rooms = roomNums.split(',').map((room) => ({ number: room }));
-        console.log(rooms);
         const datas = {
             ...inpVal,
             roomNumbers: rooms,
@@ -47,15 +46,13 @@ function AddRoom({ inputs, title, type }) {
         try {
             setLoading(true);
 
-            await axios.post(`http://localhost:4000/api/room/${hotelId}`, datas);
-            console.log(datas);
+            await axios.post(`https://rooms-backend-main.onrender.com/api/room/${hotelId}`, datas);
 
             setLoading(false);
             nevigate(`/rooms`);
         } catch (error) {
             console.log(error);
             setLoading(false);
-            console.log(inpVal);
         }
     };
 

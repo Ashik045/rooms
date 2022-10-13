@@ -22,7 +22,10 @@ const index = () => {
         dispatch({ type: 'LOGIN_START' });
 
         try {
-            const res = await axios.post('http://localhost:4000/api/user/login', inpVal);
+            const res = await axios.post(
+                'https://rooms-backend-main.onrender.com/api/user/login',
+                inpVal
+            );
 
             if (res.data.message.isadmin) {
                 dispatch({ type: 'LOGIN_SUCCESS', payload: res.data.message.details });
