@@ -26,6 +26,7 @@ import item2 from '../../images/medium1.jpg';
 import item1 from '../../images/medium2.jpg';
 import item4 from '../../images/medium3.jpg';
 import item3 from '../../images/medium4.jpg';
+import noPhoto from '../../images/no hotel.jpg';
 import style from '../../styles/hotelDetail.module.scss';
 
 const hotelDetails = ({ hotel, rooms }) => {
@@ -93,7 +94,7 @@ const hotelDetails = ({ hotel, rooms }) => {
                         modules={[Navigation, EffectFade, Pagination]}
                         className="mySwiper"
                     >
-                        {hotel.images?.map((imgs, i) => (
+                        {hotel.images.length > 0 ? hotel.images.map((imgs, i) => (
                             <SwiperSlide className={style.swiper_slide} key={i}>
                                 <Image
                                     className={style.swiper_slide_img}
@@ -104,7 +105,18 @@ const hotelDetails = ({ hotel, rooms }) => {
                                     alt="hotels"
                                 />
                             </SwiperSlide>
-                        ))}
+                        )) : (
+                            <SwiperSlide className={style.swiper_slide}>
+                                <Image
+                                    className={style.swiper_slide_img}
+                                    src={noPhoto}
+                                    height={400}
+                                    layout="fill"
+                                    objectFit="cover"
+                                    alt="hotels"
+                                />
+                            </SwiperSlide>
+                        )}
                     </Swiper>
 
                     <div className={style.hotel_detail_rooms}>
@@ -139,7 +151,7 @@ const hotelDetails = ({ hotel, rooms }) => {
                         modules={[EffectCards]}
                         className={style.mySwiper}
                     >
-                        {hotel.images?.slice(1).map((imgs, i) => (
+                        {hotel.images.length > 0 ? hotel.images.slice(1).map((imgs, i) => (
                             <SwiperSlide
                                 className={style.swiper_slide2}
                                 style={{ position: 'relative' }}
@@ -154,7 +166,21 @@ const hotelDetails = ({ hotel, rooms }) => {
                                     height={200}
                                 />
                             </SwiperSlide>
-                        ))}
+                        )) : (
+                            <SwiperSlide
+                                className={style.swiper_slide2}
+                                style={{ position: 'relative' }}
+                            >
+                                <Image
+                                    className={style.swiper_slide_img2}
+                                    src={noPhoto}
+                                    objectFit="cover"
+                                    alt="hotels"
+                                    width={300}
+                                    height={200}
+                                />
+                            </SwiperSlide>
+                        )}
                     </Swiper>
 
                     <div className={style.hotel_detail_booking}>
@@ -192,7 +218,7 @@ export default hotelDetails;
 
 // export getStaticPaths for dynamic routes
 export async function getStaticPaths() {
-    const response = await axios.get(`http://localhost:4000/api/hotels`);
+    const response = await axios.get(`https://rooms-backend-main.onrender.com/api/hotels`);
     const data = await response.data.message;
 
     const paths = data.map((item) => ({
@@ -211,8 +237,8 @@ export async function getStaticPaths() {
 export async function getStaticProps(context) {
     // api route
     const { params } = context;
-    const res = await axios.get(`http://localhost:4000/api/hotel/${params.hotel}`);
-    const res2 = await axios.get(`http://localhost:4000/api/rooms/${params.hotel}`);
+    const res = await axios.get(`https://rooms-backend-main.onrender.com/api/hotel/${params.hotel}`);
+    const res2 = await axios.get(`https://rooms-backend-main.onrender.com/api/rooms/${params.hotel}`);
 
     const data = await res.data.message;
     const data2 = await res2.data.message;

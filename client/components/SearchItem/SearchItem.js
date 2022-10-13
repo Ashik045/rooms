@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 import { FaBath, FaBed } from 'react-icons/fa';
+import noPhoto from '../../images/no hotel.jpg';
 import style from './searchitem.module.scss';
 
 function SearchItem({ results }) {
@@ -10,7 +11,7 @@ function SearchItem({ results }) {
         <div className={style.search_item}>
             <Link href={`/hotels/${results._id}`}>
                 <div className={style.search_item_img} style={{ position: 'relative' }}>
-                    <Image src={results.images[0]} height={260} width={270} layout="responsive" alt="Hotels"  />
+                    <Image src={results.images.length > 0 ? results.images[0] : noPhoto} height={260} width={270} layout="responsive" alt="Hotels"  />
                 </div>
             </Link>
 

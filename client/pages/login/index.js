@@ -66,7 +66,7 @@ const index = () => {
         dispatch({ type: 'LOGIN_START' });
 
         try {
-            const res = await axios.post('http://localhost:4000/api/user/login', inpval);
+            const res = await axios.post('https://rooms-backend-main.onrender.com/api/user/login', inpval);
             dispatch({ type: 'LOGIN_SUCCESS', payload: res.data.message.details });
 
             Toast.fire({

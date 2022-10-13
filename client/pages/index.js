@@ -142,11 +142,11 @@ export default function Home({ propertyList, propertyList2, homesDetails, blogss
 
 export async function getStaticProps() {
     const response = await axios.get(
-        'http://localhost:4000/api/hotels/getHotelByCity?cities=berlin,tokyo,dubai'
+        'https://rooms-backend-main.onrender.com/api/hotels/getHotelByCity?cities=berlin,tokyo,dubai'
     );
-    const response2 = await axios.get('http://localhost:4000/api/hotels/getHotelByType');
-    const response3 = await axios.get('http://localhost:4000/api/hotels?featured=true&limit=4');
-    const res = await axios.get('http://localhost:4000/api/blogs')
+    const response2 = await axios.get('https://rooms-backend-main.onrender.com/api/hotels/getHotelByType');
+    const response3 = await axios.get('https://rooms-backend-main.onrender.com/api/hotels?featured=true&limit=4');
+    const res = await axios.get('https://rooms-backend-main.onrender.com/api/blogs')
 
     const data = await response.data.message;
     const data2 = await response2.data.message;

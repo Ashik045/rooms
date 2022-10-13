@@ -30,13 +30,13 @@
     .username {
       font-size: 18px;
       padding: 8px 12px;
-      background-color: #c1efff;
+      // background-color: #c1efff;
       width: 180px;
       border-radius: 3px;
       text-align: center;
       margin-top: 80px;
-      margin-bottom: 30px;
-      color: #3d3c42;
+      padding-bottom: 80px;
+      color: #ffffff;
     }
 
     .reg_btn {
@@ -63,7 +63,6 @@
       max-width: 1224px;
       margin-left: auto;
       margin-right: auto;
-      // height: 80px;
       padding: 20px 10px;
       border-radius: 8px;
       position: absolute;

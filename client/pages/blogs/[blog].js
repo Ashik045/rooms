@@ -12,7 +12,9 @@ import bImgg1 from '../../images/blog1.jpg';
 import bImg2 from '../../images/blog2.jpg';
 import bImg3 from '../../images/blog3.jpg';
 import bImg4 from '../../images/blog4.jpg';
+import noPhoto from '../../images/no hotel.jpg';
 import style from '../../styles/blogdetail.module.scss';
+
 
 // remove this dummy data and fetch from the database
 const Blogs = [
@@ -77,7 +79,7 @@ const blogDetails = ({blogList1, blogss}) => {
                     <h1>{blogList1.title}</h1>
 
                     <Image
-                        src={blogList1.image}
+                        src={blogList1.image ? blogList1.image : noPhoto}
                         alt="Travel blogs"
                         className={style.blog_detail_img}
                         height={400}
@@ -123,7 +125,7 @@ export default blogDetails;
 
 // export getStaticPaths for dynamic routes
 export async function getStaticPaths() {
-    const response = await axios.get(`http://localhost:4000/api/blogs`);
+    const response = await axios.get(`https://rooms-backend-main.onrender.com/api/blogs`);
     const data = await response.data.message;
 
     const paths = data.map((item) => ({
@@ -143,8 +145,8 @@ export async function getStaticProps(context) {
     // api route
     const { params } = context;
     console.log(params);
-    const res = await axios.get(`http://localhost:4000/api/blog/${params.blog}`);
-    const res2 = await axios.get("http://localhost:4000/api/blogs")
+    const res = await axios.get(`https://rooms-backend-main.onrender.com/api/blog/${params.blog}`);
+    const res2 = await axios.get("https://rooms-backend-main.onrender.com/api/blogs")
 
     const data = await res.data.message;
     const blogss = await res2.data.message;

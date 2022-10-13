@@ -83,7 +83,7 @@ function Header({type}) {
                     </p>
 
                     {user ? (
-                        <div className={style.username}>Welcome <b> {user.username}.</b></div>
+                        <div className={style.username}>Welcome <b> {user.username ? user.username : user.fullname}</b></div>
                     ) : (
                         <Link href="login">
                             <button className={style.reg_btn} type="button">

@@ -128,7 +128,7 @@ const index = ({blogs}) => {
 export default index;
 
 export async function getStaticProps() {
-    const res = await axios.get('http://localhost:4000/api/blogs')
+    const res = await axios.get('https://rooms-backend-main.onrender.com/api/blogs')
     const data = await res.data.message;
 
     return {
