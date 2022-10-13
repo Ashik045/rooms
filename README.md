@@ -6,7 +6,6 @@ Technologies:
 - Back-end: Node.js, Express.js MongoDB, JWT.
 - Admin-dashboard: React, Material UI, SASS, CSS3, Recharts, Sweetalert2, Axios, Cloudinary.
 
-==================
 Features:
 
 - Admin Dashboard.
@@ -22,6 +21,7 @@ Features:
 - CRUD functionality
 
 ==================
+
 Live Link:
 
 👉 Project: https://rooms-frontend-beta.vercel.app/
