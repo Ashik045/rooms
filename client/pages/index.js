@@ -10,10 +10,6 @@ import Newsletter from '../components/Newsletter/Newsletter';
 import Propertys from '../components/Propertys/Propertys';
 import SpecialServices from '../components/SpecialServices/SpecialServices';
 import WhyUs from '../components/WhyUs/WhyUs';
-import bImg1 from '../images/blog1.jpg';
-import bImg2 from '../images/blog2.jpg';
-import bImg3 from '../images/blog3.jpg';
-import bImg4 from '../images/blog4.jpg';
 import styles from '../styles/index.module.scss';
 
 // const HomesDetails = [
@@ -52,68 +48,7 @@ import styles from '../styles/index.module.scss';
 // ];
 
 // dumm
-const Blogs = [
-    {
-        id: 1,
-        img: bImg1,
-        title: 'How to cure wanderlust without leaving your home',
-        tags: ['Travel', 'Communication', 'Tourist Guide'],
-        text: [
-            'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquam rerum ea doloribus quae alias velit porro eligendi laudantium dolor necessitatibus delectus ab esse, corporis labore dignissimos molestiae cupiditate quo. Ipsa adipisci error beatae, deleniti accusantium molestias quae cumque nulla quasi sunt laborum! Possimus, numquam. Obcaecati animi aspernatur distinctio explicabo consequuntur.',
-            'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquam rerum ea doloribus quae alias velit porro eligendi laudantium dolor necessitatibus delectus ab esse, corporis labore dignissimos molestiae cupiditate quo. Ipsa adipisci error beatae, deleniti accusantium molestias quae cumque nulla quasi sunt laborum! Possimus, numquam.',
-        ],
-        createdAt: new Date().toDateString(),
-        views: 122,
-    },
-    {
-        id: 2,
-        img: bImg2,
-        title: '10 of the Most Underrated Cities in Europe',
-        tags: ['City', 'Communication', 'Tourist Guide'],
-        text: [
-            'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquam rerum ea doloribus quae alias velit porro eligendi laudantium dolor necessitatibus delectus ab esse, corporis labore dignissimos molestiae cupiditate quo. Ipsa adipisci error beatae, deleniti accusantium molestias quae cumque nulla quasi sunt laborum! Possimus, numquam. Obcaecati animi aspernatur distinctio explicabo consequuntur.',
-            'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquam rerum ea doloribus quae alias velit porro eligendi laudantium dolor necessitatibus delectus ab esse, corporis labore dignissimos molestiae cupiditate quo. Ipsa adipisci error beatae, deleniti accusantium molestias quae cumque nulla quasi sunt laborum! Possimus, numquam.',
-        ],
-        createdAt: new Date().toDateString(),
-        views: 29,
-    },
-    {
-        id: 3,
-        img: bImg3,
-        title: 'The Seven People You Always Meet Hosteling',
-        tags: ['Communication', 'Tourist Guide', 'City'],
-        text: [
-            'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquam rerum ea doloribus quae alias velit porro eligendi laudantium dolor necessitatibus delectus ab esse, corporis labore dignissimos molestiae cupiditate quo. Ipsa adipisci error beatae, deleniti accusantium molestias quae cumque nulla quasi sunt laborum! Possimus, numquam. Obcaecati animi aspernatur distinctio explicabo consequuntur.',
-            'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquam rerum ea doloribus quae alias velit porro eligendi laudantium dolor necessitatibus delectus ab esse, corporis labore dignissimos molestiae cupiditate quo. Ipsa adipisci error beatae, deleniti accusantium molestias quae cumque nulla quasi sunt laborum! Possimus, numquam.',
-        ],
-        createdAt: new Date().toDateString(),
-        views: 120,
-    },
-    {
-        id: 4,
-        img: bImg4,
-        title: 'How to cure wanderlust without leaving your home',
-        tags: ['Travel', 'Communication', 'Tourist Guide', 'City'],
-        text: [
-            'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquam rerum ea doloribus quae alias velit porro eligendi laudantium dolor necessitatibus delectus ab esse, corporis labore dignissimos molestiae cupiditate quo. Ipsa adipisci error beatae, deleniti accusantium molestias quae cumque nulla quasi sunt laborum! Possimus, numquam. Obcaecati animi aspernatur distinctio explicabo consequuntur.',
-            'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquam rerum ea doloribus quae alias velit porro eligendi laudantium dolor necessitatibus delectus ab esse, corporis labore dignissimos molestiae cupiditate quo. Ipsa adipisci error beatae, deleniti accusantium molestias quae cumque nulla quasi sunt laborum! Possimus, numquam.',
-        ],
-        createdAt: new Date().toDateString(),
-        views: 802,
-    },
-    {
-        id: 5,
-        img: bImg1,
-        title: 'How to cure wanderlust without leaving your home',
-        tags: ['Travel', 'Communication', 'Tourist Guide'],
-        text: [
-            'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquam rerum ea doloribus quae alias velit porro eligendi laudantium dolor necessitatibus delectus ab esse, corporis labore dignissimos molestiae cupiditate quo. Ipsa adipisci error beatae, deleniti accusantium molestias quae cumque nulla quasi sunt laborum! Possimus, numquam. Obcaecati animi aspernatur distinctio explicabo consequuntur.',
-            'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquam rerum ea doloribus quae alias velit porro eligendi laudantium dolor necessitatibus delectus ab esse, corporis labore dignissimos molestiae cupiditate quo. Ipsa adipisci error beatae, deleniti accusantium molestias quae cumque nulla quasi sunt laborum! Possimus, numquam.',
-        ],
-        createdAt: new Date().toDateString(),
-        views: 122,
-    },
-];
+
 
 export default function Home({ propertyList, propertyList2, homesDetails, blogss }) {
     return (
@@ -142,11 +77,11 @@ export default function Home({ propertyList, propertyList2, homesDetails, blogss
 
 export async function getStaticProps() {
     const response = await axios.get(
-        'https://rooms-backend-main.onrender.com/api/hotels/getHotelByCity?cities=berlin,tokyo,dubai'
+        'https://rooms-backend.up.railway.app/api/hotels/getHotelByCity?cities=berlin,tokyo,dubai'
     );
-    const response2 = await axios.get('https://rooms-backend-main.onrender.com/api/hotels/getHotelByType');
-    const response3 = await axios.get('https://rooms-backend-main.onrender.com/api/hotels?featured=true&limit=4');
-    const res = await axios.get('https://rooms-backend-main.onrender.com/api/blogs')
+    const response2 = await axios.get('https://rooms-backend.up.railway.app/api/hotels/getHotelByType');
+    const response3 = await axios.get('https://rooms-backend.up.railway.app/api/hotels?featured=true&limit=4');
+    const res = await axios.get('https://rooms-backend.up.railway.app/api/blogs')
 
     const data = await response.data.message;
     const data2 = await response2.data.message;

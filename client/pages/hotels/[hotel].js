@@ -218,7 +218,7 @@ export default hotelDetails;
 
 // export getStaticPaths for dynamic routes
 export async function getStaticPaths() {
-    const response = await axios.get(`https://rooms-backend-main.onrender.com/api/hotels`);
+    const response = await axios.get(`https://rooms-backend.up.railway.app/api/hotels`);
     const data = await response.data.message;
 
     const paths = data.map((item) => ({
@@ -237,8 +237,8 @@ export async function getStaticPaths() {
 export async function getStaticProps(context) {
     // api route
     const { params } = context;
-    const res = await axios.get(`https://rooms-backend-main.onrender.com/api/hotel/${params.hotel}`);
-    const res2 = await axios.get(`https://rooms-backend-main.onrender.com/api/rooms/${params.hotel}`);
+    const res = await axios.get(`https://rooms-backend.up.railway.app/api/hotel/${params.hotel}`);
+    const res2 = await axios.get(`https://rooms-backend.up.railway.app/api/rooms/${params.hotel}`);
 
     const data = await res.data.message;
     const data2 = await res2.data.message;

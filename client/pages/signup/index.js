@@ -84,7 +84,7 @@ const index = () => {
                     
                 const { url } = uploadRes.data;
                 try {
-                    await axios.post('https://rooms-backend-main.onrender.com/api/user/signup', {
+                    await axios.post('https://rooms-backend.up.railway.app/api/user/signup', {
                             email,
                             password: pass,
                             fullname,
@@ -105,7 +105,7 @@ const index = () => {
                     }
                 } else {
                     try {
-                        await axios.post('https://rooms-backend-main.onrender.com/api/user/signup', {
+                        await axios.post('https://rooms-backend.up.railway.app/api/user/signup', {
                             email,
                             password: pass,
                             fullname,

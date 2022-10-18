@@ -18,9 +18,7 @@ function Detail() {
     useEffect(() => {
         setLoading(true);
         const fetchData = async () => {
-            const data = await axios.get(
-                `https://rooms-backend-main.onrender.com/api/user/${path}`
-            );
+            const data = await axios.get(`https://rooms-backend.up.railway.app/api/user/${path}`);
             setUserData(data.data.message);
         };
         fetchData();
