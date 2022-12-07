@@ -13,6 +13,7 @@ const blogRoute = require('./routes/blog');
 
 const app = express();
 
+// configure
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors());
@@ -31,7 +32,7 @@ mongoose
         console.log(err.message);
     });
 
-// application routing
+// application routes
 app.use('/api', userRoute);
 app.use('/api', hotelRoute);
 app.use('/api', roomRoute);

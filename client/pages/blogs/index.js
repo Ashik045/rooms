@@ -127,6 +127,7 @@ const index = ({blogs}) => {
 }
 export default index;
 
+// fetch all the blogs
 export async function getStaticProps() {
     const res = await axios.get('https://rooms-backend.up.railway.app/api/blogs')
     const data = await res.data.message;

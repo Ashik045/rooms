@@ -271,6 +271,7 @@ function App() {
     const { darkMode } = useContext(ColorContext);
     const [state, setState] = useState(false);
 
+    // create protected route
     function ProtectedRoute({ children }) {
         const { user } = useContext(Contexts);
         if (!user) {
