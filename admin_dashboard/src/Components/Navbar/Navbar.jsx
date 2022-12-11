@@ -1,7 +1,4 @@
-import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
-import FullscreenExitIcon from '@mui/icons-material/FullscreenExit';
-import LanguageIcon from '@mui/icons-material/Language';
 import LightModeIcon from '@mui/icons-material/LightMode';
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 import SearchIcon from '@mui/icons-material/Search';
@@ -28,10 +25,6 @@ function Navbar() {
 
             <div className="item_lists">
                 <div className="item">
-                    <LanguageIcon className="item_icon" />
-                    <p>English</p>
-                </div>
-                <div className="item">
                     {!darkMode ? (
                         <DarkModeIcon
                             className="item_icon"
@@ -44,16 +37,10 @@ function Navbar() {
                         />
                     )}
                 </div>
-                <div className="item">
-                    <FullscreenExitIcon className="item_icon" />
-                </div>
+
                 <div className="item">
                     <NotificationsNoneIcon className="item_icon" />
                     <span className="badge">1</span>
-                </div>
-                <div className="item">
-                    <ChatBubbleOutlineIcon className="item_icon" />
-                    <span className="badge">2</span>
                 </div>
 
                 <div className="item">

@@ -25,7 +25,7 @@ function AddRoom({ inputs, title, type }) {
 
     useEffect(() => {
         const roomsss = async () => {
-            const hotel = await axios.get('https://rooms-backend.up.railway.app/api/hotels');
+            const hotel = await axios.get('https://rooms-backend.onrender.com/api/hotels');
             setRoomData(hotel.data.message);
         };
         roomsss();
@@ -46,7 +46,7 @@ function AddRoom({ inputs, title, type }) {
         try {
             setLoading(true);
 
-            await axios.post(`https://rooms-backend.up.railway.app/api/room/${hotelId}`, datas);
+            await axios.post(`https://rooms-backend.onrender.com/api/room/${hotelId}`, datas);
 
             setLoading(false);
             nevigate(`/rooms`);

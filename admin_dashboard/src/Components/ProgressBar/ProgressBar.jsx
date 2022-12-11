@@ -18,10 +18,10 @@ function ProgressBar() {
 
     useEffect(() => {
         const datass = async () => {
-            const res = await axios.get('https://rooms-backend.up.railway.app/api/rooms');
-            const res2 = await axios.get('https://rooms-backend.up.railway.app/api/blogs');
-            const res3 = await axios.get('https://rooms-backend.up.railway.app/api/users');
-            const res4 = await axios.get('https://rooms-backend.up.railway.app/api/rooms');
+            const res = await axios.get('https://rooms-backend.onrender.com/api/rooms');
+            const res2 = await axios.get('https://rooms-backend.onrender.com/api/blogs');
+            const res3 = await axios.get('https://rooms-backend.onrender.com/api/users');
+            const res4 = await axios.get('https://rooms-backend.onrender.com/api/rooms');
             setHotelData(res.data.message);
             setBlogData(res2.data.message);
             setUserData(res3.data.message);

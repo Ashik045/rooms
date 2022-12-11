@@ -1,9 +1,9 @@
-import React from 'react'
-import { BiBody, BiSwim } from "react-icons/bi"
-import { FaBed, FaCar, FaTaxi } from 'react-icons/fa'
-import { MdFastfood } from 'react-icons/md'
-import Facility from '../Facility/Facility'
-import styles from './whyus.module.scss'
+import React from 'react';
+import { BiBody, BiSwim } from 'react-icons/bi';
+import { FaBed, FaCar, FaTaxi } from 'react-icons/fa';
+import { MdFastfood } from 'react-icons/md';
+import Facility from '../Facility/Facility';
+import styles from './whyus.module.scss';
 
 const Facilities = [
     {
@@ -42,28 +42,25 @@ const Facilities = [
         text: 'Best price guaranteee & Hassle free! Lorem ipsum dolor sit amet consetetur sadipscing sit amet consetetur.',
         icon: <FaTaxi className={styles.icon} />,
     },
-    
-]
+];
 
-const WhyUs = () => {
-  return (
-    <div className={styles.why_us}>
-        <div className={styles.why_us_main}>
-            <div className={styles.why_us_title}>
-                <h2 >
-                    Why Booking With Us?
-                </h2>
-                <p>What Facilities & Services We Offer For You.</p>
-            </div>
+function WhyUs() {
+    return (
+        <div className={styles.why_us}>
+            <div className={styles.why_us_main}>
+                <div className={styles.why_us_title}>
+                    <h2>Why Booking With Us?</h2>
+                    <p>What Facilities & Services We Offer For You.</p>
+                </div>
 
-            <div className={styles.why_us_item}>
-                {Facilities.map((facilities) => (
-                    <Facility key={facilities.id} facilities={facilities} />
-                ))}
+                <div className={styles.why_us_item}>
+                    {Facilities.map((facilities) => (
+                        <Facility key={facilities.id} facilities={facilities} />
+                    ))}
+                </div>
             </div>
         </div>
-    </div>
-  )
+    );
 }
 
-export default WhyUs
+export default WhyUs;

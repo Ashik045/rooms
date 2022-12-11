@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import axios from 'axios';
 import React, { useState } from 'react';
 import Blog from '../../components/Blog/Blog';
@@ -75,8 +76,8 @@ const Blogs = [
     },
 ];
 
-const index = ({blogs}) => {
-    const [blogData, setBlogData] =  useState(blogs)
+const index = ({ blogs }) => {
+    const [blogData, setBlogData] = useState(blogs);
     // const router = useRouter()
     // const {query} = router;
     // const {tag} = query;
@@ -92,7 +93,7 @@ const index = ({blogs}) => {
     //     handleClick()
     // }, [query.tag])
 
-     return (
+    return (
         <div className={style.blog_page}>
             <Navbar />
             <Header type="hList" />
@@ -104,17 +105,16 @@ const index = ({blogs}) => {
                     </form>
 
                     <p>{blogData.length} blogs found.</p>
-                    {blogData.length > 0 && blogData.map((blog) => (
-                        <Blog blogs={blog} key={blog._id} />
-                    ))}
+                    {blogData.length > 0 &&
+                        blogData.map((blog) => <Blog blogs={blog} key={blog._id} />)}
                 </div>
 
                 <div className={style.blog_search_tag}>
                     <h2>Tags</h2>
                     <div className={style.tags_main}>
-                    {/* <Link href="blogs/search?tag=Travel"> */}
+                        {/* <Link href="blogs/search?tag=Travel"> */}
                         <span>Travel</span>
-                    {/* </Link> */}
+                        {/* </Link> */}
                         <span>Communication</span>
                         <span>Tourist</span>
                     </div>
@@ -124,17 +124,17 @@ const index = ({blogs}) => {
             <Footer />
         </div>
     );
-}
+};
 export default index;
 
 // fetch all the blogs
 export async function getStaticProps() {
-    const res = await axios.get('https://rooms-backend.up.railway.app/api/blogs')
+    const res = await axios.get('https://rooms-backend.onrender.com/api/blogs');
     const data = await res.data.message;
 
     return {
         props: {
-            blogs: data
-        }
-    }
+            blogs: data,
+        },
+    };
 }

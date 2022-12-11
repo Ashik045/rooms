@@ -48,37 +48,40 @@ function BlogComponent({ blogDetail, title, id }) {
                         modules={[Pagination]}
                         className={style.mySwiper}
                     >
-                        {blogDetail.filter((blog) => blog._id !== id).slice(0, 4).map((item, i) => (
-                            <SwiperSlide key={i}>
-                                <div className={style.blog_card}>
-                                    <Image
-                                        className={style.blog_card_image}
-                                        src={item.image}
-                                        alt="News"
-                                        width={400}
-                                        height={250}
-                                        objectFit="cover"
-                                        layout='responsive'
-                                    />
-                                    <p className={style.blog_card_tag}>{item.tags[0]}</p>
-                                    <Link href={`/blogs/${item._id}`}>
-                                        <h2>{item.title}</h2>
-                                    </Link>
-                                    <p>{item.desc}</p>
+                        {blogDetail
+                            .filter((blog) => blog._id !== id)
+                            .slice(0, 4)
+                            .map((item, i) => (
+                                <SwiperSlide key={i}>
+                                    <div className={style.blog_card}>
+                                        <Image
+                                            className={style.blog_card_image}
+                                            src={item.image}
+                                            alt="News"
+                                            width={400}
+                                            height={250}
+                                            objectFit="cover"
+                                            layout="responsive"
+                                        />
+                                        <p className={style.blog_card_tag}>{item.tags[0]}</p>
+                                        <Link href={`/blogs/${item._id}`}>
+                                            <h2>{item.title}</h2>
+                                        </Link>
+                                        <p>{item.desc}</p>
 
-                                    <div className={style.blog_card_btm}>
-                                        <p>
-                                            <FaCalendarAlt style={{ marginRight: '3px' }} />{' '}
-                                            {item.createdAt}
-                                        </p>
-                                        <p>
-                                            <FaRegEye style={{ marginRight: '3px' }} /> {item.view}{' '}
-                                            views
-                                        </p>
+                                        <div className={style.blog_card_btm}>
+                                            <p>
+                                                <FaCalendarAlt style={{ marginRight: '3px' }} />{' '}
+                                                {item.createdAt}
+                                            </p>
+                                            <p>
+                                                <FaRegEye style={{ marginRight: '3px' }} />{' '}
+                                                {item.view} views
+                                            </p>
+                                        </div>
                                     </div>
-                                </div>
-                            </SwiperSlide>
-                        ))}
+                                </SwiperSlide>
+                            ))}
                     </Swiper>
                 </div>
             </div>

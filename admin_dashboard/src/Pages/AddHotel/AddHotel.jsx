@@ -33,7 +33,7 @@ function AddHotel({ inputs, title, type }) {
 
     useEffect(() => {
         const roomsss = async () => {
-            const room = await axios.get('https://rooms-backend.up.railway.app/api/rooms');
+            const room = await axios.get('https://rooms-backend.onrender.com/api/rooms');
             setroomData(room.data.message);
         };
         roomsss();
@@ -80,7 +80,7 @@ function AddHotel({ inputs, title, type }) {
                 images: imgList,
             };
 
-            await axios.post('https://rooms-backend.up.railway.app/api/hotel/create', newHotel);
+            await axios.post('https://rooms-backend.onrender.com/api/hotel/create', newHotel);
             setLoading(false);
             nevigate(`/hotels`);
         } catch (error) {

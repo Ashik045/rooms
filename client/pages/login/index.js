@@ -66,7 +66,10 @@ const index = () => {
         dispatch({ type: 'LOGIN_START' });
 
         try {
-            const res = await axios.post('https://rooms-backend.up.railway.app/api/user/login', inpval);
+            const res = await axios.post(
+                'https://rooms-backend.onrender.com/api/user/login',
+                inpval
+            );
             dispatch({ type: 'LOGIN_SUCCESS', payload: res.data.message.details });
 
             Toast.fire({

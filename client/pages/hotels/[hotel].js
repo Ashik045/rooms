@@ -94,18 +94,20 @@ const hotelDetails = ({ hotel, rooms }) => {
                         modules={[Navigation, EffectFade, Pagination]}
                         className="mySwiper"
                     >
-                        {hotel.images.length > 0 ? hotel.images.map((imgs, i) => (
-                            <SwiperSlide className={style.swiper_slide} key={i}>
-                                <Image
-                                    className={style.swiper_slide_img}
-                                    src={imgs}
-                                    height={400}
-                                    layout="fill"
-                                    objectFit="cover"
-                                    alt="hotels"
-                                />
-                            </SwiperSlide>
-                        )) : (
+                        {hotel.images.length > 0 ? (
+                            hotel.images.map((imgs, i) => (
+                                <SwiperSlide className={style.swiper_slide} key={i}>
+                                    <Image
+                                        className={style.swiper_slide_img}
+                                        src={imgs}
+                                        height={400}
+                                        layout="fill"
+                                        objectFit="cover"
+                                        alt="hotels"
+                                    />
+                                </SwiperSlide>
+                            ))
+                        ) : (
                             <SwiperSlide className={style.swiper_slide}>
                                 <Image
                                     className={style.swiper_slide_img}
@@ -131,7 +133,7 @@ const hotelDetails = ({ hotel, rooms }) => {
                     </div>
 
                     <div className={style.hotel_detail_desc}>
-                        <p >{hotel.desc}</p>
+                        <p>{hotel.desc}</p>
                     </div>
 
                     <h2>Room Facilities</h2>
@@ -151,22 +153,24 @@ const hotelDetails = ({ hotel, rooms }) => {
                         modules={[EffectCards]}
                         className={style.mySwiper}
                     >
-                        {hotel.images.length > 0 ? hotel.images.slice(1).map((imgs, i) => (
-                            <SwiperSlide
-                                className={style.swiper_slide2}
-                                style={{ position: 'relative' }}
-                                key={i}
-                            >
-                                <Image
-                                    className={style.swiper_slide_img2}
-                                    src={imgs}
-                                    objectFit="cover"
-                                    alt="hotels"
-                                    width={300}
-                                    height={200}
-                                />
-                            </SwiperSlide>
-                        )) : (
+                        {hotel.images.length > 0 ? (
+                            hotel.images.slice(1).map((imgs, i) => (
+                                <SwiperSlide
+                                    className={style.swiper_slide2}
+                                    style={{ position: 'relative' }}
+                                    key={i}
+                                >
+                                    <Image
+                                        className={style.swiper_slide_img2}
+                                        src={imgs}
+                                        objectFit="cover"
+                                        alt="hotels"
+                                        width={300}
+                                        height={200}
+                                    />
+                                </SwiperSlide>
+                            ))
+                        ) : (
                             <SwiperSlide
                                 className={style.swiper_slide2}
                                 style={{ position: 'relative' }}
@@ -190,7 +194,7 @@ const hotelDetails = ({ hotel, rooms }) => {
                             of <b>{details.rating}</b>.
                         </p>
                         <p>
-                            <span>${hotel.price * options.rooms * day } </span> / {day} nights
+                            <span>${hotel.price * options.rooms * day} </span> / {day} nights
                         </p>
 
                         {user ? (
@@ -218,7 +222,7 @@ export default hotelDetails;
 
 // export getStaticPaths for dynamic routes
 export async function getStaticPaths() {
-    const response = await axios.get(`https://rooms-backend.up.railway.app/api/hotels`);
+    const response = await axios.get(`https://rooms-backend.onrender.com/api/hotels`);
     const data = await response.data.message;
 
     const paths = data.map((item) => ({
@@ -237,8 +241,8 @@ export async function getStaticPaths() {
 export async function getStaticProps(context) {
     // api route
     const { params } = context;
-    const res = await axios.get(`https://rooms-backend.up.railway.app/api/hotel/${params.hotel}`);
-    const res2 = await axios.get(`https://rooms-backend.up.railway.app/api/rooms/${params.hotel}`);
+    const res = await axios.get(`https://rooms-backend.onrender.com/api/hotel/${params.hotel}`);
+    const res2 = await axios.get(`https://rooms-backend.onrender.com/api/rooms/${params.hotel}`);
 
     const data = await res.data.message;
     const data2 = await res2.data.message;

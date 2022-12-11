@@ -7,7 +7,7 @@ import style from './Navbar.module.scss';
 
 function Navbar() {
     const { user, dispatch } = useContext(Contexts);
-    const [toggler, setToggler] = useState(false)
+    const [toggler, setToggler] = useState(false);
 
     const menus = [
         {
@@ -15,41 +15,41 @@ function Navbar() {
             icon: <FaHome className={style.icon} />,
             txt: 'Home',
             isActive: false,
-            href: '/'
+            href: '/',
         },
         {
             id: 2,
             icon: <MdMapsHomeWork className={style.icon} />,
             txt: 'Hotels',
             isActive: false,
-            href: '/hotels'
+            href: '/hotels',
         },
         {
             id: 3,
             icon: <FaNewspaper className={style.icon} />,
             txt: 'Blogs',
             isActive: false,
-            href: '/blogs'
+            href: '/blogs',
         },
         {
             id: 4,
             icon: <MdLocalHotel className={style.icon} />,
             txt: 'Resorts',
             isActive: false,
-            href: '/'
+            href: '/',
         },
         {
             id: 5,
             icon: <MdLocalTaxi className={style.icon} />,
             txt: 'Taxis',
             isActive: false,
-            href: '/'
+            href: '/',
         },
     ];
 
     const handleToggle = () => {
-        setToggler(!toggler)
-      }
+        setToggler(!toggler);
+    };
 
     const handleLogOut = () => {
         dispatch({ type: 'LOG_OUT' });
@@ -58,7 +58,6 @@ function Navbar() {
     return (
         <div className={style.navbar}>
             <div className={style.navbar_main}>
-                <>
                 <Link href="/">
                     <div className={style.nav_brand}>
                         <h2>
@@ -68,15 +67,15 @@ function Navbar() {
                 </Link>
 
                 <div className={style.header_menus}>
-                 <ul>
-                    {menus.map((menu) => (
-                        <Link href={menu.href} key={menu.id}>
-                        <li>
-                            {menu.icon} {menu.txt}
-                        </li>
-                        </Link>
-                    ))}
-                 </ul>
+                    <ul>
+                        {menus.map((menu) => (
+                            <Link href={menu.href} key={menu.id}>
+                                <li>
+                                    {menu.icon} {menu.txt}
+                                </li>
+                            </Link>
+                        ))}
+                    </ul>
                 </div>
 
                 <div className={style.registration}>
@@ -92,24 +91,27 @@ function Navbar() {
                         </Link>
                     )}
                 </div>
-                </>
 
                 <div className={style.res_nav}>
-                    {toggler ? <FaTimes onClick={handleToggle} className={style.tgl_btn} /> : <FaGripLines onClick={handleToggle} className={style.tgl_btn} />}
+                    {toggler ? (
+                        <FaTimes onClick={handleToggle} className={style.tgl_btn} />
+                    ) : (
+                        <FaGripLines onClick={handleToggle} className={style.tgl_btn} />
+                    )}
                     {toggler && (
                         <div className={style.res_nav_menu}>
                             <ul>
                                 {menus.map((menu) => (
                                     <Link href={menu.href} key={menu.id}>
-                                    <li>
-                                        {menu.icon} {menu.txt}
-                                    </li>
+                                        <li>
+                                            {menu.icon} {menu.txt}
+                                        </li>
                                     </Link>
                                 ))}
                             </ul>
                         </div>
                     )}
-        </div>
+                </div>
             </div>
         </div>
     );

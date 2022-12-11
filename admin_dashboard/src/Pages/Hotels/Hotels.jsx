@@ -80,7 +80,7 @@ function Hotels({ type }) {
 
     useEffect(() => {
         const datass = async () => {
-            const res = await axios.get('https://rooms-backend.up.railway.app/api/hotels');
+            const res = await axios.get('https://rooms-backend.onrender.com/api/hotels');
             setData(res.data.message);
         };
         datass();
@@ -88,7 +88,7 @@ function Hotels({ type }) {
 
     const handleDlt = (id) => {
         try {
-            axios.delete(`https://rooms-backend.up.railway.app/api/${path}/${id}`);
+            axios.delete(`https://rooms-backend.onrender.com/api/${path}/${id}`);
             setData(data.filter((item) => item.id !== id));
             console.log(`deleted user ${id}`);
         } catch (error) {

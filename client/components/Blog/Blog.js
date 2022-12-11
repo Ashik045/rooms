@@ -12,10 +12,19 @@ function Blog({ blogs }) {
         <div className={style.blog}>
             <div className={style.blog_img} style={{ position: 'relative' }}>
                 <Link href={`/blogs/${_id}`}>
-                    <Image src={image} className={style.blog_imggg} height={200} width={300} layout="responsive" objectFit="cover" />
+                    <Image
+                        src={image}
+                        className={style.blog_imggg}
+                        height={200}
+                        width={300}
+                        layout="responsive"
+                        objectFit="cover"
+                    />
                 </Link>
 
-                <p className={style.blog_tag} style={{textTransform: "capitalize"}}>{tags[0]}</p>
+                <p className={style.blog_tag} style={{ textTransform: 'capitalize' }}>
+                    {tags[0]}
+                </p>
             </div>
 
             <div className={style.blog_details}>

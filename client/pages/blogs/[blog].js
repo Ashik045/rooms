@@ -11,67 +11,68 @@ import Newsletter from '../../components/Newsletter/Newsletter';
 import noPhoto from '../../images/no hotel.jpg';
 import style from '../../styles/blogdetail.module.scss';
 
-
 // remove this dummy data and fetch from the database
 
-const blogDetails = ({blogList1, blogss}) => {
-    
-    return (
-        <div className={style.blog_detail}>
-            <Navbar />
-            <Header type="hList" />
-            <div className={style.blog_detail_main}>
-                <div className={style.blog_detailss}>
-                    <h1>{blogList1.title}</h1>
+const blogDetails = ({ blogList1, blogss }) => (
+    <div className={style.blog_detail}>
+        <Navbar />
+        <Header type="hList" />
+        <div className={style.blog_detail_main}>
+            <div className={style.blog_detailss}>
+                <h1>{blogList1.title}</h1>
 
-                    <Image
-                        src={blogList1.image ? blogList1.image : noPhoto}
-                        alt="Travel blogs"
-                        className={style.blog_detail_img}
-                        height={400}
-                        width={600}
-                        objectFit="cover"
-                        layout='responsive'
-                    />
+                <Image
+                    src={blogList1.image ? blogList1.image : noPhoto}
+                    alt="Travel blogs"
+                    className={style.blog_detail_img}
+                    height={400}
+                    width={600}
+                    objectFit="cover"
+                    layout="responsive"
+                />
 
-                    <div className={style.blog_detail_tv}>
-                        <p>
-                            <FaCalendarAlt style={{ marginRight: '3px' }} />
-                            {blogList1.createdAt}
-                        </p>
-                        <p>
-                            <FaRegEye style={{ marginRight: '3px' }} />
-                            {blogList1.view} views
-                        </p>
-                    </div>
-                    
-                    <p className={style.blog_detail_txt}>{blogList1.desc}</p>
-                    <h3>Tags:</h3>
-                    {blogList1.tags.map((tag, i) => (
-                        <span key={i} className={style.blog_detail_tag}>{tag}</span>
-                    ))}
+                <div className={style.blog_detail_tv}>
+                    <p>
+                        <FaCalendarAlt style={{ marginRight: '3px' }} />
+                        {blogList1.createdAt}
+                    </p>
+                    <p>
+                        <FaRegEye style={{ marginRight: '3px' }} />
+                        {blogList1.view} views
+                    </p>
                 </div>
 
-                <div className={style.blog_detail_right}>
-                    <h2>Recent Blogs</h2>
-                    {blogss.filter((item) => item._id !== blogList1._id).slice(0, 3).map((blog, i) => (
-                        <LatestBlogs blog={blog} key={i} />
-                    ))}
-                </div>
+                <p className={style.blog_detail_txt}>{blogList1.desc}</p>
+                <h3>Tags:</h3>
+                {blogList1.tags.map((tag, i) => (
+                    <span key={i} className={style.blog_detail_tag}>
+                        {tag}
+                    </span>
+                ))}
             </div>
 
-            <BlogComponent blogDetail={blogss} title="You might also like" id={blogList1._id} />
-
-            <Newsletter />
-            <Footer />
+            <div className={style.blog_detail_right}>
+                <h2>Recent Blogs</h2>
+                {blogss
+                    .filter((item) => item._id !== blogList1._id)
+                    .slice(0, 3)
+                    .map((blog, i) => (
+                        <LatestBlogs blog={blog} key={i} />
+                    ))}
+            </div>
         </div>
-    );
-};
+
+        <BlogComponent blogDetail={blogss} title="You might also like" id={blogList1._id} />
+
+        <Newsletter />
+        <Footer />
+    </div>
+);
 export default blogDetails;
 
 // export getStaticPaths for dynamic routes
 export async function getStaticPaths() {
-    const response = await axios.get(`https://rooms-backend.up.railway.app/api/blogs`);
+    const response = await axios.get(`https://rooms-backend.onrender.com/api/blogs`);
     const data = await response.data.message;
 
     const paths = data.map((item) => ({
@@ -91,8 +92,8 @@ export async function getStaticProps(context) {
     // api route
     const { params } = context;
     console.log(params);
-    const res = await axios.get(`https://rooms-backend.up.railway.app/api/blog/${params.blog}`);
-    const res2 = await axios.get("https://rooms-backend.up.railway.app/api/blogs")
+    const res = await axios.get(`https://rooms-backend.onrender.com/api/blog/${params.blog}`);
+    const res2 = await axios.get('https://rooms-backend.onrender.com/api/blogs');
 
     const data = await res.data.message;
     const blogss = await res2.data.message;
@@ -100,7 +101,7 @@ export async function getStaticProps(context) {
     return {
         props: {
             blogList1: data,
-            blogss: blogss,
+            blogss,
         },
     };
 }

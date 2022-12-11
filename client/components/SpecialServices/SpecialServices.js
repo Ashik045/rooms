@@ -4,9 +4,9 @@ import Link from 'next/link';
 import React from 'react';
 import { Pagination } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import img1 from '../../images/about-sec1.jpg';
-import img2 from '../../images/about-sec2.jpg';
-import img3 from '../../images/about-sec3.jpg';
+import img1 from '../../images/about_sec1.jpg';
+import img2 from '../../images/about_sec2.jpg';
+import img3 from '../../images/about_sec3.jpg';
 import style from './specialservices.module.scss';
 
 // Import Swiper styles

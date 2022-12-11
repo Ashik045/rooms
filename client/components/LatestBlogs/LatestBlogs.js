@@ -10,8 +10,15 @@ function LatestBlogs({ blog }) {
     return (
         <div className={style.recent_blog}>
             <Link href={`/blogs/${_id}`}>
-                <Image src={image} alt="recent blog" className={style.recent_blog_img} height={100}
-                width={150} objectFit="cover" layout="responsive" />
+                <Image
+                    src={image}
+                    alt="recent blog"
+                    className={style.recent_blog_img}
+                    height={100}
+                    width={150}
+                    objectFit="cover"
+                    layout="responsive"
+                />
             </Link>
 
             <div className={style.recent_blog_txt}>

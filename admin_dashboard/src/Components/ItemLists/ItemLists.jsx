@@ -17,9 +17,9 @@ function ItemLists({ type }) {
 
     useEffect(() => {
         const datass = async () => {
-            const res = await axios.get('https://rooms-backend.up.railway.app/api/hotels');
-            const res2 = await axios.get('https://rooms-backend.up.railway.app/api/blogs');
-            const res3 = await axios.get('https://rooms-backend.up.railway.app/api/users');
+            const res = await axios.get('https://rooms-backend.onrender.com/api/hotels');
+            const res2 = await axios.get('https://rooms-backend.onrender.com/api/blogs');
+            const res3 = await axios.get('https://rooms-backend.onrender.com/api/users');
             setHotelData(res.data.message);
             setBlogData(res2.data.message);
             setUserData(res3.data.message);

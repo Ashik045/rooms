@@ -49,7 +49,6 @@ import styles from '../styles/index.module.scss';
 
 // dumm
 
-
 export default function Home({ propertyList, propertyList2, homesDetails, blogss }) {
     return (
         <div className={styles.container}>
@@ -67,7 +66,7 @@ export default function Home({ propertyList, propertyList2, homesDetails, blogss
                 <Propertys propertyList2={propertyList2} />
                 <WhyUs />
                 <SpecialServices />
-                <BlogComponent blogDetail={blogss} title="Rooms Blogs"  />
+                <BlogComponent blogDetail={blogss} title="Rooms Blogs" />
                 <Newsletter />
                 <Footer />
             </main>
@@ -77,11 +76,15 @@ export default function Home({ propertyList, propertyList2, homesDetails, blogss
 
 export async function getStaticProps() {
     const response = await axios.get(
-        'https://rooms-backend.up.railway.app/api/hotels/getHotelByCity?cities=berlin,tokyo,dubai'
+        'https://rooms-backend.onrender.com/api/hotels/getHotelByCity?cities=berlin,tokyo,dubai'
     );
-    const response2 = await axios.get('https://rooms-backend.up.railway.app/api/hotels/getHotelByType');
-    const response3 = await axios.get('https://rooms-backend.up.railway.app/api/hotels?featured=true&limit=4');
-    const res = await axios.get('https://rooms-backend.up.railway.app/api/blogs')
+    const response2 = await axios.get(
+        'https://rooms-backend.onrender.com/api/hotels/getHotelByType'
+    );
+    const response3 = await axios.get(
+        'https://rooms-backend.onrender.com/api/hotels?featured=true&limit=4'
+    );
+    const res = await axios.get('https://rooms-backend.onrender.com/api/blogs');
 
     const data = await response.data.message;
     const data2 = await response2.data.message;
@@ -93,7 +96,7 @@ export async function getStaticProps() {
             propertyList: data,
             propertyList2: data2,
             homesDetails: data3,
-            blogss: blog
+            blogss: blog,
         },
     };
 }

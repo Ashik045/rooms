@@ -56,32 +56,34 @@ function Reserve({ setOpen, hotelId, rooms }) {
                 <span>Select your rooms:</span>
                 <FaTimes onClick={handleBlur} className={style.reserve_modal_close} />
 
-                {rooms.length > 0 ? rooms.map((room) => (
-                    <div className={style.room_item} key={room._id}>
-                        <div className={style.room_item_info}>
-                            <p className={style.room_item_title}>{room.title}</p>
-                            <p>
-                                {room.bathroom} Bathroom, {room.sleep} Sleep
-                            </p>
-                            <p>Max people: {room.maxPeople}</p>
-                            <span>${room.price}</span>
-                        </div>
+                {rooms.length > 0 ? (
+                    rooms.map((room) => (
+                        <div className={style.room_item} key={room._id}>
+                            <div className={style.room_item_info}>
+                                <p className={style.room_item_title}>{room.title}</p>
+                                <p>
+                                    {room.bathroom} Bathroom, {room.sleep} Sleep
+                                </p>
+                                <p>Max people: {room.maxPeople}</p>
+                                <span>${room.price}</span>
+                            </div>
 
-                        <div className={style.room_item_room}>
-                            {room.roomNumbers?.map((roomNumber) => (
-                                <div className={style.room} key={roomNumber._id}>
-                                    <label htmlFor="">{roomNumber.number}</label>
-                                    <input
-                                        type="checkbox"
-                                        value={roomNumber._id}
-                                        onChange={handleSlect}
-                                        disabled={!isAvailable(roomNumber)}
-                                    />
-                                </div>
-                            ))}
+                            <div className={style.room_item_room}>
+                                {room.roomNumbers?.map((roomNumber) => (
+                                    <div className={style.room} key={roomNumber._id}>
+                                        <label htmlFor="">{roomNumber.number}</label>
+                                        <input
+                                            type="checkbox"
+                                            value={roomNumber._id}
+                                            onChange={handleSlect}
+                                            disabled={!isAvailable(roomNumber)}
+                                        />
+                                    </div>
+                                ))}
+                            </div>
                         </div>
-                    </div>
-                )) : (
+                    ))
+                ) : (
                     <p>No room is available for this hotel.</p>
                 )}
 

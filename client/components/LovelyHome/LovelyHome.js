@@ -15,12 +15,12 @@ function LovelyHome({ hmDetails }) {
                     width={250}
                 />
             </div>
-            
+
             <Link href={`/hotels/${hmDetails._id}`}>
                 <h3>{hmDetails.name}</h3>
             </Link>
-            <p style={{textTransform: 'capitalize'}}>{hmDetails.city}</p>
-            <p className={style.lovely_home_price}> Starting from  ${hmDetails.price}</p>
+            <p style={{ textTransform: 'capitalize' }}>{hmDetails.city}</p>
+            <p className={style.lovely_home_price}> Starting from ${hmDetails.price}</p>
 
             <div className={style.lovely_home_btm}>
                 <span>{hmDetails.rating}</span>

@@ -44,7 +44,7 @@ const index = ({ hotelList }) => {
         dispatch({ type: 'NEW_SEARCH', payload: { city, dates, options } });
         // fetch data from server by search values
         const hotels = await axios.get(
-            `https://rooms-backend.up.railway.app/api/hotels?city=${city?.toLocaleLowerCase()}&min=${min}&max=${max}`
+            `https://rooms-backend.onrender.com/api/hotels?city=${city?.toLocaleLowerCase()}&min=${min}&max=${max}`
         );
         const hotelDatas = await hotels.data.message;
         setHotelData(hotelDatas);
@@ -181,10 +181,14 @@ export default index;
 
 // fetch the data using getStaticProps
 export async function getServerSideProps(context) {
-    const {  query } = context;
+    const { query } = context;
     const { city } = query;
 
-    const response = await axios.get(city ? `https://rooms-backend.up.railway.app/api/hotels?city=${city}` : 'https://rooms-backend.up.railway.app/api/hotels');
+    const response = await axios.get(
+        city
+            ? `https://rooms-backend.onrender.com/api/hotels?city=${city}`
+            : 'https://rooms-backend.onrender.com/api/hotels'
+    );
 
     const data = await response.data.message;
 

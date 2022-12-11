@@ -1,3 +1,4 @@
+/* eslint-disable func-names */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable no-nested-ternary */
@@ -71,59 +72,59 @@ const index = () => {
         e.preventDefault();
         try {
             setLoading(true);
-            
+
             if (photo) {
                 const data = new FormData();
                 data.append('file', photo);
                 data.append('upload_preset', 'upload');
-                    
+
                 const uploadRes = await axios.post(
                     'https://api.cloudinary.com/v1_1/drbvugloj/image/upload',
                     data
-                    );
-                    
+                );
+
                 const { url } = uploadRes.data;
                 try {
-                    await axios.post('https://rooms-backend.up.railway.app/api/user/signup', {
-                            email,
-                            password: pass,
-                            fullname,
-                            country,
-                            username: userName,
-                            image: url,
-                            phone,
-                            fblink: facebookUrl,
-                            twlink: twitterUrl,
+                    await axios.post('https://rooms-backend.onrender.com/api/user/signup', {
+                        email,
+                        password: pass,
+                        fullname,
+                        country,
+                        username: userName,
+                        image: url,
+                        phone,
+                        fblink: facebookUrl,
+                        twlink: twitterUrl,
                     });
-        
+
                     Router.push('/login');
                     setLoading(false);
-                    } catch (err) {
-                        setError(true);
-                        console.log('signup error', err);
-                        setLoading(false);
-                    }
-                } else {
-                    try {
-                        await axios.post('https://rooms-backend.up.railway.app/api/user/signup', {
-                            email,
-                            password: pass,
-                            fullname,
-                            country,
-                            username: userName,
-                            phone,
-                            fblink: facebookUrl,
-                            twlink: twitterUrl,
-                        });
-
-                        Router.push('/login');
-                        setLoading(false);
-                    } catch (err) {
-                        setError(true);
-                        console.log('signup error', err);
-                        setLoading(false);
-                    }
+                } catch (err) {
+                    setError(true);
+                    console.log('signup error', err);
+                    setLoading(false);
                 }
+            } else {
+                try {
+                    await axios.post('https://rooms-backend.onrender.com/api/user/signup', {
+                        email,
+                        password: pass,
+                        fullname,
+                        country,
+                        username: userName,
+                        phone,
+                        fblink: facebookUrl,
+                        twlink: twitterUrl,
+                    });
+
+                    Router.push('/login');
+                    setLoading(false);
+                } catch (err) {
+                    setError(true);
+                    console.log('signup error', err);
+                    setLoading(false);
+                }
+            }
         } catch (errr) {
             console.log('image error', errr);
             setError(true);
@@ -238,7 +239,12 @@ const index = () => {
                                 <p style={{ color: 'red', marginBottom: '-5px' }}>SignUp failed!</p>
                             )}
                             {page === 2 && (
-                                <input type="submit" value={loading ? "Loading..." : "Submit"} className={styles.submit_btn} style={{cursor: loading ? "not-allowed" : "pointer"}} />
+                                <input
+                                    type="submit"
+                                    value={loading ? 'Loading...' : 'Submit'}
+                                    className={styles.submit_btn}
+                                    style={{ cursor: loading ? 'not-allowed' : 'pointer' }}
+                                />
                             )}
                             <p style={{ marginTop: '10px' }}>
                                 <Link href="/login"> Already have an account? Log in here..</Link>
