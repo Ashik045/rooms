@@ -28,7 +28,8 @@ router.delete('/users/:id', deleteUser);
 // find a user by userId
 router.get('/user/:id', getOneUser);
 
-// find all user by userId
+// find all user
+
 router.get('/users', getAllUser);
 
 module.exports = router;

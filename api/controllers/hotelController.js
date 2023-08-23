@@ -4,7 +4,8 @@
 const HotelModel = require('../models/hotelModel');
 const RoomModel = require('../models/roomModel');
 
-// create new hotel
+//   The function creates a new hotel using the data from the request body and saves it to the database,
+//   returning the saved hotel as a response.
 const createHotel = async (req, res) => {
     try {
         const newHotel = HotelModel(req.body);
@@ -20,7 +21,8 @@ const createHotel = async (req, res) => {
     }
 };
 
-// find hotel and update
+//  * The function `updateHotel` updates a hotel record in the database based on the provided ID and
+//  * request body.
 const updateHotel = async (req, res) => {
     try {
         const updHotel = await HotelModel.findByIdAndUpdate(
@@ -42,7 +44,8 @@ const updateHotel = async (req, res) => {
     }
 };
 
-// find a hotel an delete
+//  * The deleteHotel function deletes a hotel from the database and returns a success message if the
+//  * deletion is successful, or an error message if it fails.
 const deleteHotel = async (req, res) => {
     try {
         await HotelModel.findByIdAndDelete(req.params.id);
@@ -57,7 +60,8 @@ const deleteHotel = async (req, res) => {
         }
 };
 
-// get a hotel by id
+//  * The function `getOneHotel` retrieves a hotel from the database based on the provided ID and returns
+//  * it as a JSON response.
 const getOneHotel = async (req, res) => {
     try {
         const hotel = await HotelModel.findById(req.params.id);
@@ -72,7 +76,8 @@ const getOneHotel = async (req, res) => {
         }
 };
 
-    // get a hotels
+//  * The function `getAllHotel` retrieves hotels based on specified criteria and returns them as a JSON
+//  * response.
 const getAllHotel = async (req, res) => {
     const { min, max, ...others } = req.query;
 
@@ -89,6 +94,10 @@ const getAllHotel = async (req, res) => {
         }
 };
 
+/**
+ * The function `getHotelByCity` takes a list of cities as input and returns the count of hotels in
+ * each city.
+ */
 const getHotelByCity = async (req, res) => {
     const cities = req.query.cities.split(',');
 
@@ -105,6 +114,10 @@ const getHotelByCity = async (req, res) => {
         }
 };
 
+/**
+ * The function `getHotelByType` retrieves the count of hotels based on their type (apartment, hotel,
+ * resort, villa, cabin) and returns the counts in a JSON response.
+ */
 const getHotelByType = async (req, res) => {
         try {
             const apartmentCount = await HotelModel.countDocuments({ type: 'apartment' });
@@ -129,6 +142,9 @@ const getHotelByType = async (req, res) => {
         }
 };
 
+/**
+ * The function `getHotelRooms` retrieves a list of rooms for a specific hotel using the hotel's ID.
+ */
 const getHotelRooms = async (req, res) => {
     try {
         const hotel = await HotelModel.findById(req.params.id);

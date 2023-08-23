@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable prettier/prettier */
 /* eslint-disable no-underscore-dangle */
 // external import
@@ -7,7 +8,10 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const UserModel = require('../models/userModel');
 
-// user signup and save to the database
+/**
+ * The `signup` function checks if an email already exists in the database, and if not, it hashes the
+ * password and saves a new user with the provided email and password.
+ */
 const signup = async (req, res) => {
     const isEmail = await UserModel.findOne({ email: req.body.email });
     if (!isEmail) {
@@ -34,7 +38,11 @@ const signup = async (req, res) => {
     }
 };
 
-// user signup and save to the database
+/**
+ * The `login` function is an asynchronous function that handles the authentication process for a user
+ * logging in, including checking the user's email and password, generating a JWT token, and sending a
+ * response with the token and user details.
+ */
 const login = async (req, res) => {
     try {
         const isUser = await UserModel.find({ email: req.body.email });
@@ -43,12 +51,17 @@ const login = async (req, res) => {
             if (comparePassword) {
                 // jwt process
 
+                /* The line `const { password, isadmin, ...userDetail } = isUser[0]._doc;` is using
+                object destructuring to extract the `password` and `isadmin` properties from the
+                `isUser[0]._doc` object. It also creates a new object called `userDetail` that
+                contains all the remaining properties of `isUser[0]._doc` except for `password` and
+                `isadmin`. */
                 const { password, isadmin, ...userDetail } = isUser[0]._doc;
                 const jwtToken = jwt.sign(
                     { id: isUser._id, isadmin: isUser.isadmin, email: isUser.email },
                     process.env.JWT_SECRET_KEY,
                     {
-                        expiresIn: '2d',
+                        expiresIn: '3d',
                     },
                 );
                 res.cookie('access_token', jwtToken, {
@@ -75,6 +88,9 @@ const login = async (req, res) => {
 };
 
 // find user by userId and update
+/**
+ * The updateUser function updates a user in the database and returns the updated user as a response
+ */
 const updateUser = async (req, res) => {
     try {
         const user = await UserModel.findByIdAndUpdate(
@@ -95,7 +111,10 @@ const updateUser = async (req, res) => {
     }
 };
 
-// find user by userId and delete
+/**
+ * The deleteUser function deletes a user from the database and returns a success message if the user
+ * is found, otherwise it returns an error message.
+ */
 const deleteUser = async (req, res) => {
     try {
         await UserModel.findByIdAndDelete(req.params.id);
@@ -110,7 +129,10 @@ const deleteUser = async (req, res) => {
     }
 };
 
-// find a user by userId
+/**
+ * The function `getOneUser` retrieves a user from the database by their ID and returns it as a JSON
+ * response, or returns an error message if the user is not found.
+ */
 const getOneUser = async (req, res) => {
     try {
         const user = await UserModel.findById(req.params.id);

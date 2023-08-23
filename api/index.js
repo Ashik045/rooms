@@ -21,6 +21,8 @@ app.use(cookieparser());
 dotenv.config();
 
 // database connection
+/* The code `mongoose.connect(process.env.DATABASE_URL, { useUnifiedTopology: true })`
+ is establishing a connection to a MongoDB database using the Mongoose library. */
 mongoose
     .connect(process.env.DATABASE_URL, {
         useUnifiedTopology: true,

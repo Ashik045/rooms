@@ -1,10 +1,13 @@
+/* eslint-disable max-len */
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable prettier/prettier */
 // internal import
 const RoomModel = require('../models/roomModel');
 const HotelModel = require('../models/hotelModel');
 
-// create new room
+/**
+ * The function creates a new room and associates it with a hotel by updating the hotel's rooms array.
+ */
 const createRoom = async (req, res) => {
     const hotelId = req.params.hotelid;
     const newRoom = new RoomModel(req.body);
@@ -31,7 +34,11 @@ const createRoom = async (req, res) => {
     }
 };
 
-// find room and update
+/**
+ * The function `updateRoom` updates a room in a database using the provided request parameters and
+ * body, and returns the updated room as a response.
+
+ */
 const updateRoom = async (req, res) => {
     try {
         const updroom = await RoomModel.findByIdAndUpdate(
@@ -53,7 +60,10 @@ const updateRoom = async (req, res) => {
     }
 };
 
-// find room and update room abailability
+/**
+ * The function updates the availability of a room by adding unavailable dates to the room's list of
+ * unavailable dates.
+ */
 const updateRoomAvailability = async (req, res) => {
     try {
         await RoomModel.updateOne({ 'roomNumbers._id': req.params.id }, {
@@ -73,6 +83,10 @@ const updateRoomAvailability = async (req, res) => {
 };
 
 // find a room an delete
+/**
+ * The `deleteRoom` function deletes a room from a hotel and updates the hotel's rooms list
+ * accordingly.
+ */
 const deleteRoom = async (req, res) => {
     const hotelId = req.params.hotelid;
     try {
@@ -98,7 +112,11 @@ const deleteRoom = async (req, res) => {
         }
 };
 
-// get a room by id
+/**
+ * The function `getOneRoom` retrieves a room from the database by its ID and sends it as a response,
+ * or returns an error message if the room is not found.
+
+ */
 const getOneRoom = async (req, res) => {
     try {
         const room = await RoomModel.findById(req.params.id);
@@ -113,7 +131,10 @@ const getOneRoom = async (req, res) => {
         }
     };
 
-    // get a room by id
+/**
+ * The function getAllRoom retrieves all rooms from the RoomModel and sends them as a response.
+ e response, such as
+ */
 const getAllRoom = async (req, res) => {
     try {
         const rooms = await RoomModel.find();

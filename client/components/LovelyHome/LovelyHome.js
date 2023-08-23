@@ -4,15 +4,16 @@ import React from 'react';
 import style from './LovelyHome.module.scss';
 
 function LovelyHome({ hmDetails }) {
+
     return (
         <div className={style.lovely_home}>
             <div>
                 <Image
                     className={style.lovely_home_img}
-                    src={hmDetails.images[0]}
+                    src={hmDetails?.images && hmDetails?.images[0]}
                     alt="Lovely Hotel"
-                    height={200}
                     width={250}
+                    height={200}
                 />
             </div>
 

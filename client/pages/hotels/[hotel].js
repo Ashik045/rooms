@@ -14,13 +14,13 @@ import axios from 'axios';
 import Link from 'next/link';
 import { useContext, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { Context } from '../../ContextApi/Context';
+import { Contexts } from '../../ContextUser/Contexts';
 import Footer from '../../components/Footer/Footer';
 import Header from '../../components/Header/Header';
 import Navbar from '../../components/Navbar/Navbar';
 import Newsletter from '../../components/Newsletter/Newsletter';
 import Reserve from '../../components/Reserve/Reserve';
-import { Context } from '../../ContextApi/Context';
-import { Contexts } from '../../ContextUser/Contexts';
 import img1 from '../../images/img1.jpg';
 import item2 from '../../images/medium1.jpg';
 import item1 from '../../images/medium2.jpg';
@@ -233,7 +233,7 @@ export async function getStaticPaths() {
 
     return {
         paths,
-        fallback: true,
+        fallback: false,
     };
 }
 

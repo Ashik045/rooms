@@ -4,52 +4,16 @@ import BlogComponent from '../components/BlogComponent/BlogComponent';
 import Features from '../components/Features/Features';
 import Footer from '../components/Footer/Footer';
 import Header from '../components/Header/Header';
-import LovelyHomeDetail from '../components/lovelyHomeDetail/LovelyHomeDetail';
 import Navbar from '../components/Navbar/Navbar';
 import Newsletter from '../components/Newsletter/Newsletter';
 import Propertys from '../components/Propertys/Propertys';
 import SpecialServices from '../components/SpecialServices/SpecialServices';
 import WhyUs from '../components/WhyUs/WhyUs';
+import LovelyHomeDetail from '../components/lovelyHomeDetail/LovelyHomeDetail';
 import styles from '../styles/index.module.scss';
 
-// const HomesDetails = [
-//     {
-//         id: 2,
-//         img: item6,
-//         title: 'The patio Barcelona',
-//         location: 'Barcelona',
-//         price: '$135',
-//         rating: '9.5',
-//     },
-//     {
-//         id: 1,
-//         img: item7,
-//         title: 'Flora Ciado Apartments',
-//         location: 'Lisbon',
-//         price: '$105',
-//         rating: '8.7',
-//     },
-//     {
-//         id: 3,
-//         img: item8,
-//         title: 'Sea front Apartments',
-//         location: 'London',
-//         price: '$165',
-//         rating: '9.5',
-//     },
-//     {
-//         id: 4,
-//         img: item9,
-//         title: 'The tower of Chevel',
-//         location: 'Chevel',
-//         price: '$135',
-//         rating: '9.6',
-//     },
-// ];
-
-// dumm
-
 export default function Home({ propertyList, propertyList2, homesDetails, blogss }) {
+
     return (
         <div className={styles.container}>
             <Head>

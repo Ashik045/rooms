@@ -5,16 +5,16 @@
 import axios from 'axios';
 import { format } from 'date-fns';
 import { useRouter } from 'next/router';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { DateRange } from 'react-date-range';
 import 'react-date-range/dist/styles.css'; // main css file
 import 'react-date-range/dist/theme/default.css'; // theme css file
+import { Context } from '../../ContextApi/Context';
 import Footer from '../../components/Footer/Footer';
 import Header from '../../components/Header/Header';
 import Navbar from '../../components/Navbar/Navbar';
 import Newsletter from '../../components/Newsletter/Newsletter';
 import SearchItem from '../../components/SearchItem/SearchItem';
-import { Context } from '../../ContextApi/Context';
 import style from '../../styles/hotels.module.scss';
 
 const index = ({ hotelList }) => {
@@ -38,6 +38,22 @@ const index = ({ hotelList }) => {
     const [hotelData, setHotelData] = useState(hotelList);
 
     const { dispatch } = useContext(Context);
+
+    useEffect(() => {
+        const getHotelByCity = async () => {
+
+            if (city !== "") {
+            const response = await axios.get(`https://rooms-backend.onrender.com/api/hotels?city=${city}`
+            );
+            const hotels = await response.data.message
+            setHotelData(hotels)
+        } else  {
+            setHotelData(hotelList)
+        }
+        }
+
+        getHotelByCity()
+    }, [city])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -180,15 +196,8 @@ const index = ({ hotelList }) => {
 export default index;
 
 // fetch the data using getStaticProps
-export async function getServerSideProps(context) {
-    const { query } = context;
-    const { city } = query;
-
-    const response = await axios.get(
-        city
-            ? `https://rooms-backend.onrender.com/api/hotels?city=${city}`
-            : 'https://rooms-backend.onrender.com/api/hotels'
-    );
+export async function getStaticProps() {
+    const response = await axios.get('https://rooms-backend.onrender.com/api/hotels');
 
     const data = await response.data.message;
 

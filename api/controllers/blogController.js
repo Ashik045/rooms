@@ -3,7 +3,8 @@
 // internal import
 const BlogModel = require('../models/blogModel');
 
-// create new Blog
+//  * The function creates a new blog post and saves it to the database, returning the saved blog post if
+//  * successful.
 const createBlog = async (req, res) => {
     try {
         const newBlog = BlogModel(req.body);
@@ -19,7 +20,8 @@ const createBlog = async (req, res) => {
     }
 };
 
-// find Blog and update
+//  * The function `updateBlog` updates a blog post in a database using the provided request parameters
+//  * and body, and returns the updated blog post as a response.
 const updateBlog = async (req, res) => {
     try {
         const updBlog = await BlogModel.findByIdAndUpdate(
@@ -40,7 +42,8 @@ const updateBlog = async (req, res) => {
     }
 };
 
-// find a Blog an delete
+//  * The deleteBlog function deletes a blog post from the database and returns a success message if the
+//  * deletion is successful, or an error message if it fails.
 const deleteBlog = async (req, res) => {
     try {
         await BlogModel.findByIdAndDelete(req.params.id);
@@ -55,7 +58,7 @@ const deleteBlog = async (req, res) => {
         }
 };
 
-// get a Blog by id
+//  * The function `getOneBlog` retrieves a blog from the database based on the provided ID and returns it as a JSON response.
 const getOneBlog = async (req, res) => {
     try {
         const Blog = await BlogModel.findById(req.params.id);
@@ -70,7 +73,8 @@ const getOneBlog = async (req, res) => {
         }
 };
 
-// get all Blogs
+//  * The function getAllBlog retrieves all blog posts from the database and returns them as a JSON
+//  * response.
 const getAllBlog = async (req, res) => {
     // const { tag } = req.query;
     let allBlogs;
@@ -90,7 +94,8 @@ const getAllBlog = async (req, res) => {
     }
 };
 
-// get all Blogs
+//  * The function `getBlogByTag` retrieves all blogs that have a specific tag and returns them as a JSON
+//  * response.
 const getBlogByTag = async (req, res) => {
     const { tag } = req.query;
     try {

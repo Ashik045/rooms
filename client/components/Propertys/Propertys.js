@@ -15,7 +15,7 @@ function Propertys({ propertyList2 }) {
             <h2>Browse by propertys</h2>
             <div className={styles.propertys_main}>
                 {propertyList2 &&
-                    images.map((img, i) => (
+                    images?.map((img, i) => (
                         <div className={styles.property_item} key={i}>
                             <Image src={img} alt="Propertys" className={styles.property_item_img} />
 
