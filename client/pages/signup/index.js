@@ -68,6 +68,9 @@ const index = () => {
 
     const PageTitle = ['Sign In', 'Personal Info', 'Social Links'];
 
+
+    //  The `handleSubmit` function is used to handle form submission, including uploading a photo to
+    // Cloudinary and making a POST request to a signup API endpoint.
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
@@ -132,6 +135,12 @@ const index = () => {
         }
     };
 
+
+    // The function returns different components based on the value of the "page" variable.
+    // @returns The code is returning a component based on the value of the "page" variable. If "page"
+    // is equal to 0, it returns the "Email" component with the specified props. If "page" is equal to
+    // 1, it returns the "PersonalInfo" component with the specified props. Otherwise, it returns the
+    // "SocialLink" component with the specified props.
     const PageBody = function () {
         if (page === 0) {
             return (

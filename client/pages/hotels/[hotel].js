@@ -59,6 +59,9 @@ const hotelDetails = ({ hotel, rooms }) => {
         price: '231',
     };
 
+
+//  The handleClick function checks if the user is defined and sets the open state to true if so,
+//  otherwise it sets it to false.
     const handleClick = () => {
         if (user) {
             setOpen(true);
@@ -67,6 +70,10 @@ const hotelDetails = ({ hotel, rooms }) => {
         }
     };
 
+//   The function calculates the difference in days between two dates.
+//  param date1 - The `date1` parameter represents the start date of a period of time.
+//  param date2 - The `date2` parameter represents the end date of a specific event or period.
+//  returns The function `dayDifference` returns the number of days between `date1` and `date2`.
     const MILISEC_PER_DAY = 1000 * 60 * 60 * 24;
     function dayDifference(date1, date2) {
         const timeDiference = Math.abs(date2.getTime() - date1.getTime());
@@ -210,6 +217,9 @@ const hotelDetails = ({ hotel, rooms }) => {
                 </div>
                 <hr />
             </div>
+             
+            {/* conditionally rendering the `<Reserve>` component based on the value of the `open` state
+            variable.  */}
             {open && <Reserve setOpen={setOpen} hotelId={hotel._id} rooms={rooms} />}
 
             <Newsletter />
@@ -220,7 +230,13 @@ const hotelDetails = ({ hotel, rooms }) => {
 
 export default hotelDetails;
 
-// export getStaticPaths for dynamic routes
+
+// The function `getStaticPaths` retrieves a list of hotels from an API and generates static paths for
+// each hotel.
+// @returns an object with two properties: "paths" and "fallback". The "paths" property is an array of
+// objects, where each object represents a specific hotel and contains a "params" property with the
+// hotel's ID. The "fallback" property is set to false, indicating that any paths not returned in the
+// "paths" array will result in a 404 page.
 export async function getStaticPaths() {
     const response = await axios.get(`https://rooms-backend.onrender.com/api/hotels`);
     const data = await response.data.message;
@@ -237,7 +253,9 @@ export async function getStaticPaths() {
     };
 }
 
-// fetch the individual item data using getStaticProps
+
+//  The function `getStaticProps` is an asynchronous function that makes two API requests to retrieve
+//  data for a hotel and its rooms, and returns the data as props.
 export async function getStaticProps(context) {
     // api route
     const { params } = context;

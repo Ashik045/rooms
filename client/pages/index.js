@@ -38,6 +38,12 @@ export default function Home({ propertyList, propertyList2, homesDetails, blogss
     );
 }
 
+
+//  The function `getStaticProps` makes multiple API requests to retrieve data related to hotels and
+//  blogs, and returns the retrieved data as props.
+//  returns an object with the properties `propertyList`, `propertyList2`, `homesDetails`, and
+//  `blogss`. The values of these properties are the data retrieved from the API calls.
+
 export async function getStaticProps() {
     const response = await axios.get(
         'https://rooms-backend.onrender.com/api/hotels/getHotelByCity?cities=berlin,tokyo,dubai'

@@ -36,6 +36,8 @@ function Header({type}) {
 
     const router = useRouter()
 
+
+    //  The handleBtn function updates the value of a specific option based on the given operation.
     const handleBtn = (name, operation) => {
         setOptions((prev) => ({
                 ...prev,
@@ -60,6 +62,10 @@ function Header({type}) {
     const {dispatch} = useContext(Context);
     const {user} = useContext(Contexts)
 
+
+//  The handleSubmit function prevents the default form submission behavior, dispatches a new search
+//  action with the city, dates, and options as payload, and navigates to the hotels page with the query
+//  parameters.
     const handleSubmit = (e) => {
         e.preventDefault()
         // router.push(`http://localhost:4000/api/hotels?city=${city?.toLocaleLowerCase()}`)

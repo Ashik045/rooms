@@ -78,20 +78,6 @@ const Blogs = [
 
 const index = ({ blogs }) => {
     const [blogData, setBlogData] = useState(blogs);
-    // const router = useRouter()
-    // const {query} = router;
-    // const {tag} = query;
-    // console.log(query);
-
-    // useEffect(() => {
-    //     const handleClick = async () => {
-    //         const datas = await axios.get(query.tag ? `http://localhost:4000/api/blogs/search?tag=${query.tag}` : 'http://localhost:4000/api/blogs')
-    //         setBlogData(datas.data.message)
-    //         console.log('fetch', datas.data.message);
-    //         console.log('state', blogData);
-    //     }
-    //     handleClick()
-    // }, [query.tag])
 
     return (
         <div className={style.blog_page}>
@@ -127,7 +113,10 @@ const index = ({ blogs }) => {
 };
 export default index;
 
-// fetch all the blogs
+//  The function is using axios to make an asynchronous GET request to the specified URL and returning
+//  the response data as props for the component.
+//  returns an object with a "props" property. The "props" property contains a "blogs" property, which
+//  is assigned the value of the "data" variable.
 export async function getStaticProps() {
     const res = await axios.get('https://rooms-backend.onrender.com/api/blogs');
     const data = await res.data.message;

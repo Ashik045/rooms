@@ -70,7 +70,10 @@ const blogDetails = ({ blogList1, blogss }) => (
 );
 export default blogDetails;
 
-// export getStaticPaths for dynamic routes
+
+// The function `getStaticPaths` retrieves data from an API endpoint and generates an array of paths
+// based on the response data.
+// @returns an object with two properties: "paths" and "fallback".
 export async function getStaticPaths() {
     const response = await axios.get(`https://rooms-backend.onrender.com/api/blogs`);
     const data = await response.data.message;
@@ -87,7 +90,9 @@ export async function getStaticPaths() {
     };
 }
 
-// fetch the individual item data using getStaticProps
+
+// The function `getStaticProps` is an asynchronous function that fetches data from two API routes and
+// returns the data as props.
 export async function getStaticProps(context) {
     // api route
     const { params } = context;

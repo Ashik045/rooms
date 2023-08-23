@@ -8,10 +8,10 @@ import { useRouter } from 'next/router';
 import React, { useContext, useState } from 'react';
 import { FaGoogle, FaTwitter } from 'react-icons/fa';
 import Swal from 'sweetalert2';
+import { Contexts } from '../../ContextUser/Contexts';
 import Footer from '../../components/Footer/Footer';
 import Input from '../../components/Input/Input';
 import Navbar from '../../components/Navbar/Navbar';
-import { Contexts } from '../../ContextUser/Contexts';
 import styles from '../../styles/login.module.scss';
 
 const index = () => {
@@ -24,6 +24,9 @@ const index = () => {
     const { loading, dispatch } = useContext(Contexts);
     // const { data: session } = useSession()
 
+    //  The `inpDetail` constant is an array of objects that contains the details of the input fields
+    // used in the login form. Each object represents an input field and contains the following
+    // properties: 
     const inpDetail = [
         {
             id: 2,
@@ -43,6 +46,9 @@ const index = () => {
         },
     ];
 
+
+    //   The handleChng function updates the value of a specific property in the inpval object based on
+    //   the user's input.
     const handleChng = (e) => {
         setInpval({ ...inpval, [e.target.name]: e.target.value });
     };
@@ -61,6 +67,9 @@ const index = () => {
         },
     });
 
+
+    // The handleSubmit function is used to handle form submission for user login, making a POST
+    // request to the specified API endpoint and dispatching actions based on the response.
     const handleSubmit = async (e) => {
         e.preventDefault();
         dispatch({ type: 'LOGIN_START' });
@@ -113,17 +122,6 @@ const index = () => {
 
                         <hr className={styles.hr_line} />
 
-                        {/* {session ? (
-                  <>
-                    Signed in as  <br /> 
-                    <button onClick={() => signOut('google')}>Sign out</button>
-                  </>
-                ) : (
-                  <>
-                  Not signed in <br />
-                  <button onClick={() => signIn('google')}>Sign in</button>
-                  </>
-                )} */}
                         <div className={`${styles.auth_next} ${styles.google}`}>
                             <FaGoogle style={{ marginRight: '5px' }} /> Google
                         </div>

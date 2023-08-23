@@ -39,6 +39,8 @@ const index = ({ hotelList }) => {
 
     const { dispatch } = useContext(Context);
 
+//  The `useEffect` hook is used to perform side effects in a functional component. In this case, the
+// `useEffect` hook is used to fetch hotel data based on the selected city. 
     useEffect(() => {
         const getHotelByCity = async () => {
 
@@ -55,6 +57,11 @@ const index = ({ hotelList }) => {
         getHotelByCity()
     }, [city])
 
+
+//  The handleSubmit function is used to handle form submission, dispatch a new search action, and fetch
+//  hotel data from a server based on search values.
+//  @param e - The parameter `e` is an event object that represents the event that triggered the form
+//  submission. In this case, it is the form submission event.
     const handleSubmit = async (e) => {
         e.preventDefault();
         dispatch({ type: 'NEW_SEARCH', payload: { city, dates, options } });
@@ -195,7 +202,8 @@ const index = ({ hotelList }) => {
 
 export default index;
 
-// fetch the data using getStaticProps
+
+// The function retrieves a list of hotels from an API endpoint and returns it as a prop.
 export async function getStaticProps() {
     const response = await axios.get('https://rooms-backend.onrender.com/api/hotels');
 
