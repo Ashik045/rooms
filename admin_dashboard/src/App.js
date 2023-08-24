@@ -1,7 +1,6 @@
 /* eslint-disable react/no-unstable-nested-components */
 import { useContext, useState } from 'react';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
-import './app.scss';
 import { ColorContext } from './ColorContext/darkContext';
 import Home from './Components/Home/Home';
 import { Contexts } from './ContextUser/Contexts';
@@ -15,6 +14,7 @@ import Hotels from './Pages/Hotels/Hotels';
 import Login from './Pages/Login/Login';
 import Rooms from './Pages/Rooms/Rooms';
 import Lists from './Pages/UserLists/UserLists';
+import './app.scss';
 
 // Dynamicaly change the data for different pages
 const userInpDetails = [
@@ -272,6 +272,11 @@ function App() {
     const [state, setState] = useState(false);
 
     // create protected route
+    /**
+     * The ProtectedRoute function checks if a user is logged in and redirects to the login page if not,
+     * otherwise it renders the children components.
+     * @returns The children component is being returned.
+     */
     function ProtectedRoute({ children }) {
         const { user } = useContext(Contexts);
         if (!user) {

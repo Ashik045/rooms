@@ -9,10 +9,15 @@ import './Login.scss';
 const index = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [loginLoading, setLoginLoading] = useState('');
     const [err, setErr] = useState(false);
     const nevigate = useNavigate();
     const { loading, dispatch } = useContext(Contexts);
 
+    /**
+     * The handleSubmit function is used to handle form submission for user login, making an API call to
+     * the backend and updating the state accordingly.
+     */
     const handleSubmit = async (e) => {
         e.preventDefault();
         const inpVal = {
@@ -20,6 +25,7 @@ const index = () => {
             password,
         };
         dispatch({ type: 'LOGIN_START' });
+        setLoginLoading(true);
 
         try {
             const res = await axios.post(
@@ -30,13 +36,16 @@ const index = () => {
             if (res.data.message.isadmin) {
                 dispatch({ type: 'LOGIN_SUCCESS', payload: res.data.message.details });
                 nevigate('/');
+                setLoginLoading(false);
             } else {
                 dispatch({ type: 'LOGIN_FAILURE' });
                 setErr(true);
+                setLoginLoading(false);
             }
         } catch (error) {
             dispatch({ type: 'LOGIN_FAILURE' });
             setErr(true);
+            setLoginLoading(false);
         }
     };
 
@@ -63,7 +72,7 @@ const index = () => {
 
                         <input
                             type="submit"
-                            value="Log In"
+                            value={loginLoading ? 'Loading..' : 'Log In'}
                             className="submit_btn"
                             disabled={loading}
                         />

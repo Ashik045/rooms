@@ -13,6 +13,8 @@ function DataTable() {
     const location = useLocation();
     const path = location.pathname.split('/')[1];
 
+    /* The `useEffect` hook is used to perform side effects in a functional component. In this case, it is used to fetch data from an API endpoint and update the component's state (`data`) with the fetched
+data. */
     useEffect(() => {
         const dataCall = async () => {
             const res = await axios.get(`https://rooms-backend.onrender.com/api/${path}`);
@@ -21,6 +23,10 @@ function DataTable() {
         dataCall();
     }, [path, data]);
 
+    /**
+     * The function `handleDlt` is used to delete an item from a data array and send a delete request
+     * to a backend API.
+     */
     const handleDlt = async (id) => {
         try {
             axios.delete(`https://rooms-backend.onrender.com/api/${path}/${id}`);

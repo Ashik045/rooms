@@ -13,6 +13,8 @@ function Rooms({ type }) {
     const location = useLocation();
     const path = location.pathname.split('/')[1];
 
+    /* The `useEffect` hook is used to perform side effects in a functional component. In this case, the
+   effect is triggered when the `data` state variable changes. */
     useEffect(() => {
         const datass = async () => {
             const res = await axios.get('https://rooms-backend.onrender.com/api/rooms');
@@ -21,6 +23,10 @@ function Rooms({ type }) {
         datass();
     }, [data]);
 
+    /**
+     * The function `handleDlt` is used to delete a room with a specific ID from a server and update
+     * the data accordingly.
+     */
     const handleDlt = (id) => {
         try {
             axios.delete(`https://rooms-backend.onrender.com/api/${path}/${id}`);

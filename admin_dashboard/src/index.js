@@ -5,29 +5,6 @@ import App from './App';
 import { ColorContextProvider } from './ColorContext/darkContext';
 import { UserContext } from './ContextUser/Contexts';
 
-// const router = createBrowserRouter([
-//     {
-//         path: '/',
-//         element: <App />,
-//         errorElement: <PageNotFound />,
-//     },
-//     {
-//         path: '/login',
-//         element: <Login />,
-//         errorElement: <PageNotFound />,
-//     },
-//     {
-//         path: 'users',
-//         element: <Lists />,
-//         errorElement: <PageNotFound />,
-//     },
-//     {
-//         path: 'user/:userId',
-//         element: <Detail />,
-//         errorElement: <PageNotFound />,
-//     },
-// ]);
-
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <React.StrictMode>

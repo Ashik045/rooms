@@ -15,6 +15,8 @@ function ItemLists({ type }) {
     const [hotelData, setHotelData] = useState([]);
     const [blogData, setBlogData] = useState([]);
 
+    /* The `useEffect` hook is used to perform side effects in functional components. In this case, it
+   is used to fetch data from three different API endpoints with the response data. */
     useEffect(() => {
         const datass = async () => {
             const res = await axios.get('https://rooms-backend.onrender.com/api/hotels');
@@ -30,6 +32,8 @@ function ItemLists({ type }) {
     let data;
 
     // Dynamicaly change the ui content
+    /* The `switch` statement is used to conditionally assign values to the `data` object based on the
+    value of the `type` parameter. */
     switch (type) {
         case 'user':
             data = {

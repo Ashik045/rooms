@@ -78,6 +78,8 @@ function Hotels({ type }) {
     const location = useLocation();
     const path = location.pathname.split('/')[1];
 
+    /* The `useEffect` hook is used to perform side effects in a functional component. In this case, the
+   effect is triggered when the `data` state variable changes. */
     useEffect(() => {
         const datass = async () => {
             const res = await axios.get('https://rooms-backend.onrender.com/api/hotels');
@@ -86,6 +88,10 @@ function Hotels({ type }) {
         datass();
     }, [data]);
 
+    /**
+     * The function `handleDlt` is used to delete an item from the data array and make an API call to
+     * delete the item with the corresponding id.
+     */
     const handleDlt = (id) => {
         try {
             axios.delete(`https://rooms-backend.onrender.com/api/${path}/${id}`);
@@ -96,6 +102,9 @@ function Hotels({ type }) {
         }
     };
 
+    /* The `columns` variable is an array of objects that define the columns for the data grid component.
+  Each object represents a column and contains properties such as `field`, `headerName`, `width`,
+  and `renderCell`. */
     const columns = [
         {
             field: 'id',

@@ -16,6 +16,9 @@ function ProgressBar() {
     const [blogData, setBlogData] = useState([]);
     const [roomData, setRoomData] = useState([]);
 
+    /* The `useEffect` hook is used to perform side effects in functional components. In this case, it
+   is used to fetch data from the specified API endpoints and update the state variables
+   (`userData`, `hotelData`, `blogData`, `roomData`) with the received data. */
     useEffect(() => {
         const datass = async () => {
             const res = await axios.get('https://rooms-backend.onrender.com/api/rooms');

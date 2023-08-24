@@ -23,6 +23,9 @@ function AddRoom({ inputs, title, type }) {
     const [hotelId, setHotelId] = useState(null);
     const nevigate = useNavigate();
 
+    /* The `useEffect` hook is used to perform side effects in a functional component. In this case, it
+   is used to fetch data from the API endpoint `'https://rooms-backend.onrender.com/api/hotels'` and
+   update the state variables `roomData` with the response data. */
     useEffect(() => {
         const roomsss = async () => {
             const hotel = await axios.get('https://rooms-backend.onrender.com/api/hotels');
@@ -35,6 +38,11 @@ function AddRoom({ inputs, title, type }) {
         setInpVal({ ...inpVal, [e.target.name]: e.target.value });
     };
 
+    /**
+     * The handleSubmit function is an asynchronous function that handles form submission by sending a
+     * POST request to a backend API with the input values and room numbers, and then redirects to the
+     * /rooms page.
+     */
     const handleSubmit = async (e) => {
         e.preventDefault();
         const rooms = roomNums.split(',').map((room) => ({ number: room }));

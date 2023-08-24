@@ -31,6 +31,9 @@ function AddHotel({ inputs, title, type }) {
     const [loading, setLoading] = useState(false);
     const nevigate = useNavigate();
 
+    /* The `useEffect` hook is used to perform side effects in a functional component. In this case, it
+   is used to fetch data from the API endpoint `'https://rooms-backend.onrender.com/api/rooms'` and
+   update the state variable `roomData` with the response data. */
     useEffect(() => {
         const roomsss = async () => {
             const room = await axios.get('https://rooms-backend.onrender.com/api/rooms');
@@ -52,6 +55,10 @@ function AddHotel({ inputs, title, type }) {
         setRooms(value);
     };
 
+    /**
+     * The handleSubmit function is used to handle form submission, upload images to Cloudinary, and
+     * create a new hotel entry in the database.
+     */
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {

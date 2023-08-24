@@ -15,6 +15,9 @@ function Detail() {
     const location = useLocation();
     const path = location.pathname.split('/')[2];
 
+    /* The `useEffect` hook in React is used to perform side effects in functional components. In this
+   case, the `useEffect` hook is used to fetch user data from an API endpoint when the `path`
+   variable changes. */
     useEffect(() => {
         setLoading(true);
         const fetchData = async () => {

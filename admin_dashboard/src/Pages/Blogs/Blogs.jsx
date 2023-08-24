@@ -65,6 +65,9 @@ function Blogs({ type }) {
     const location = useLocation();
     const path = location.pathname.split('/')[1];
 
+    /* The `useEffect` hook is used to perform side effects in a functional component. In this case, it
+   is used to fetch data from an API endpoint and update the state variable `data` with the fetched
+   data. */
     useEffect(() => {
         const getData = async () => {
             const datas = await axios.get('https://rooms-backend.onrender.com/api/blogs');
@@ -73,6 +76,10 @@ function Blogs({ type }) {
         getData();
     }, [data]);
 
+    /**
+     * The function `handleDlt` is used to delete an item from the data array and send a delete request
+     * to the specified API endpoint.
+     */
     const handleDlt = (id) => {
         try {
             axios.delete(`https://rooms-backend.onrender.com/api/${path}/${id}`);
@@ -83,6 +90,9 @@ function Blogs({ type }) {
         }
     };
 
+    /* The `columns` array is defining the columns for the DataGrid component. Each object in the array
+   represents a column and has properties such as `field`, `headerName`, and `width` to define the
+   column's data source, header name, and width respectively. */
     const columns = [
         {
             field: 'id',

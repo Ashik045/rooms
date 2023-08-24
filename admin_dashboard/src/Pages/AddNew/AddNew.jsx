@@ -15,6 +15,8 @@ function AddNew({ inputs, title, type }) {
     let dynamicInpVal;
 
     // dynamically change the state values
+    /* The `switch` statement is used to conditionally assign different values to the `dynamicInpVal`
+  variable based on the value of the `type` parameter. */
     switch (type) {
         case 'USER':
             dynamicInpVal = {
@@ -45,10 +47,18 @@ function AddNew({ inputs, title, type }) {
     const nevigate = useNavigate();
     // Dynamicaly change the data for different pages
 
+    /**
+     * The handleChange function updates the userInp state object with the new value entered by the
+     * user.
+     */
     const handleChange = (e) => {
         setUserInp({ ...userInp, [e.target.name]: e.target.value });
     };
 
+    /**
+     * The above function is a handleSubmit function in JavaScript React that handles form submission,
+     * including uploading a photo to Cloudinary and making a POST request to a backend API.
+     */
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
